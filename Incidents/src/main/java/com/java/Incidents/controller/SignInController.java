@@ -1,4 +1,4 @@
 package com.java.Incidents.controller;
 
-public class SignInController {
+public class SignInController <SignInEntity, SignInServiceInterfImpl>{
 }
