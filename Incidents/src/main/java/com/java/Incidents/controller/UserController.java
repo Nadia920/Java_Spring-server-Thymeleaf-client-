@@ -1,4 +1,4 @@
 package com.java.Incidents.controller;
 
-public class UserController <UserEntity, UserServiceInterfImpl>{
+public class UserController<UserEntity, UserServiceInterfImpl>{
 }

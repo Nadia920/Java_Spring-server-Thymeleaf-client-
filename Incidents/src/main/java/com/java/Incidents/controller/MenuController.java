@@ -1,4 +1,4 @@
 package com.java.Incidents.controller;
 
-public class MenuController <MenuEntity, MenuServiceInterfImpl>{
+public class MenuController<MenuEntity, MenuServiceInterfImpl>{
 }
