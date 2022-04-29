@@ -1,4 +1,4 @@
 package com.java.Incidents.repository;
 
-public interface MenuRepository CommonRepository {
+public interface MenuRepository extends CommonRepository {
 }

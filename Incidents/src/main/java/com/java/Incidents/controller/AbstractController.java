@@ -1,10 +1,12 @@
+
 package com.java.Incidents.controller;
 
-import com.java.Incidents.model.AbstractEntity;
-import com.java.Incidents.servicesInterface.CommonService;
+import com.java.Incidents.model.BaseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-public abstract class AbstractController<E extends AbstractEntity, S extends CommonService<E>> implements CommonController<E> {
+@Controller
+public abstract class AbstractController<E extends BaseEntity, S> implements CommonController<E> {
 
     private final S service;
 

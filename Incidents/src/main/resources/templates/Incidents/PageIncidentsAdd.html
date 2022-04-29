@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="form-group">
+    <form th:href="@{/PageIncidentsAdd}" method="post">
+    <label for="name" class="col-form-label" th:text="#{text.city}"></label>
+    <input type="text" th:value="${city?.name}" th:name="name" class="form-control"
+           id="name" th:placeholder="#{text.city}" autofocus required
+           pattern="([A-Z])([a-zA-Z-\s]{3,39})" maxlength="40"/>
+    <span class="form__error" th:text="#{text.error.city}"></span>
+    <p>{text.incident_category}</p>
+    <select name="incident_category"></select>
+    <p>{text.incident_name}</p>
+    <select name="incident_name"></select>
+    <p>{text.incident_resolution}</p>
+    <input name="{text.incident_resolution}">
+    <p>{text.incident_response}</p>
+    <input name="{text.incident_response}">
+    <p>{text.comment}</p>
+    <input name="{text.comment}">
+    <p>{text.preventive_measures}</p>
+    <input name="{text.preventive_measures}">
+    <p>{text.client_name}</p>
+    <select name="client_name"></select>
+    <p>{text.team_name}</p>
+    <select name="team_name"></select>
+    </form>
+</div>
+</body>
+</html>

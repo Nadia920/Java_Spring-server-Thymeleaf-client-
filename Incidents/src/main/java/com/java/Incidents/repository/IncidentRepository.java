@@ -1,5 +1,5 @@
 package com.java.Incidents.repository;
 
-public interface IncidentRepository CommonRepository{
+public interface IncidentRepository extends CommonRepository{
 
 }

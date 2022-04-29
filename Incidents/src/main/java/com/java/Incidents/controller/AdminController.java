@@ -1,12 +1,46 @@
 package com.java.Incidents.controller;
 
-import com.java.Incidents.model.AdminEntity;
-import com.java.Incidents.servicesImpl.AdminServiceInterfImpl;
+import com.java.Incidents.model.UserEntity;
+import com.java.Incidents.service.AdminServiceInterfImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-public class AdminController extends AbstractController<AdminEntity, AdminServiceInterfImpl> {
+
+@Controller
+@RequestMapping(value = "/")
+public class AdminController extends AbstractController<UserEntity, AdminServiceInterfImpl> {
+    protected AdminController(AdminServiceInterfImpl service) {
+        super(service);
+    }
+
+    /*@Override
+        public ResponseEntity<AdminEntity> save(AdminEntity entity) {
+            return null;
+        }*/
+    @GetMapping("/Client")
+    public String Client() {
+        return "Client";
+    }
+
     @Override
-    public ResponseEntity<AdminEntity> save(AdminEntity entity) {
+    public ResponseEntity<UserEntity> save(UserEntity entity) {
         return null;
     }
+
+
+    @PostMapping("/menuAdmin")
+    public String MenuAdmin(String number) {
+        switch (number){
+            case "1": { return "redirect:/Incidents"; }
+            case "2": { return "redirect:/FixedDetachments"; }
+            case "3": { return "redirect:/Detachment"; }
+            case "4": { return "redirect:/"; }
+            case "5": { return "redirect:/Incidents"; }
+        }
+        return "Client";
+    }
+
 }

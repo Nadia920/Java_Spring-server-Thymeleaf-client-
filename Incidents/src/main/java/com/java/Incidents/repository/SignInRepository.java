@@ -1,4 +1,4 @@
 package com.java.Incidents.repository;
 
-public interface SignInRepository CommonRepository{
+public interface SignInRepository extends CommonRepository{
 }
