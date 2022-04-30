@@ -1,7 +1,7 @@
 package com.java.Incidents.exception;
 
 import com.java.Incidents.controller.dto.ApiError;
-import com.java.Travel.controller.dto.ApiError;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;

@@ -1,7 +1,7 @@
 package com.java.Incidents.exception;
 
 import com.java.Incidents.controller.dto.ApiError;
-import com.java.Incidents.model.AppRaiting;
+import com.java.Incidents.model.AppRating;
 import com.java.Incidents.repository.*;
 import com.java.Incidents.service.servicesInterface.CountryService;
 import org.jetbrains.annotations.NotNull;
@@ -27,25 +27,20 @@ import java.io.IOException;
 public class EntityControllerHandler {
 
     @Autowired
-    CountryEntityRepository countryRepository;
+    CountryRepository countryRepository;
 
     @Autowired
     CountryService countryService;
 
     @Autowired
-    BusEntityRepository busRepository;
+    CityRepository cityRepository;
+
 
     @Autowired
-    CityEntityRepository cityRepository;
+    CompanyRepository companyRepository;
 
     @Autowired
-    BusStationEntityRepository busStationRepository;
-
-    @Autowired
-    CompanyEntityRepository companyRepository;
-
-    @Autowired
-    TripEntityRepository tripRepository;
+    IncidentRepository tripRepository;
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityControllerHandler.class);
@@ -203,59 +198,15 @@ public class EntityControllerHandler {
         return modelAndView;
     }
 
-    //Order on this trip exist
-    // Some code
-    @ExceptionHandler(OrderSeatsException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ResponseEntity<Object> handleIncorrectOrderSeats(OrderSeatsException ex) {
-        String error = ex.getMessage();
-        ApiError apiError =
-                new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
-    }
 
 
-    @ExceptionHandler(OrderOnThisBusStationAlreadyExistException.class)
+    @ExceptionHandler({OrderStatusIncorrectException.class})
     @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ResponseEntity<Object> handleOrderOnThisTripAlreadyExist(OrderOnThisBusStationAlreadyExistException ex) {
-        String error = ex.getMessage();
-        ApiError apiError =
-                new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
-    }
-
-    @ExceptionHandler(WalletBalanceException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ModelAndView handleIncorrectBalance(WalletBalanceException ex) {
-        String error = ex.getMessage();
-        ApiError apiError = new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage(), error);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("wallet/replenishBalance");
-        modelAndView.addObject("bankCard", ex.getBankCardDTO());
-        modelAndView.addObject("apiError", apiError);
-        return modelAndView;
-    }
-
-    @ExceptionHandler(WalletIncorrectBalanceException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ResponseEntity<Object> handleIncorrectWalletBalance(WalletIncorrectBalanceException ex) {
-        String error = ex.getMessage();
-        ApiError apiError =
-                new ApiError(HttpStatus.CONFLICT, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
-    }
-
-    @ExceptionHandler({TripStatusIncorrectException.class})
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ModelAndView handleTripStatusIncorrect(TripStatusIncorrectException ex) {
+    public ModelAndView handleTripStatusIncorrect(OrderStatusIncorrectException ex) {
         return getModelAndView(ex);
     }
 
-    @ExceptionHandler(PaymentException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public ModelAndView handlePayments(PaymentException ex) {
-        return getModelAndView(ex);
-    }
+
 
     @NotNull
     private ModelAndView getModelAndView(RuntimeException ex) {

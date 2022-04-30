@@ -21,15 +21,18 @@
 </head>
 <body>
 <form th:action="@{/Problems}" method="post">
-    <table>
-        <tr>
-            <td>Название проблемы</td>
-            <td>Описание проблемы</td>
-            <td>Решение проблемы</td>
-            <td>Имя клиента</td>
-            <td>Название команды</td>
-        </tr>
-    </table>
+    <h3>{text.nameProblem}</h3>
+    <input name="nameProblem">
+    <h3>{text.descriptionProblem}</h3>
+    <input name="descriptionProblem">
+    <h3>{text.solutionProblem}</h3>
+    <input name="solutionProblem">
+    <h3>{text.nameClient</h3>
+    <input name="nameClient">
+    <h3>{text.nameTeam}</h3>
+    <input name="nameTeam">
+
+
 </form>
 
 </body>

@@ -2,11 +2,7 @@ package com.java.Incidents.controller.dto;
 
 
 
-import com.java.Incidents.model.OrderStatus;
-import com.java.Incidents.model.OrderStatus;
-
 import java.sql.Timestamp;
-import java.util.List;
 
 public class OrderDTO {
 

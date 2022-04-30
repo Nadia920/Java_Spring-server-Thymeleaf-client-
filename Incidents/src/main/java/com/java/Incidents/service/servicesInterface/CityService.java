@@ -1,6 +1,7 @@
 package com.java.Incidents.service.servicesInterface;
 
-import com.java.Travel.controller.dto.CityDTO;
+import com.java.Incidents.controller.dto.CityDTO;
+
 
 import java.util.List;
 

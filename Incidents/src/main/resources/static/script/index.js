@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 function sendСonfirmPurchaseToEmail(order) {
     $.ajax({
-        url: localServerUrl  + 'Travel/orders/sendСonfirmPurchaseToEmail',
+        url: localServerUrl  + 'Incidents/orders/sendСonfirmPurchaseToEmail',
         contentType: "application/json",
         method: "POST",
         data: JSON.stringify(order),

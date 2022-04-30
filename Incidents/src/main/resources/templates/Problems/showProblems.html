@@ -23,14 +23,17 @@
 <form th:action="@{/Problems}" method="post">
     <table>
         <tr>
-            <td>Название проблемы</td>
-            <td>Описание проблемы</td>
-            <td>Решение проблемы</td>
-            <td>Имя клиента</td>
-            <td>Название команды</td>
+            <td>{text.nameProblem}Название проблемы</td>
+            <td>{text.descriptionProblem}Описание проблемы</td>
+            <td>{text.solutionProblem}Решение проблемы</td>
+            <td>{text.nameClient}Имя клиента</td>
+            <td>{text.nameTeam}Название команды</td>
         </tr>
     </table>
 </form>
+<a th:href="@{/ProblemAdd}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+<a th:href="@{/ProblemEdit}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+<a th:href="@{/ProblemDelete}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
 
 </body>
 </html>

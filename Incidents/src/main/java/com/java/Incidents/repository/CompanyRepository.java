@@ -1,6 +1,8 @@
 package com.java.Incidents.repository;
 
-import com.java.Incidents.model.AppRaiting;
+import com.java.Incidents.model.AppRating;
+import com.java.Incidents.model.GivingCompany;
+import com.java.Incidents.model.ReceivingCompany;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -10,32 +12,50 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface CompanyRepository {
-    @Query(value = "SELECT bs.id FROM BusStationEntity bs WHERE bs.name = ?1")
-    Long findIdByName(String name);
 
-    @Query(value = "SELECT bs.id FROM BusStationEntity bs WHERE bs.code = ?1")
-    Long findIdByCode(String code);
+    Optional<GivingCompany> findGivById(Long id);
 
-    Optional<Company> findById(Long id);
+    List<GivingCompany> findGivAll();
 
-    List<Company> findAll();
+    GivingCompany findGivByName(String name);
 
-    Company findByName(String name);
+    Set<GivingCompany> findGivByAppRaiting(AppRating AppRaiting);
 
-    Set<Company> findByAppRaiting(AppRaiting AppRaiting);
+    GivingCompany findGivByNameAndAppRaiting(String name, AppRating AppRaiting);
 
-    Company findByNameAndAppRaiting(String name, AppRaiting AppRaiting);
+    void deleteGiv(GivingCompany Company);
 
-    void delete(Company Company);
-
-    void deleteById(Long id);
+    void deleteGivById(Long id);
 
     @Query("SELECT comp.id FROM Company comp WHERE comp.name = ?1")
-    Long getCompanyIdByName(String name);
+    Long getGivCompanyIdByName(String name);
 
     @Query("select comp from Company comp order by comp.name asc")
-    List<Company> findAllAndOrderByName();
+    List<GivingCompany> findAllGivAndOrderByName();
 
     @Query("select company from Company company where LOWER(company.name) like  %?#{[0].toLowerCase()}% ")
-    Page<Company> findAllByNameIgnoreCase(String name, Pageable pageable);
+    Page<GivingCompany> findAllGivByNameIgnoreCase(String name, Pageable pageable);
+
+    Optional<ReceivingCompany> findRecById(Long id);
+
+    List<ReceivingCompany> findRecAll();
+
+    ReceivingCompany findRecByName(String name);
+
+    Set<ReceivingCompany> findRecByAppRaiting(AppRating AppRaiting);
+
+    ReceivingCompany findRecByNameAndAppRaiting(String name, AppRating AppRaiting);
+
+    void deleteRec(ReceivingCompany Company);
+
+    void deleteRecById(Long id);
+
+    @Query("SELECT comp.id FROM Company comp WHERE comp.name = ?1")
+    Long getRecCompanyIdByName(String name);
+
+    @Query("select comp from Company comp order by comp.name asc")
+    List<ReceivingCompany> findAllRecAndOrderByName();
+
+    @Query("select company from Company company where LOWER(company.name) like  %?#{[0].toLowerCase()}% ")
+    Page<ReceivingCompany> findAllRecByNameIgnoreCase(String name, Pageable pageable);
 }

@@ -23,13 +23,17 @@
 <form th:action="@{/Questions}" method="post">
     <table>
         <tr>
-            <td>Вопрос</td>
-            <td>Ответ</td>
-            <td>Имя клиента</td>
-            <td>Название команды</td>
+            <td>{text.question}Вопрос</td>
+            <td>{text.answer}Ответ</td>
+            <td>{text.nameClient}Имя клиента</td>
+            <td>{text.nameTeam}Название команды</td>
         </tr>
     </table>
 </form>
+<a th:href="@{/QuestionAdd}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+<a th:href="@{/QuestionEdit}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+<a th:href="@{/QuestionDelete}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+
 
 </body>
 </html>

@@ -8,11 +8,11 @@ google.charts.setOnLoadCallback(drawBasic);
 function drawBasic() {
 
     var init = [
-        ['Маршрут', 'Кол-во рейсов']
+        ['Категория инцидента', 'Кол-во инцидентов']
     ];
 
     $.ajax({
-        url: localServerUrl + "Travel/info/tour/data",
+        url: localServerUrl + "Incidents/info/tour/data",
         contentType: "application/json",
         method: "GET",
         success: function (result) {
@@ -36,18 +36,19 @@ draw = (init)=>{
     var data = google.visualization.arrayToDataTable(init);
 
     var options = {
-        title: 'Статистика популярности существующих направлений поездок',
+        title: 'Статистика популярности существующих инцидентов',
         chartArea: {width: '70%'},
         hAxis: {
-            title: 'Количество рейсов',
+            title: 'Количество инцидентов',
             minValue: 0
         },
         vAxis: {
-            title: 'Р е й с'
+            title: 'И Н Ц И Д Е Н Т'
         }
     };
 
     var tour = new google.visualization.BarTour(document.getElementById('tour_div'));
+
 
     tour.draw(data, options);
 };

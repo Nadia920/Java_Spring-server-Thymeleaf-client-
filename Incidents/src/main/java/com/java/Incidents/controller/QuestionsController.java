@@ -1,5 +1,6 @@
 package com.java.Incidents.controller;
 
+
 import com.java.Incidents.controller.dto.CompanyDTO;
 import com.java.Incidents.controller.dto.CountryDTO;
 import com.java.Incidents.model.Incidents;
@@ -39,7 +40,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/")
-public class IncidentController extends AbstractController<Incidents, IncidentServiceInterfImpl> {
+public class QuestionsController extends AbstractController<Question, QuestionServiceInterfImpl> {
     private final static Logger LOGGER = LogManager.getLogger();
 
     private OrderService OrderService;
@@ -54,11 +55,11 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
     private List<CompanyDTO> companyDTOList;
 
     public IncidentController(OrderService OrderService,
-                          CountryService countryService,
-                          CityService cityService,
-                          CompanyService companyService,
-                          EmailSender emailSender,
-                          OrderService orderService) {
+                              CountryService countryService,
+                              CityService cityService,
+                              CompanyService companyService,
+                              EmailSender emailSender,
+                              OrderService orderService) {
         super();
         this.OrderService = OrderService;
         this.countryService = countryService;
@@ -100,7 +101,7 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
 
     @GetMapping("/edit/{id}")
     public String getEditTripView(@PathVariable Long id, Model model) {
-       OrderDTO tripDTO = OrderService.getById(id);
+        OrderDTO tripDTO = OrderService.getById(id);
 
         String dDeparture = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(tripDTO.getDepartureDate().getTime()));
         String dArrival = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(tripDTO.getArrivalDate().getTime()));

@@ -16,9 +16,9 @@ public class Role extends BaseEntity{
     String role;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "role")
-    List<UserEntity> users;
+    List<User> users;
 
-    public Role(String role, List<UserEntity> users) {
+    public Role(String role, List<User> users) {
         this.role = role;
         this.users = users;
     }

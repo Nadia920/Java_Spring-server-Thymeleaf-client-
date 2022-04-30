@@ -1,6 +1,6 @@
 package com.java.Incidents.exception;
 
-import com.java.Travel.controller.dto.CountryDTO;
+import com.java.Incidents.controller.dto.CountryDTO;
 
 
 public class EditCountryParametersExistException extends RuntimeException {

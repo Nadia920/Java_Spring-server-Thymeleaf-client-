@@ -1,6 +1,6 @@
 package com.java.Incidents.exception;
 
-import com.java.Travel.controller.dto.CompanyDTO;
+import com.java.Incidents.controller.dto.CompanyDTO;
 
 public class EditCompanyParametersExistException extends RuntimeException {
 

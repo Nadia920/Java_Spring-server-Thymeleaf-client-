@@ -6,6 +6,7 @@ import com.java.Incidents.security.CustomUserDetail;
 import com.java.Incidents.service.servicesInterface.CountryService;
 import com.java.Incidents.service.servicesInterface.UserService;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +48,18 @@ public class HomeController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN, WORKER')")
+    @GetMapping("/login")
+    public String loginA() {
+        return "menuAdmin";
+    }
+
+    @PreAuthorize("hasAnyRole('CLIENT')")
+    @GetMapping("/login")
+    public String loginC() {
+        return "menuClient";
     }
 
     @GetMapping(value = "/registration")

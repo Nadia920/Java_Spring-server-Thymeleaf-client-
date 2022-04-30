@@ -2,7 +2,7 @@ protocol = $(location).attr('protocol') + '//';
 hostUrl = $(location).attr('host');
 localServerUrl = protocol+hostUrl+'/';
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     //City from
     const selectCity_fr = document.getElementById('select_city_fr');
@@ -12,7 +12,7 @@ $(document).ready(function () {
         const select = document.getElementById("select_country_fr");
         let id = select.value;
         console.log(id);
-        fetch(localServerUrl + "Travel/trups/countries/" + id, {
+        fetch(localServerUrl + "Travel/trips/countries/" + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -675,4 +675,4 @@ $(document).ready(function () {
             dataType: "json"
         });
     });
-});
+});*/

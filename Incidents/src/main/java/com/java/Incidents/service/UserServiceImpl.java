@@ -3,7 +3,7 @@ package com.java.Incidents.service;
 
 import com.java.Incidents.controller.dto.UserDTO;
 import com.java.Incidents.exception.EditUsersParametersExistException;
-import com.java.Incidents.model.UserEntity;
+import com.java.Incidents.model.User;
 import com.java.Travel.controller.dto.UserDTO;
 import com.java.Travel.exception.EditUsersParametersExistException;
 import com.java.Travel.exception.UserNotFoundException;
@@ -53,20 +53,20 @@ public class UserServiceImpl implements UserService {
             throw new EditUsersParametersExistException("This_phone_number_already_exist", userDTO);
         }
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setLogin(userDTO.getLogin());
-        userEntity.setEmail(userDTO.getEmail());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity.setFirstName(userDTO.getFirstName());
-        userEntity.setLastName(userDTO.getLastName());
-        userEntity.setPatronymic(userDTO.getPatronymic());
-        userEntity.setPhoneNumber(userDTO.getPhoneNumber());
-        userEntity.setRole(roleRepository.findByRole(role));
+        User user = new User();
+        user.setLogin(userDTO.getLogin());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPatronymic(userDTO.getPatronymic());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setRole(roleRepository.findByRole(role));
 
         if (role.equals("ROLE_CLIENT")) {
-            userEntity.setWallet(new WalletEntity(DEFAULT_SUM));
+            user.setWallet(new WalletEntity(DEFAULT_SUM));
         }
-        userRepository.save(userEntity);
+        userRepository.save(user);
 
         return true;
     }
@@ -74,8 +74,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getUsersByRole(String role) {
 
-        List<UserEntity> userEntityList = userRepository.findAllByRoleEntity_Role(role);
-        List<UserDTO> userDTOList = userEntityList.stream()
+        List<User> userList = userRepository.findAllByRoleEntity_Role(role);
+        List<UserDTO> userDTOList = userList.stream()
                 .map(a -> new UserDTO(
                         a.getId(),
                         a.getLogin(),
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void deleteUserById(Long id) throws UserNotFoundException {
-        Optional<UserEntity> userEntity = userRepository.findById(id);
+        Optional<User> userEntity = userRepository.findById(id);
 
         if (userEntity.isPresent()) {
             userRepository.deleteById(id);
@@ -107,21 +107,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUserById(Long id) {
-        Optional<UserEntity> userEntity = userRepository.findById(id);
+        Optional<User> userEntity = userRepository.findById(id);
         return userEntity.isPresent() ? mapUserDTO(userEntity.get()) : null;
     }
 
-    private UserDTO mapUserDTO(UserEntity userEntity) {
+    private UserDTO mapUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
-        userDTO.setId(userEntity.getId());
-        userDTO.setEmail(userEntity.getEmail());
-        userDTO.setLogin(userEntity.getLogin());
-        userDTO.setPassword(userEntity.getPassword());
-        userDTO.setFirstName(userEntity.getFirstName());
-        userDTO.setLastName(userEntity.getLastName());
-        userDTO.setPatronymic(userEntity.getPatronymic());
-        userDTO.setPhoneNumber(userEntity.getPhoneNumber());
-        userDTO.setRole(userEntity.getRole().getRole());
+        userDTO.setId(user.getId());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setLogin(user.getLogin());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setFirstName(user.getFirstName());
+        userDTO.setLastName(user.getLastName());
+        userDTO.setPatronymic(user.getPatronymic());
+        userDTO.setPhoneNumber(user.getPhoneNumber());
+        userDTO.setRole(user.getRole().getRole());
         return userDTO;
     }
 
@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
             throw new EditUsersParametersExistException("This_phone_number_already_exist", user);
         }
 
-        Optional<UserEntity> editUserEntity = userRepository.findById(user.getId());
+        Optional<User> editUserEntity = userRepository.findById(user.getId());
         if (editUserEntity.isPresent()) {
 
             editUserEntity.get().setLogin(user.getLogin());
@@ -164,7 +164,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserEntity> findByLogin(String login) {
+    public Optional<User> findByLogin(String login) {
         return Optional.ofNullable(userRepository.findByLogin(login));
     }
 

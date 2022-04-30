@@ -6,13 +6,11 @@ public class DatasException {
     CityDTO cityDTODepart;
     CityDTO cityDTOArriv;
     String departureDate;
-    TripCriteriaDTO TripCriteriaDTO;
 
     public DatasException(String msg, CityDTO cityDTODepart, CityDTO cityDTOArriv, String departureDate, IncidentCriteriaDTO incidentCriteriaDTO) {
         super(msg);
         this.cityDTODepart = cityDTODepart;
         this.cityDTOArriv = cityDTOArriv;
         this.departureDate = departureDate;
-        this.TripCriteriaDTO = TripCriteriaDTO;
     }
 }

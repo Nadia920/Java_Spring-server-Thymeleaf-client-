@@ -1,5 +1,4 @@
 package com.java.Incidents.repositoryInterfImpl;
-import com.java.Incidents.repository.*;
 
-public class LogInRepositoryInterfImpl extends  AbstractRepository implements LogInRepository{
+public class LogInRepositoryInterfImpl extends  AbstractRepository {
 }

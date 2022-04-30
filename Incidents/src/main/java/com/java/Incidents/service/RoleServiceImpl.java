@@ -7,7 +7,7 @@ import com.java.Incidents.model.Role;
 
 import java.util.List;
 
-import com.java.Incidents.model.UserEntity;
+import com.java.Incidents.model.User;
 
 import com.java.Incidents.repository.RoleEntityRepository;
 import com.java.Incidents.service.RoleService;
@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<UserDTO> getUsersByRole(String role) {
         Role roleEntity = roleRepository.findByRole(role);
-        List<UserEntity> users = roleEntity.getUsers();
+        List<User> users = roleEntity.getUsers();
         List<UserDTO> userDTOList = users.stream()
                 .map(a -> new UserDTO(
                         a.getId(),

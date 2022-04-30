@@ -1,7 +1,7 @@
 package com.java.Incidents.repository;
 
 
-import com.java.Travel.model.UserEntity;
+import com.java.Incidents.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,24 +9,24 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT u.id FROM UserEntity u WHERE u.login = ?1")
+    @Query(value = "SELECT c.id FROM Client c WHERE c.login = ?1")
     Long getIdUserByLogin(String login);
 
-    @Query(value = "SELECT u.id FROM UserEntity u WHERE u.email = ?1")
+    @Query(value = "SELECT c.id FROM Client c WHERE c.email = ?1")
     Long getIdUserByEmail(String email);
 
-    @Query(value = "SELECT u.id FROM UserEntity u WHERE u.phoneNumber = ?1")
+    @Query(value = "SELECT c.id FROM Client c WHERE c.phoneNumber = ?1")
     Long getIdUserByPhoneNumber(String phoneNumber);
 
-    List<UserEntity> findAllByRoleEntity_Role(String role);
+    List<User> findAllByRoleEntity_Role(String role);
 
     void deleteById(Long id);
 
-    Optional<UserEntity> findById(Long id);
+    Optional<User> findById(Long id);
 
-    UserEntity findByLogin(String login);
+    User findByLogin(String login);
 
 
 }

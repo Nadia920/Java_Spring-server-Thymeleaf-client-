@@ -1,5 +1,7 @@
 package com.java.Incidents.controller.dto;
 
+import com.java.Incidents.model.GivingCompany;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -11,7 +13,7 @@ public class CityDTO {
     @Size(min = 3,max = 20)
     private  String name;
 
-    private  List<BusStationDTO> busStationDTOList;
+    private  List<CompanyDTO> CompanyDTOList;
 
     private  CountryDTO countryDTO;
 
@@ -56,12 +58,12 @@ public class CityDTO {
         this.name = name;
     }
 
-    public List<BusStationDTO> getBusStationDTOList() {
-        return busStationDTOList;
+    public List<CompanyDTO> getBusStationDTOList() {
+        return CompanyDTOList;
     }
 
-    public void setBusStationDTOList(List<BusStationDTO> busStationDTOList) {
-        this.busStationDTOList = busStationDTOList;
+    public void setBusStationDTOList(List<CompanyDTO> busStationDTOList) {
+        this.CompanyDTOList = busStationDTOList;
     }
 
     public CountryDTO getCountryDTO() {
@@ -77,7 +79,7 @@ public class CityDTO {
         return "CityDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", busStationDTOList=" + busStationDTOList +
+                ", busStationDTOList=" + CompanyDTOList +
                 ", countryDTO=" + countryDTO +
                 '}';
     }

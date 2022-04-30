@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "Users")
 @Getter
 @Setter
-public class UserEntity extends BaseEntity {
+public class User extends BaseEntity {
 
     @NotNull
     @Column(name = "login", length = 15)
@@ -50,10 +50,10 @@ public class UserEntity extends BaseEntity {
 
     BigInteger IDReceivingCompanyC;
 
-    public UserEntity() {
+    public User() {
     }
 
-    public UserEntity(UserEntity user) {
+    public User(User user) {
         this.setId(user.getId());
         this.login = user.getLogin();
         this.password = user.getPassword();
@@ -66,7 +66,7 @@ public class UserEntity extends BaseEntity {
     }
 
 
-    public UserEntity(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<Order> orders, WalletEntity wallet, Role role) {
+    public User(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<Order> orders, Role role) {
         this.login = login;
         this.email = email;
         this.password = password;

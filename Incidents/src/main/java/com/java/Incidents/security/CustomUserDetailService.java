@@ -1,9 +1,9 @@
 package com.java.Incidents.security;
 
 
-import com.java.Travel.model.UserEntity;
+import com.java.Incidents.model.User;
+import com.java.Incidents.service.servicesInterface.UserService;
 
-import com.java.Travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class CustomUserDetailService extends UserEntity implements UserDetailsService{
+public class CustomUserDetailService extends User implements UserDetailsService{
 
     @Autowired
     private UserService userService;
@@ -24,7 +24,7 @@ public class CustomUserDetailService extends UserEntity implements UserDetailsSe
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        Optional<UserEntity> optionalUser = userService.findByLogin(login);
+        Optional<User> optionalUser = userService.findByLogin(login);
 
         optionalUser
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
