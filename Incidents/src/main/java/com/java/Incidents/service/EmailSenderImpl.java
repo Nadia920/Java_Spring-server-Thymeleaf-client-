@@ -1,10 +1,9 @@
 package com.java.Incidents.service;
 
 
-import com.java.Travel.config.EmailConfig;
-import com.java.Travel.controller.dto.OrderDTO;
-
-import com.java.Travel.service.EmailSender;
+import com.java.Incidents.config.EmailConfig;
+import com.java.Incidents.controller.dto.IncidentDTO;
+import com.java.Incidents.service.servicesInterface.EmailSender;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,16 @@ public class EmailSenderImpl implements EmailSender {
     }
 
     @Override
+    public void sendСonfirmPurchaseToEmail(IncidentDTO incidentDTO) {
+
+    }
+
+    @Override
+    public void sendСancellationСonfirmToEmail(IncidentDTO incidentDTO) {
+
+    }
+
+   /* @Override
     public void sendСonfirmPurchaseToEmail(OrderDTO orderDTO) {
         LOGGER.info("Send confirm purchase to email: " + orderDTO.getUserDTO().getEmail() + ". Order: " + orderDTO);
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -69,6 +78,6 @@ public class EmailSenderImpl implements EmailSender {
                 "This message was automatically generated. Please do not reply to this message.");
 
         mailSender.send(mailMessage);
-    }
+    }*/
 }
 

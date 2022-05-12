@@ -1,14 +1,13 @@
 package com.java.Incidents.controller;
 
-package com.java.Travel.controller;
 
+import com.java.Incidents.controller.dto.IncidentCreateUpdateDTO;
+import com.java.Incidents.controller.dto.IncidentDTO;
+import com.java.Incidents.model.IncidentStatus;
+import com.java.Incidents.security.CustomUserDetail;
+import com.java.Incidents.service.servicesInterface.EmailSender;
+import com.java.Incidents.service.servicesInterface.IncidentService;
 
-import com.java.Travel.controller.dto.OrderCreateUpdateDTO;
-import com.java.Travel.controller.dto.OrderDTO;
-import com.java.Travel.model.OrderStatus;
-import com.java.Travel.security.CustomUserDetail;
-import com.java.Travel.service.EmailSender;
-import com.java.Travel.service.OrderService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,29 +30,29 @@ import java.util.List;
 public class OrderController {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    private OrderService orderService;
+    private IncidentService incidentService;
     private EmailSender emailSender;
 
-    public OrderController(OrderService orderService,
+    public OrderController(IncidentService orderService,
                            EmailSender emailSender) {
-        this.orderService = orderService;
+        this.incidentService = incidentService;
         this.emailSender = emailSender;
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @PostMapping("/checkout")
     @ResponseBody
-    public OrderDTO addTicket(@RequestBody OrderCreateUpdateDTO orderDTO, @AuthenticationPrincipal CustomUserDetail currentUser) {
-        LOGGER.info("Buy Trip tickets. Order: " + orderDTO + ", Client with login: " + currentUser.getLogin());
-        orderDTO.setIdClient(currentUser.getId());
-        return orderService.add(orderDTO);
+    public IncidentDTO addTicket(@RequestBody IncidentCreateUpdateDTO incidentDTO, @AuthenticationPrincipal CustomUserDetail currentUser) {
+        LOGGER.info("Buy Trip tickets. Order: " + incidentDTO + ", Client with login: " + currentUser.getLogin());
+        incidentDTO.setIdClient(currentUser.getId());
+        return incidentService.add(incidentDTO);
 
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @GetMapping("/client")
-    public String getOrdersByUser(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") OrderStatus status, Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
-        List<OrderDTO> orderDTOList = orderService.getOrdersByUserIdAndStatus(currUser.getId(), status);
+    public String getOrdersByUser(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status, Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
+        List<IncidentDTO> orderDTOList = incidentService.getOrdersByUserIdAndStatus(currUser.getId(), status);
         model.addAttribute("orders", orderDTOList.size() != 0 ? orderDTOList : null);
         return "withrole/client/myTrips";
     }
@@ -61,40 +60,40 @@ public class OrderController {
     @PreAuthorize("hasAnyRole('CLIENT')")
     @GetMapping("/return/{id}")
     public String getOrderById(@PathVariable Long id, Model model) {
-        model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("order", incidentService.findById(id));
         return "order/returnTickets";
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @PostMapping("/return")
     @ResponseBody
-    public OrderCreateUpdateDTO deleteTicketsOnTripByUser(@RequestBody OrderCreateUpdateDTO order, @AuthenticationPrincipal CustomUserDetail currUser) {
-        order.setIdClient(currUser.getId());
-        orderService.deleteTicketsOnTripByUSer(order);
-        return order;
+    public IncidentCreateUpdateDTO deleteTicketsOnTripByUser(@RequestBody IncidentCreateUpdateDTO incident, @AuthenticationPrincipal CustomUserDetail currUser) {
+        incident.setIdClient(currUser.getId());
+        incidentService.deleteTicketsOnTripByUSer(incident);
+        return incident;
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @GetMapping("/{id}/moreTickets")
     public String getTakeMoreTicketsView(@PathVariable Long id, Model model) {
-        model.addAttribute("order", orderService.findById(id));
-        return "order/takeMoreTickets";
+        model.addAttribute("incident", incidentService.findById(id));
+        return "incident/takeMoreTickets";
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @PostMapping("/{id}/moreTickets")
     @ResponseBody
-    public OrderDTO takeMoreTickets(@RequestBody OrderCreateUpdateDTO order, @AuthenticationPrincipal CustomUserDetail currUser) {
+    public IncidentDTO takeMoreTickets(@RequestBody IncidentCreateUpdateDTO order, @AuthenticationPrincipal CustomUserDetail currUser) {
         order.setIdClient(currUser.getId());
-        return orderService.takeMoreTickets(order);
+        return incidentService.takeMoreTickets(order);
     }
 
     @PostMapping("/sendСonfirmPurchaseToEmail")
     @ResponseBody
-    public OrderDTO sendСonfirmPurchaseToEmail(@RequestBody OrderDTO orderDTO, @AuthenticationPrincipal CustomUserDetail currUser) {
-        LOGGER.info("Send Сonfirm Purchase To Email. Order: " + orderDTO);
-        emailSender.sendСonfirmPurchaseToEmail(orderDTO);
-        return orderDTO;
+    public IncidentDTO sendСonfirmPurchaseToEmail(@RequestBody IncidentDTO incidentDTO, @AuthenticationPrincipal CustomUserDetail currUser) {
+        LOGGER.info("Send Сonfirm Purchase To Email. Order: " + incidentDTO);
+        emailSender.sendСonfirmPurchaseToEmail(incidentDTO);
+        return incidentDTO;
     }
 
 

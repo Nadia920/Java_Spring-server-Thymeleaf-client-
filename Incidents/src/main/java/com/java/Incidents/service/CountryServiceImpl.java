@@ -1,15 +1,11 @@
 package com.java.Incidents.service;
 
 
-import com.java.Travel.controller.dto.BusStationDTO;
-import com.java.Travel.controller.dto.CityDTO;
-import com.java.Travel.controller.dto.CountryDTO;
-import com.java.Travel.exception.UserNotFoundException;
-import com.java.Travel.model.BusStationEntity;
-import com.java.Travel.model.CityEntity;
-import com.java.Travel.model.CountryEntity;
-import com.java.Travel.repository.CountryEntityRepository;
-import com.java.Travel.service.CountryService;
+import com.java.Incidents.controller.dto.CityDTO;
+import com.java.Incidents.controller.dto.CountryDTO;
+import com.java.Incidents.model.Country;
+import com.java.Incidents.repository.CountryRepository;
+import com.java.Incidents.service.servicesInterface.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,11 +24,11 @@ import java.util.stream.Collectors;
 @Service
 public class CountryServiceImpl implements CountryService {
     @Autowired
-    private CountryEntityRepository countryRepository;
+    private CountryRepository countryRepository;
 
 
     @Override
-    public Page<CountryEntity> findAll(Pageable pageable) {
+    public Page<Country> findAll(Pageable pageable) {
         return countryRepository.findAll(pageable);
     }
 
@@ -42,21 +38,56 @@ public class CountryServiceImpl implements CountryService {
         countryRepository.deleteById(id);
     }
 
-
     @Override
     public CountryDTO findOne(Long id) {
-        Optional<CountryEntity> countryEntity = countryRepository.findById(id);
-        return mapToCountryDTO(countryEntity);
+        return null;
     }
 
-    @Nullable
-    private CountryDTO mapToCountryDTO(Optional<CountryEntity> countryEntity) {
-        if (countryEntity.isPresent()) {
-            CountryDTO countryDTO = new CountryDTO();
-            countryDTO.setName(countryEntity.get().getName());
-            countryDTO.setId(countryEntity.get().getId());
 
-            Set<CityDTO> cityDTOSet = countryEntity.get().getCities().stream().map(a -> new CityDTO(a.getId(), a.getName())).collect(Collectors.toSet());
+    /*@Override
+    public CountryDTO findOne(Long id) {
+        Optional<Country> Country = countryRepository.findById(id);
+        return mapToCountryDTO(Country);
+    }*/
+
+    @Override
+    public Long getCountryIdByName(String name) {
+        return null;
+    }
+
+    @Override
+    public void saveOrUpdate(CountryDTO countryDTO) {
+
+    }
+
+    @Override
+    public CountryDTO findCountryByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<CountryDTO> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<CountryDTO> findAll(Sort name) {
+        return null;
+    }
+
+    @Override
+    public Set<CityDTO> checkCityDTOSet(Set<CityDTO> cityDTOSet) {
+        return null;
+    }
+
+    /*@Nullable
+    private CountryDTO mapToCountryDTO(Optional<Country> Country) {
+        if (Country.isPresent()) {
+            CountryDTO countryDTO = new CountryDTO();
+            countryDTO.setName(Country.get().getName());
+            countryDTO.setId(Country.get().getId());
+
+            Set<CityDTO> cityDTOSet = Country.get().getCities().stream().map(a -> new CityDTO(a.getId(), a.getName())).collect(Collectors.toSet());
             countryDTO.setCityDTOSet(cityDTOSet);
 
             return countryDTO;
@@ -71,23 +102,28 @@ public class CountryServiceImpl implements CountryService {
         return countryRepository.getIdCountryByName(name);
     }
 
+    @Override
+    public void saveOrUpdate(CountryDTO countryDTO) {
+
+    }
+
     @Transactional
     @Override
     public void saveOrUpdate(CountryDTO countryDTO) {
-        CountryEntity countryEntity = new CountryEntity();
-        countryEntity.setId(countryDTO.getId());
-        countryEntity.setName(countryDTO.getName());
+        Country Country = new Country();
+        Country.setId(countryDTO.getId());
+        Country.setName(countryDTO.getName());
 
-        if (countryEntity.getId() == null) {
-            countryRepository.save(countryEntity);
+        if (Country.getId() == null) {
+            countryRepository.save(Country);
         } else {
-            CountryEntity editCountryEntity;
-            if (countryRepository.findById(countryEntity.getId()).isPresent()) {
-                editCountryEntity = countryRepository.findById(countryEntity.getId()).get();
-                editCountryEntity.setName(countryEntity.getName());
-                countryRepository.save(editCountryEntity);
+            Country editCountry;
+            if (countryRepository.findById(Country.getId()).isPresent()) {
+                editCountry = countryRepository.findById(Country.getId()).get();
+                editCountry.setName(Country.getName());
+                countryRepository.save(editCountry);
             } else {
-                throw new UserNotFoundException("Country with id=" + countryEntity.getId() + " not found");
+                throw new UserNotFoundException("Country with id=" + Country.getId() + " not found");
             }
 
         }
@@ -96,28 +132,28 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public CountryDTO findCountryByName(String name) {
-        Optional<CountryEntity> countryEntity = countryRepository.findByName(name);
-        return mapToCountryDTO(countryEntity);
+        Optional<Country> Country = countryRepository.findByName(name);
+        return mapToCountryDTO(Country);
     }
 
     @Override
     public List<CountryDTO> findAll() {
-        List<CountryEntity> countryEntities = countryRepository.findAll(Sort.by("name").ascending());
+        List<Country> countryEntities = countryRepository.findAll(Sort.by("name").ascending());
         return countryEntities.stream().map(a -> new CountryDTO(a.getId(), a.getName())).collect(Collectors.toList());
     }
 
     @Override
     public List<CountryDTO> findAll(Sort name) {
-        List<CountryEntity> countryEntityList = countryRepository.findAll(name);
+        List<Country> CountryList = countryRepository.findAll(name);
 
         List<CountryDTO> countryDTOList = new ArrayList<>();
         CountryDTO countryDTO;
         CityDTO cityDTO;
-        for (CountryEntity countryEntity : countryEntityList) {
-            countryDTO = new CountryDTO(countryEntity.getId(), countryEntity.getName());
+        for (Country Country : CountryList) {
+            countryDTO = new CountryDTO(Country.getId(), Country.getName());
 
             Set<CityDTO> cityDTOSet = new HashSet<>();
-            for (CityEntity cityEntity : countryEntity.getCities()) {
+            for (CityEntity cityEntity : Country.getCities()) {
                 cityDTO = new CityDTO(cityEntity.getId(), cityEntity.getName());
 
                 List<BusStationDTO> busStationDTOList = new ArrayList<>();
@@ -137,9 +173,14 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Set<CityDTO> checkCityDTOSet(Set<CityDTO> cityDTOSet) {
-        return cityDTOSet.size() == 0 || cityDTOSet == null ? null : cityDTOSet;
+        return null;
     }
 
+    @Override
+    public Set<CityDTO> checkCityDTOSet(Set<CityDTO> cityDTOSet) {
+        return cityDTOSet.size() == 0 || cityDTOSet == null ? null : cityDTOSet;
+    }
+    */
 
 }
 

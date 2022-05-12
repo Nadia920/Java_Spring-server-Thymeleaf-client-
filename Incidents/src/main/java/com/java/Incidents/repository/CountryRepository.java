@@ -15,7 +15,7 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
 
     Optional<Country> findById(Long id);
 
-    @Query(value = "SELECT c.id FROM CountryEntity c WHERE c.name = ?1")
+    @Query(value = "SELECT c.id FROM Country c WHERE c.name = ?1")
     Long getIdCountryByName(String name);
 
     Optional<Country> findByName(String name);

@@ -1,11 +1,15 @@
 package com.java.Incidents.controller.dto;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.Arrays;
 
+@Getter
+@Setter
 public class ApiError {
 
     private HttpStatus status;
@@ -29,29 +33,6 @@ public class ApiError {
         errors = Arrays.asList(error);
     }
 
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
 
 }
 

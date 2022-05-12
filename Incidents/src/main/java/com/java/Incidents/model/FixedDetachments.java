@@ -15,5 +15,5 @@ public class FixedDetachments extends BaseEntity {
     private Detachment detachment;
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_F_ReceivingCompany")
-    private ReceivingCompany receivingCompany;
+    private Company сompany;
 }

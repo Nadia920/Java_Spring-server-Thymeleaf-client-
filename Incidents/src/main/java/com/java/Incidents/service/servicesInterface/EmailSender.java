@@ -1,11 +1,11 @@
 package com.java.Incidents.service.servicesInterface;
 
 
-import com.java.Travel.controller.dto.OrderDTO;
+import com.java.Incidents.controller.dto.IncidentDTO;
 
 public interface EmailSender {
-    void sendСonfirmPurchaseToEmail(OrderDTO orderDTO);
+    void sendСonfirmPurchaseToEmail(IncidentDTO incidentDTO);
 
-    void sendСancellationСonfirmToEmail(OrderDTO orderDTO);
+    void sendСancellationСonfirmToEmail(IncidentDTO incidentDTO);
 }
 

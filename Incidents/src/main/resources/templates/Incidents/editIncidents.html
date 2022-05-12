@@ -33,9 +33,283 @@
 
         </tr>
     </table>
-    <a th:href="@{/IncidentAdd}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+    <!--<a th:href="@{/IncidentAdd}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
     <a th:href="@{/IncidentEdit}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
-    <a th:href="@{/IncidentDelete}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+    <a th:href="@{/IncidentDelete}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>-->
+    <div th:replace="home/workerHeader :: worker-header"/>
+    <div class="myForm" style="margin-left: -90vh">
 
+        <div class="" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content" style="width: 280%;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:text="#{text.edit}"></h5>
+                    </div>
+                    <input type="hidden" id="id" th:value="${id}" th:name="id">
+                    <div class="modal-body">
+
+
+                        <div class="modal-content">
+                            <div class="card-body">
+                                <div class="row vdivide">
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.country}+':'"></h5>
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_country_fr" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="country_fr" id="h_country_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto" name="idCountry_fr"  id="select_country_fr" required >
+                                                        <option th:each="country : ${countries_fr}" th:value="${country.id}" th:text="${country.name}"  ></option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_city_fr" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="city_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto" name="idCity_fr" id="select_city_fr"  required>
+                                                        <option th:each="city : ${cities_fr}" th:value="${city.id}" th:text="${city.name}"></option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_country_fr" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="category" id="h_category" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto" name="idCountry_fr"  id="select_country_fr" required >
+                                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"  ></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.city}+':'"></h5>
+
+                                        <div class="control-group ">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_city_fr" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="city_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto" name="idCity_fr" id="select_city_fr"  required>
+                                                        <option th:each="incidentName : ${incidentNames}" th:value="${incidentName.id}" th:text="${incidentName.name}"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.busStation}+':'"></h5>
+
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="busStation_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idBusStation_fr" id="select_busStation_fr"  required>
+                                                        <option th:each="IncidentSolution : ${IncidentSolutions}"   th:value="${IncidentSolution.id}" th:text="${IncidentSolution.name}+'('+${IncidentSolution.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.busStation}+':'"></h5>
+
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="busStation_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idBusStation_fr" id="select_busStation_fr"  required>
+                                                        <option th:each="reaction : ${reactions}"   th:value="${reaction.id}" th:text="${reaction.name}+'('+${reaction.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.busStation}+':'"></h5>
+
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="comment" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idComment" id="select_busStation_fr"  required>
+                                                        <option th:each="comment : ${comments}"   th:value="${comment.id}" th:text="${comment.name}+'('+${comment.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 text-center">
+                                        <h5 class="card-title" th:text="#{text.busStation}+':'"></h5>
+
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="busStation_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idBusStation_fr" id="select_busStation_fr"  required>
+                                                        <option th:each="type : ${types}"   th:value="${type.id}" th:text="${type.name}+'('+${type.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="busStation_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idBusStation_fr" id="select_busStation_fr"  required>
+                                                        <option th:each="client : ${clients}"   th:value="${client.id}" th:text="${client.name}+'('+${client.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div style="display: flex; flex-direction: row;">
+                                                <div>
+                                                    <a class="btn btn-outline-info btn-sm " id="edt_busStation_from" style="margin-bottom: 5px"><i class="far fa-edit fa-sm"></i></a>
+                                                    <a for="busStation_fr" class="col-form-label" ><b th:text="#{text.from}"></b></a>
+                                                    <select class="form-control col-lg-auto"  name="idBusStation_fr" id="select_busStation_fr"  required>
+                                                        <option th:each="detachment : ${detachments}"   th:value="${detachment.id}" th:text="${detachment.name}+'('+${detachment.code}+')'"></option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-content">
+                            <div class="card-body">
+                                <div class="row vdivide justify-content-center">
+
+                                    <div class="text-center">
+                                        <h5 class="card-title" th:text="#{text.seats-info}+':'"></h5>
+
+                                        <div style="display: flex; flex-direction: row;" class="text-center">
+                                            <div class="container " style="width: 250px">
+                                                <h3 for="allSeats" class="col-form-label" th:text="#{text.all-seats}"></h3>
+                                                <input placeholder="Enter a number" name="allSeats" th:value="${CategoryName}" id="allSeatsEdit" required type="number"  min="0" max="300" step="1"/>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 for="freeSeats" class="col-form-label" th:text="#{text.free-seats}"></h3>
+                                                <input placeholder="Enter a number" th:value="${DescriptionCategory}" id="freeSeatsEdit" required type="number"  min="0" step="1"/>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 for="price" class="col-form-label" th:text="#{text.seat-price}"></h3>
+                                                <input data-prefix="$"  data-decimals="2" name="price" th:value="${IncidentName}" id="price" min="0" max="10000" step="0.1" type="number" placeholder="Enter ticket price" required/>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="soldTickets" th:value="${IncidentSolution}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="Reaction" th:value="${Reaction}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="Comments" th:value="${Comments}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="PreventionMeasures" th:value="${PreventionMeasures}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="type" th:value="${type}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="LastNameClient" th:value="${LastNameClient}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="FirstNameClient" th:value="${FirstNameClient}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="PatronymicClient" th:value="${PatronymicClient}"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="container " style="width: 250px; padding-left: 10px">
+                                                <h3 class="col-form-label"  th:text="#{text.number-tickets-sold}"></h3>
+                                                <div class="input-group" style="width: 150px" >
+
+                                                    <input type="text" class="form-control" id="NameDetachment" th:value="${NameDetachment}"  readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div >
+                        </div>
+                        <div>
+                            <p id="error-dates" class="text-danger text-left "></p>
+                            <span class="error"
+                                  th:text="#{${'text.error.' + apiError?.getMessage()}}"
+                                  th:unless="${apiError == null}">Nothing</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a th:href="@{/trip}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+                        <button type="button" class="btn btn-primary" id="edit" th:text="#{bt.save}"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
 </body>
 </html>

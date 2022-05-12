@@ -23,39 +23,83 @@
 <form th:action="@{/staff}" method="post">
     <table>
         <tr>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Квалификация</td>
-            <td>Опыт</td>
-            <td>Роль</td>
+            <td>{text.lastName}</td>
+            <td>{text.name}</td>
+            <td>{text.qualification}</td>
+            <td>{text.experience}</td>
+            <td>{text.role}</td>
         </tr>
-        <tr>
-            <td>Савенок</td>
-            <td>Марина</td>
-            <td>Николаевна</td>
-            <td>Юрист</td>
-            <td>5</td>
-            <td>Член команды</td>
-        </tr>
-        <tr>
-            <td>Соколовская</td>
-            <td>Анна</td>
-            <td>Владимировна</td>
-            <td>Программист</td>
-            <td>5</td>
-            <td>Член команды</td>
-        </tr>
-        <tr>
-            <td>Чуб</td>
-            <td>Артём</td>
-            <td>Валерьевич</td>
-            <td>Пожарник</td>
-            <td>7</td>
-            <td>Член команды</td>
-        </tr>
+
     </table>
 </form>
+<div class="container my-md-2" style="width: 50%">
+    <div class="card ">
+        <div class="card-block">
+            <div th:switch="${staffs}" class="container my-md-4">
 
+                <div class="d-flex justify-content-between">
+                    <div sec:authorize="hasRole('ROLE_WORKER')">
+                        <p class="my-9" >
+                            <a th:href="@{staffs/edit}" class="btn btn-primary">
+                                <i class="fas fa-plus ml-2" th:text="#{text.add-company}"></i></a>
+                        </p>
+                    </div>
+                    <div>
+                        <form class="form-inline">
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="nameId" name="name" th:value="${name}" th:placeholder="#{text.name}">
+                            <button th:href="@{staffs/name}" type="submit" class="btn btn-primary mb-2" th:text="#{text.search}"></button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12" style="margin-left: 10%">
+                    <h2 th:case="null" th:text="#{text.record.found}"></h2>
+                    <div th:case="*">
+                        <table class="table table-hover" style="margin-left: -10%">
+                            <thead>
+                            <tr style="text-align: left">
+                                <th th:text="#{text.lastName}" ></th>
+                                <th th:text="#{text.name}" ></th>
+                                <th th:text="#{text.qualification}" ></th>
+                                <th th:text="#{text.experience}" ></th>
+                                <th th:text="#{text.role}" ></th>
+                                <th th:text="#{text.delete}" sec:authorize="hasRole('ROLE_WORKER')"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="staff : ${staffs}">
+                                <td th:text="${staff.name}"></td>
+                                <td>
+                                    <a th:href="@{ /staffs/edit/{id} (id=${staff.id}) }">
+                                        <i class="far fa-edit  ml-3 "></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/staffs/delete/{id}(id=${staff.id}) }"
+                                       onclick="return confirm('Are you sure?')">
+                                        <span style="color: Tomato;">
+                                            <i class="fas fa-trash-alt ml-2"> </i>
+                                         </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"
+                                th:each=" i : ${#numbers.sequence(0, staffs.totalPages -1)}">
+                                <a th:href="@{/staffs(page=${i})}" th:text="${i}" class="nav-link"
+                                   th:classappend="${currentPage}==${i}?'active':''"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

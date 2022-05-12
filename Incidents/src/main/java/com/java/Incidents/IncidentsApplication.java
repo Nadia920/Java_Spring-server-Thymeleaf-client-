@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
-@EntityScan(basePackages = {"com.java.Travel.model" })
+@EntityScan(basePackages = {"com.java.Incidents.model" })
 @Component
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableScheduling

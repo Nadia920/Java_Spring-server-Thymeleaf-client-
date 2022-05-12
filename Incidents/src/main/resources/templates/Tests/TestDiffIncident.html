@@ -20,6 +20,7 @@
     <!--div th:replace="header :: header-css"/-->
 </head>
 <body>
+<form action="TestDiffIncident" method="post">
 <h3>Первое действие, если загорелась техника</h3>
 <input type="radio" id="contactChoice1"
        name="contact" value="">
@@ -70,7 +71,7 @@
 <input type="radio" id="contactChoice5_2"
        name="contact5" value="">
 <label for="contactChoice5_2">Покинуть помещение</label>
-
-
+    <input type="submit" value="Ответить">
+</form>
 </body>
 </html>

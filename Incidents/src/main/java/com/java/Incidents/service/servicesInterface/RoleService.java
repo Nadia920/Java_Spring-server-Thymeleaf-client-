@@ -2,9 +2,10 @@ package com.java.Incidents.service.servicesInterface;
 
 
 
-import com.java.Travel.controller.dto.RoleDTO;
-import com.java.Travel.controller.dto.UserDTO;
-import com.java.Travel.model.RoleEntity;
+import com.java.Incidents.controller.dto.RoleDTO;
+import com.java.Incidents.controller.dto.UserDTO;
+import com.java.Incidents.model.Role;
+
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface RoleService {
 
     List<RoleDTO> findAllRoles();
 
-    RoleEntity findByRole(String role);
+    Role findByRole(String role);
 
     List<UserDTO> getUsersByRole(String role);
 }

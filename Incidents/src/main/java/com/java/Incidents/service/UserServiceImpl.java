@@ -3,20 +3,15 @@ package com.java.Incidents.service;
 
 import com.java.Incidents.controller.dto.UserDTO;
 import com.java.Incidents.exception.EditUsersParametersExistException;
+import com.java.Incidents.exception.UserNotFoundException;
 import com.java.Incidents.model.User;
-import com.java.Travel.controller.dto.UserDTO;
-import com.java.Travel.exception.EditUsersParametersExistException;
-import com.java.Travel.exception.UserNotFoundException;
-import com.java.Travel.model.UserEntity;
+import com.java.Incidents.repository.RoleRepository;
+import com.java.Incidents.repository.UserRepository;
+import com.java.Incidents.service.servicesInterface.UserService;
 
 import java.util.List;
 import java.util.Optional;
 
-
-import com.java.Travel.model.WalletEntity;
-import com.java.Travel.repository.RoleEntityRepository;
-import com.java.Travel.repository.UserEntityRepository;
-import com.java.Travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,9 +58,7 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setRole(roleRepository.findByRole(role));
 
-        if (role.equals("ROLE_CLIENT")) {
-            user.setWallet(new WalletEntity(DEFAULT_SUM));
-        }
+
         userRepository.save(user);
 
         return true;

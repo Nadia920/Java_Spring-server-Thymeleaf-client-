@@ -30,5 +30,5 @@ public class Problems extends BaseEntity {
     Detachment detachment;
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    Client client;
+    User user;
 }

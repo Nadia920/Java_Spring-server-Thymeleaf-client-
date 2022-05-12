@@ -11,13 +11,13 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query(value = "SELECT c.id FROM Client c WHERE c.login = ?1")
+    @Query(value = "SELECT c.id FROM User c WHERE c.login = ?1")
     Long getIdUserByLogin(String login);
 
-    @Query(value = "SELECT c.id FROM Client c WHERE c.email = ?1")
+    @Query(value = "SELECT c.id FROM User c WHERE c.email = ?1")
     Long getIdUserByEmail(String email);
 
-    @Query(value = "SELECT c.id FROM Client c WHERE c.phoneNumber = ?1")
+    @Query(value = "SELECT c.id FROM User c WHERE c.phoneNumber = ?1")
     Long getIdUserByPhoneNumber(String phoneNumber);
 
     List<User> findAllByRoleEntity_Role(String role);

@@ -21,5 +21,5 @@ public class Results extends BaseEntity {
     private Tests tests;
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Client_R")
-    private Client client;
+    private User user;
 }

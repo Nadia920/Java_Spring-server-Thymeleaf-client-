@@ -108,9 +108,7 @@ public class HomeController {
 
 
     @GetMapping("/MenuAdmin")
-    public String MenuAdmin() {
-        return "home/MenuAdmin";
-    }
+    public String MenuAdmin() { return "MenuAdmin"; }
 
     @GetMapping("/MenuClient")
     public String MenuClient() {
@@ -137,14 +135,14 @@ public class HomeController {
         return "company/Client";
     }
 
-    @GetMapping("/Detachment")
+    @GetMapping("/showDetachment")
     public String Detachment() {
-        return "company/Detachment";
+        return "showDetachment";
     }
 
-    @GetMapping("/FixedDetachments")
+    @GetMapping("/showFixedDetachments")
     public String FixedDetachments() {
-        return "company/FixedDetachments";
+        return "showFixedDetachments";
     }
 
     @GetMapping("/GivingCompany")
@@ -152,9 +150,9 @@ public class HomeController {
         return "company/GivingCompany";
     }
 
-    @GetMapping("/Incidents")
+    @GetMapping("/showIncidents")
     public String Incidents() {
-        return "company/Incidents";
+        return "showIncidents";
     }
 
     @GetMapping("/Problems")

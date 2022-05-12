@@ -1,7 +1,7 @@
 package com.java.Incidents.exception;
 
-import com.java.Incidents.controller.dto.UserDTO;
 
+import com.java.Incidents.controller.dto.UserDTO;
 
 public class EditUsersParametersExistException extends RuntimeException {
 

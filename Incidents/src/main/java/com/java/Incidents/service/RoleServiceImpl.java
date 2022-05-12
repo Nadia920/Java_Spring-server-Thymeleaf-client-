@@ -9,8 +9,7 @@ import java.util.List;
 
 import com.java.Incidents.model.User;
 
-import com.java.Incidents.repository.RoleEntityRepository;
-import com.java.Incidents.service.RoleService;
+import com.java.Incidents.repository.RoleRepository;
 import com.java.Incidents.service.servicesInterface.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

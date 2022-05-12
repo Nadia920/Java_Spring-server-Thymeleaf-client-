@@ -20,24 +20,22 @@
     <!--div th:replace="header :: header-css"/-->
 </head>
             <body>
-            <form th:action="@{/menuClient}" method="post">
+            <!--<form th:action="@{/menuClient}" method="post">-->
             <p>Возможности</p>
 
-            <button href="#" class="button2" tabindex="0"> 1 - Связь с членом команды помощи для решения возникших вопросов </button>
+            <a href="/problems/ProblemsAdd"><button class="button2" tabindex="0"> 1 - Связь с членом команды помощи для решения возникших вопросов </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 2 - Пройти тест "Знаешь ли ты, что делать при различных инцидентах" </button>
+            <a href="/test/TestDiffIncident"><button  class="button2" tabindex="0"> 2 - Пройти тест "Знаешь ли ты, что делать при различных инцидентах" </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 3 - Поиск нужных действий при различных инцидентах </button>
+            <a href="/incidents/showIncidents"><button  class="button2" tabindex="0"> 3 - Поиск нужных действий при различных инцидентах </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 4 - Работа с записями от команды помощи </button>
+            <a href="/detachment/showDetachment"><button  class="button2" tabindex="0"> 4 - Отправить заявку на закрепление определённого отряда помощи за этим предприятием </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 5 - Отправить заявку на закрепление определённого отряда помощи за этим предприятием </button>
+            <a href="/incidents/PageIncidentAdd"><button  class="button2" tabindex="0"> 5 - Подать заявление о инциденте </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 6 - Подать заявление о инциденте </button>
+            <a href="/showAppRating"><button  class="button2" tabindex="0"> 6 - Оценить приложение </button></a>
 
-            <button href="#" class="button2" tabindex="0"> 7 - Оценить приложение </button>
-
-            <button href="#" class="button2" tabindex="0"> 8 - Пройти тест, чтобы выявить моменты, из-за которых могут случиться инциденты </button>
-            </form>
+            <a href="/test/TestMoments"><button  class="button2" tabindex="0"> 7 - Пройти тест, чтобы выявить моменты, из-за которых могут случиться инциденты </button></a>
+            <!--</form>-->
             </body>
             </html>

@@ -20,28 +20,76 @@
     <!--div th:replace="header :: header-css"/-->
 </head>
 <body>
-<form th:action="@{/Client}" method="post">
-    <table>
-        <tr>
-            <td>{text.last_name_of_the_client}</td>
-            <td>{text._name_client}</td>
-            <td>{text.patronymic_client}</td>
-            <td>{text.year_of_birth}</td>
-            <td>{text.phone_number}</td>
-            <td>{text.email}</td>
-            <td>{text.company_name}</td>
-        </tr>
-        <tr>
-            <td>Лесенко</td>
-            <td>Андрей</td>
-            <td>Викторович</td>
-            <td>22.11.1990</td>
-            <td>+375299061211</td>
-            <td>lesenko@gmail.com</td>
-            <td>Юпитер</td>
-        </tr>
-    </table>
-</form>
+<div class="container my-md-2" style="width: 50%">
+    <div class="card ">
+        <div class="card-block">
+            <div th:switch="${clients}" class="container my-md-4">
 
+                <div class="d-flex justify-content-between">
+                    <div sec:authorize="hasRole('ROLE_WORKER')">
+                        <p class="my-9" >
+                            <a th:href="@{clients/edit}" class="btn btn-primary">
+                                <i class="fas fa-plus ml-2" th:text="#{text.add-client}"></i></a>
+                        </p>
+                    </div>
+                    <div>
+                        <form class="form-inline">
+                            <input type="text" class="form-control mb-2 mr-sm-2" id="nameId" name="name" th:value="${name}" th:placeholder="#{text.name}">
+                            <button th:href="@{clients/name}" type="submit" class="btn btn-primary mb-2" th:text="#{text.search}"></button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12" style="margin-left: 10%">
+                    <h2 th:case="null" th:text="#{text.record.found}"></h2>
+                    <div th:case="*">
+                        <table class="table table-hover" style="margin-left: -10%">
+                            <thead>
+                            <tr style="text-align: left">
+                                <th th:text="#{text.lastNameOfTheClient}" ></th>
+                                <th th:text="#{text.nameClient}" ></th>
+                                <th th:text="#{text.patronymicClient}" ></th>
+                                <th th:text="#{text.yearOfBirth}" ></th>
+                                <th th:text="#{text.phoneNumber}" ></th>
+                                <th th:text="#{text.email}" ></th>
+                                <th th:text="#{text.companyName}" ></th>
+                                <th th:text="#{text.delete}" sec:authorize="hasRole('ROLE_WORKER')"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="client : ${clients}">
+                                <td th:text="${client.name}"></td>
+                                <td>
+                                    <a th:href="@{ /clients/edit/{id} (id=${client.id}) }">
+                                        <i class="far fa-edit  ml-3 "></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/clients/delete/{id}(id=${client.id}) }"
+                                       onclick="return confirm('Are you sure?')">
+                                        <span style="color: Tomato;">
+                                            <i class="fas fa-trash-alt ml-2"> </i>
+                                         </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"
+                                th:each=" i : ${#numbers.sequence(0, clients.totalPages -1)}">
+                                <a th:href="@{/clients(page=${i})}" th:text="${i}" class="nav-link"
+                                   th:classappend="${currentPage}==${i}?'active':''"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

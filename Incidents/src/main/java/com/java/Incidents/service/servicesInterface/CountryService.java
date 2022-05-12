@@ -2,9 +2,9 @@ package com.java.Incidents.service.servicesInterface;
 
 
 
-import com.java.Travel.controller.dto.CityDTO;
-import com.java.Travel.controller.dto.CountryDTO;
-import com.java.Travel.model.CountryEntity;
+import com.java.Incidents.controller.dto.CityDTO;
+import com.java.Incidents.controller.dto.CountryDTO;
+import com.java.Incidents.model.Country;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 public interface CountryService {
 
-    Page<CountryEntity> findAll(Pageable pageable);
+    Page<Country> findAll(Pageable pageable);
 
     void delete(Long id);
 
