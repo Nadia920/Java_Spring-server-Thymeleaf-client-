@@ -28,5 +28,5 @@ public class Questions extends BaseEntity {
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
-    private Client client;
+    private User user;
 }

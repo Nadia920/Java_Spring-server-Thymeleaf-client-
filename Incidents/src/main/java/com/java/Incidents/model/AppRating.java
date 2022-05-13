@@ -20,4 +20,11 @@ public class AppRating extends BaseEntity {
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Client_A")
     private BigInteger IDClientA;
+
+    AppRating() {}
+
+    public static AppRating values(){
+        AppRating app = new AppRating();
+        return app;
+    }
 }

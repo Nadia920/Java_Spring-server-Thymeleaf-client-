@@ -25,8 +25,37 @@ import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImpl implements CityService {
+    @Override
+    public CityDTO findOne(Long id) {
+        return null;
+    }
 
-    @Autowired
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public Long getCityIdByName(String name) {
+        return null;
+    }
+
+    @Override
+    public void saveOrUpdate(CityDTO cityDTO, String cuntryName) {
+
+    }
+
+    @Override
+    public List<CityDTO> getCityListByCountry(Long id) {
+        return null;
+    }
+
+    @Override
+    public Long getCountryIdByCityId(Long id) {
+        return null;
+    }
+
+    /*@Autowired
     private CityRepository cityRepository;
     @Autowired
     private CountryRepository countryRepository;
@@ -106,6 +135,6 @@ public class CityServiceImpl implements CityService {
     @Override
     public Long getCountryIdByCityId(Long id) {
         return cityRepository.getIdCountryByCityId(id);
-    }
+    }*/
 
 }

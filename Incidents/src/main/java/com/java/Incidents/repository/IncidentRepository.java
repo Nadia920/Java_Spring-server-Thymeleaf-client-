@@ -20,7 +20,7 @@ public interface IncidentRepository {
 
     @Modifying
     @Query("UPDATE Incidents i " +
-            "SET i.status = com.java.Incidents.model.OrderStatus.FINISHED " +
-            "WHERE o.trip.id=:id")
-    void setStatusFinishedWhereTripId(Long id);
+            "SET i.status = com.java.Incidents.model.IncidentStatus.FINISHED " +
+            "WHERE i.id=:id")
+    void setStatusFinishedWhereIncidentId(Long id);
 }

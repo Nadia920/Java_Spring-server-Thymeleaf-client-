@@ -18,9 +18,12 @@ public class CustomUserDetailService extends User implements UserDetailsService{
     @Autowired
     private UserService userService;
 
-    /*public CustomUserDetailService(UserService userService) {
+    public CustomUserDetailService(UserService userService) {
         this.userService = userService;
-    }*/
+    }
+    public CustomUserDetailService() {
+
+    }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

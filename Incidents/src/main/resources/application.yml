@@ -26,7 +26,7 @@ spring:
     #   For Docker
     #    url: jdbc:postgresql://localhost:5432/Var-db
     #    For Local host
-    url: jdbc:postgresql://localhost:5432/Var-db
+    url: jdbc:postgresql://localhost:5432/help_incidents
     username: postgres
     password: Nadja1008
     driverClassName: org.postgresql.Driver

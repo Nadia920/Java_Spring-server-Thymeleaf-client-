@@ -26,7 +26,7 @@ import java.io.IOException;
 @ControllerAdvice
 public class EntityControllerHandler {
 
-    @Autowired
+    /*@Autowired
     CountryRepository countryRepository;
 
     @Autowired
@@ -216,7 +216,7 @@ public class EntityControllerHandler {
         modelAndView.setViewName("statuscode/409");
         modelAndView.addObject("apiError", apiError);
         return modelAndView;
-    }
+    }*/
 
 
 }

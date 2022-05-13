@@ -3,13 +3,9 @@ package com.java.Incidents.service;
 
 import java.util.List;
 
-import com.java.Travel.controller.dto.CityFrAndTo;
-import com.java.Travel.controller.dto.TourDTO;
-import com.java.Travel.model.BusStationEntity;
-import com.java.Travel.model.TripEntity;
-import com.java.Travel.repository.CityEntityRepository;
-import com.java.Travel.repository.TripEntityRepository;
-import com.java.Travel.service.InfoService;
+import com.java.Incidents.controller.dto.CompanyDTO;
+import com.java.Incidents.controller.dto.IncidentDTO;
+import com.java.Incidents.service.servicesInterface.InfoService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -20,14 +16,23 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.java.Travel.model.TripStatus.ACTIVE;
-import static com.java.Travel.model.TripStatus.FINISHED;
+/*import static com.java.Travel.model.TripStatus.ACTIVE;
+import static com.java.Travel.model.TripStatus.FINISHED;*/
 
 
 @Service
 public class InfoServiceImpl implements InfoService {
+    @Override
+    public List<IncidentDTO> getDataForTour() {
+        return null;
+    }
 
-    @Autowired
+    @Override
+    public List<CompanyDTO> getDataForIncident() {
+        return null;
+    }
+
+    /*@Autowired
     private TripEntityRepository tripRepository;
     @Autowired
     private CityEntityRepository cityRepository;
@@ -81,7 +86,7 @@ public class InfoServiceImpl implements InfoService {
         tripEntity.setBusStationDeparture(busStationEntityDepartures);
 
         return tripEntity;
-    }
+    }*/
 
 
 }

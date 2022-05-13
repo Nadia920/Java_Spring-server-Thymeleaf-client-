@@ -1,18 +1,14 @@
 package com.java.Incidents.model;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
-public class City {
+public class City extends BaseEntity{
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cityEntity")
-    Set<ReceivingCompany> receivingCompany;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "cityEntity")
-    Set<GivingCompany> givingCompany;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "city")
+    Set<Company> company;
 
     @ManyToOne()
     @JoinColumn(name = "country_id")

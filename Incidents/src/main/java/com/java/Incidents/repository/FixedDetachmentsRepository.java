@@ -1,6 +1,7 @@
 package com.java.Incidents.repository;
 
 import com.java.Incidents.model.Country;
+import com.java.Incidents.model.FixedDetachments;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
@@ -10,8 +11,8 @@ public interface FixedDetachmentsRepository {
 
     Optional<Country> findById(Long id);
 
-    @Query(value = "SELECT c.id FROM CountryEntity c WHERE c.name = ?1")
-    Long getIdCountryByName(String name);
+    @Query(value = "SELECT * FROM FixedDetachments f WHERE f.ID = ?1")
+    Long getallFixedDetachmentsById(String name);
 
-    Optional<Country> findByName(String name);
+    Optional<FixedDetachments> findByName(String name);
 }

@@ -20,20 +20,77 @@
     <!--div th:replace="header :: header-css"/-->
 </head>
 <body>
-<form th:action="@{/GivingCompany}" method="post">
+<form th:action="@{/givingCompanies}" method="post">
     <table>
         <tr>
             <td>{text.company_name}Название компании</td>
             <td>{text.company_address}Адрес компании</td>
             <td>{text.activity_of_the_company}Деятельность компании</td>
         </tr>
-        <tr>
-            <td>Роза</td>
-            <td>г.Минск, Менделеева 30</td>
-            <td>Помощь с любыми проблемами</td>
-        </tr>
+
     </table>
 </form>
+<div class="myForm">
+    <form th:action="@{/givingCompanies/edit}" th:object="${company}" method="post">
+        <div class="" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:text="#{text.update}"></h5>
+                    </div>
+
+                    <div th:if="${#fields.hasErrors()}">
+                        <span class="error" th:text="#{text.correct.problem}"></span>
+                    </div>
+                    <span class="error"
+                          th:text="#{${'text.error.' + apiError?.getMessage()}}"
+                          th:unless="${apiError == null}">Nothing</span>
+
+
+                    <div class="modal-body">
+
+                        <input type="hidden" id="id" data-th-value="${company?.id}" data-th-name="id">
+
+                        <div class="form-group">
+                            <label for="company" class="col-form-label" th:text="#{text.name}"></label>
+                            <input type="text" th:value="${company?.name}" th:name="name" class="form-control"
+                                   id="company" th:placeholder="#{text.name}" autofocus required
+                                   pattern="([A-Z])([a-zA-Z1-9-\s?']{3,29})" maxlength="30"/>
+                            <span class="form__error" th:text="#{text.error.company}"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="code" class="col-form-label" th:text="#{text.code}"></label>
+                            <input type="text" th:value="${company?.code}" th:name="code" class="form-control"
+                                   id="code" th:placeholder="#{text.code}" autofocus required
+                                   pattern="([A-Z]{1,5})" maxlength="5"/>
+                            <span class="form__error" th:text="#{text.error.code}"></span>
+                        </div>
+
+                        <div class="form-group">
+                                    <span>
+                                      <label for="city" class="col-form-label" th:text="#{text.city}"></label>
+                                      <input type="text" th:value="${company?.cityDTO?.name}" th:name="city" class="form-control"
+                                             id="city" th:placeholder="#{text.city}" readonly/>
+                                    </span>
+                            <span>
+                                         <label for="country" class="col-form-label" th:text="#{text.country}"></label>
+                                         <input type="text" th:value="${company?.cityDTO?.countryDTO?.name}" th:name="country" class="form-control"
+                                                id="country" th:placeholder="#{text.country}" readonly/>
+                                      </span>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a th:href="@{/givingCompanies}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+                        <input type="submit" class="btn btn-primary" id="save" th:value="#{bt.save}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

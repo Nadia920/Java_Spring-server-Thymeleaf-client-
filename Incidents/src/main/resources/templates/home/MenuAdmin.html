@@ -19,13 +19,12 @@
     <div th:replace="header :: header-css"/>
 </head>
 <body>
-<form th:action="@{/menuAdmin}" method="post">
+<!--<form th:action="@{/menuAdmin}" method="post">-->
 <p>Выберите пункт меню</p>
-    <button href="#" class="button2" tabindex="0"> 1 - Работа с ложными заявлениями о инцидентах </button>
-    <button href="../company/fixedDetachments" class="button2" tabindex="0"> 2 - Закрепление определённого отряда помощи за определённым предприятием </button>
-    <button href="../company/Detachment" class="button2" tabindex="0"> 3 - Формирование отрядов реагирования </button>
-    <button href="#" class="button2" tabindex="0"> 4 - Изменение настроек приложения </button>
-    <button href="../company/Incidents" class="button2" tabindex="0"> 5 - Работа с реальными заявлениями о инцидентах </button>
-</form>
+    <a href="showIncidents"><button  class="button2" tabindex="0"> 1 - Работа с ложными заявлениями о инцидентах </button></a>
+    <a href="showFixedDetachments"><button class="button2" tabindex="0"> 2 - Закрепление определённого отряда помощи за определённым предприятием </button></a>
+    <a href="showDetachment"><button  class="button2" tabindex="0"> 3 - Формирование отрядов реагирования </button></a>
+    <a href="showIncidents"><button class="button2" tabindex="0"> 4 - Работа с реальными заявлениями о инцидентах </button></a>
+<!--</form>-->
 </body>
 </html>

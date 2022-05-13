@@ -20,28 +20,44 @@
     <!--div th:replace="header :: header-css"/-->
 </head>
 <body>
-<form th:action="@{/Client}" method="post">
-    <table>
-        <tr>
-            <td>{text.last_name_of_the_client}</td>
-            <td>{text._name_client}</td>
-            <td>{text.patronymic_client}</td>
-            <td>{text.year_of_birth}</td>
-            <td>{text.phone_number}</td>
-            <td>{text.email}</td>
-            <td>{text.company_name}</td>
-        </tr>
-        <tr>
-            <td>Лесенко</td>
-            <td>Андрей</td>
-            <td>Викторович</td>
-            <td>22.11.1990</td>
-            <td>+375299061211</td>
-            <td>lesenko@gmail.com</td>
-            <td>Юпитер</td>
-        </tr>
-    </table>
-</form>
+<div class="myForm">
+    <form th:action="@{/clients/edit}" th:object="${client}" method="post">
+        <div class="" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:text="#{text.update-create}"></h5>
+                    </div>
 
+                    <div th:if="${#fields.hasErrors()}">
+                        <span class="error" th:text="#{text.correct.problem}"></span>
+                    </div>
+                    <span class="error"
+                          th:text="#{${'text.error.' + apiError?.getMessage()}}"
+                          th:unless="${apiError == null}">Nothing</span>
+
+
+                    <div class="modal-body">
+
+                        <input type="hidden" id="id" data-th-value="${appRating?.id}" data-th-name="id">
+
+                        <div class="form-group">
+                            <label for="name" class="col-form-label" th:text="#{text.client}"></label>
+                            <input type="text" th:value="${appRating?.name}" th:name="name" class="form-control"
+                                   id="name" th:placeholder="#{text.appRating}" autofocus required
+                                   pattern="([A-Z])([a-zA-Z-\s?']{3,29})" maxlength="30"/>
+                            <span class="form__error" th:text="#{text.error.appRating}"></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a th:href="@{/clients}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+                        <input type="submit" class="btn btn-primary" id="save" th:value="#{bt.save}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

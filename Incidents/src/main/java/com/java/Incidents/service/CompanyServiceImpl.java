@@ -1,12 +1,11 @@
 package com.java.Incidents.service;
 
 
-import com.java.Travel.controller.dto.BusDTO;
-import com.java.Travel.controller.dto.CompanyDTO;
-import com.java.Travel.exception.UserNotFoundException;
-import com.java.Travel.model.CompanyEntity;
-import com.java.Travel.repository.CompanyEntityRepository;
-import com.java.Travel.service.CompanyService;
+import com.java.Incidents.controller.dto.CompanyDTO;
+import com.java.Incidents.model.Company;
+import com.java.Incidents.repository.CompanyRepository;
+import com.java.Incidents.service.servicesInterface.CompanyService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,8 +23,52 @@ import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-    @Autowired
-    private CompanyEntityRepository companyRepository;
+    @Override
+    public Page<Company> findAll(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public CompanyDTO findOne(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public Long getCompanyIdByName(String name) {
+        return null;
+    }
+
+    @Override
+    public void save(CompanyDTO companyDTO) {
+
+    }
+
+    @Override
+    public void update(CompanyDTO companyDTO) {
+
+    }
+
+    @Override
+    public CompanyDTO findCompanyByName(String company) {
+        return null;
+    }
+
+    @Override
+    public List<CompanyDTO> findAll() {
+        return null;
+    }
+
+    @Override
+    public Page<Company> findAllByCriteria(PageRequest pageRequest, String name1) {
+        return null;
+    }
+    /* @Autowired
+    private CompanyRepository companyRepository;
 
 
     @Override
@@ -115,6 +158,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     public List<BusDTO> checkBusDTOList(List<BusDTO> busDTOList) {
         return busDTOList.size() == 0 || busDTOList == null ? null : busDTOList;
-    }
+    }*/
 }
 

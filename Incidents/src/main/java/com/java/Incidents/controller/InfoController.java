@@ -1,12 +1,10 @@
 package com.java.Incidents.controller;
 
-package com.java.Travel.controller;
 
 
 import com.java.Incidents.controller.dto.CompanyDTO;
 import com.java.Incidents.service.servicesInterface.InfoService;
-import com.java.Travel.controller.dto.TourDTO;
-import com.java.Travel.service.InfoService;
+
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +26,13 @@ public class InfoController {
     @GetMapping("/tour")
     public ModelAndView getTourView() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("tour/tour");
+        modelAndView.setViewName("incident/incident");
         return modelAndView;
     }
 
     @GetMapping("/tour/data")
-    public List<CompanyDTO> getTourData() {
-        return infoService.getDataForTour();
+    public List<CompanyDTO> getIncidentData() {
+        return infoService.getDataForIncident();
     }
 }
 

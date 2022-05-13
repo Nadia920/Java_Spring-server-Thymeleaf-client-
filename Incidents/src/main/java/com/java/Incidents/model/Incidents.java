@@ -33,7 +33,7 @@ public class Incidents extends BaseEntity {
     Category category;
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Client_I")
-    Client client;
+    User user;
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "ID_Detachment_I")
     Detachment detachment;

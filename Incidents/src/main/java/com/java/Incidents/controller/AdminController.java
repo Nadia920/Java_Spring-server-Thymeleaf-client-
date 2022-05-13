@@ -1,7 +1,7 @@
 package com.java.Incidents.controller;
 
 import com.java.Incidents.model.User;
-import com.java.Incidents.service.AdminServiceInterfImpl;
+import com.java.Incidents.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/")
-public class AdminController extends AbstractController<User, AdminServiceInterfImpl> {
-    protected AdminController(AdminServiceInterfImpl service) {
-        super(service);
+public class AdminController {
+    protected AdminController(UserServiceImpl service) {
+
     }
 
     /*@Override
@@ -25,7 +25,6 @@ public class AdminController extends AbstractController<User, AdminServiceInterf
         return "Client";
     }
 
-    @Override
     public ResponseEntity<User> save(User entity) {
         return null;
     }

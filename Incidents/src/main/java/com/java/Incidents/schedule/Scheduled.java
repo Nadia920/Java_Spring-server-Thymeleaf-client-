@@ -1,10 +1,6 @@
 package com.java.Incidents.schedule;
 
 
-import com.java.Travel.model.TripEntity;
-import com.java.Travel.model.TripStatus;
-import com.java.Travel.repository.OrderEntityRepository;
-import com.java.Travel.repository.TripEntityRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +10,7 @@ import java.util.List;
 @Component
 public class Scheduled {
 
-    private final TripEntityRepository tripRepository;
+    /*private final TripEntityRepository tripRepository;
     private final OrderEntityRepository orderRepository;
 
     public Scheduled(TripEntityRepository tripRepository,
@@ -25,7 +21,7 @@ public class Scheduled {
 
     /**
      * Update every 5 minutes
-     */
+
     @Transactional
     @org.springframework.scheduling.annotation.Scheduled(fixedDelay = 300000)
     public void setTripStatusFinished() {
@@ -36,7 +32,7 @@ public class Scheduled {
             tripEntityList.forEach(a->a.setStatus(TripStatus.FINISHED));
         }
 
-    }
+    }*/
 
 }
 

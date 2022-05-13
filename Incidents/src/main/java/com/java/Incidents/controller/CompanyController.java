@@ -3,12 +3,10 @@ package com.java.Incidents.controller;
 import com.java.Incidents.controller.dto.ApiError;
 import com.java.Incidents.controller.dto.CompanyDTO;
 import com.java.Incidents.exception.EditCompanyParametersExistException;
+import com.java.Incidents.model.AppRating;
+import com.java.Incidents.model.Company;
 import com.java.Incidents.service.servicesInterface.CompanyService;
-import com.java.Travel.controller.dto.BusStationDTO;
-import com.java.Travel.controller.dto.CityDTO;
-import com.java.Travel.service.BusStationService;
-import com.java.Travel.service.CityService;
-import com.java.Travel.service.CountryService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -19,12 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.java.Travel.controller.dto.ApiError;
-import com.java.Travel.controller.dto.CompanyDTO;
-import com.java.Travel.exception.EditCompanyParametersExistException;
-import com.java.Travel.model.CompanyEntity;
-import com.java.Travel.model.Rating;
-import com.java.Travel.service.CompanyService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -73,7 +66,7 @@ public class CompanyController {
             CompanyDTO companyDTO = companyService.findOne(id.get());
             if (companyDTO != null) {
                 model.addAttribute("company", companyDTO);
-                model.addAttribute("ratingTypes", Rating.values());
+                model.addAttribute("ratingTypes", AppRating.values());
             } else {
                 LOGGER.error("Company with id=" + id + " not found");
                 throw new EntityNotFoundException("Company with id=" + id + " not found");
@@ -81,7 +74,7 @@ public class CompanyController {
             return "company/editCompany";
         } else {
             model.addAttribute("company", new CompanyDTO());
-            model.addAttribute("ratingTypes", Rating.values());
+            model.addAttribute("ratingTypes", AppRating.values());
             return "company/editCompany";
         }
     }
@@ -108,7 +101,7 @@ public class CompanyController {
             }
 
             model.addAttribute("company", company);
-            model.addAttribute("ratingTypes", Rating.values());
+            model.addAttribute("ratingTypes", AppRating.values());
             model.addAttribute("apiError", apiError);
             return "company/editCompany";
         }
@@ -131,15 +124,6 @@ public class CompanyController {
         return "redirect:/companies";
     }
 
-    @GetMapping("/{id}/buses")
-    public String getCitiesByCountryId(@PathVariable Long id,
-                                       Model model) {
-        LOGGER.info("Get cities by country id: " + id);
-        CompanyDTO companyDTO = companyService.findOne(id);
-        model.addAttribute("company", companyDTO);
-        model.addAttribute("buses", companyService.checkBusDTOList(companyDTO.getBusDTOList()));
-        return "bus/showBuses";
-    }
 
 
     /*private final static Logger LOGGER = LogManager.getLogger();

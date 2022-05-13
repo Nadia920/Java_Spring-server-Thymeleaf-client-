@@ -1,11 +1,14 @@
 package com.java.Incidents.controller.dto;
 
-import com.java.Incidents.model.GivingCompany;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
+@Getter
+@Setter
 public class CityDTO {
     private  Long id;
 
@@ -42,37 +45,7 @@ public class CityDTO {
         this.countryDTO = countryDTO;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<CompanyDTO> getBusStationDTOList() {
-        return CompanyDTOList;
-    }
-
-    public void setBusStationDTOList(List<CompanyDTO> busStationDTOList) {
-        this.CompanyDTOList = busStationDTOList;
-    }
-
-    public CountryDTO getCountryDTO() {
-        return countryDTO;
-    }
-
-    public void setCountryDTO(CountryDTO countryDTO) {
-        this.countryDTO = countryDTO;
-    }
 
     @Override
     public String toString() {

@@ -27,12 +27,59 @@
             <td>{text.team_specialization}</td>
             <td>{text.line-up}</td>
         </tr>
-        <tr>
-            <td>Юпитер</td>
-            <td>Инциденты с пожаром</td>
-            <td>Соколовская Анна Владимировна, Чуб Артём Валерьевич</td>
-        </tr>
+
     </table>
 </form>
+<div class="myForm">
+    <form th:action="@{/cities/edit}" th:object="${city}" method="post">
+
+        <div class="" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:text="#{text.update-create}"></h5>
+                        <span  data-th-text="#{text.country}+': '+${countryName}" data-th-name="countryName"></span>
+                    </div>
+                    <input type="hidden" data-th-value="${countryName}" data-th-name="countryName">
+
+                    <div th:if="${#fields.hasErrors()}">
+                        <span class="error" th:text="#{text.correct.problem}"></span>
+                    </div>
+                    <span class="error"
+                          th:text="#{${'text.error.' + apiError?.getMessage()}}"
+                          th:unless="${apiError == null}">Nothing</span>
+
+                    <div>
+                    <input type="text" th:value="${detachment?.name}" th:name="name" class="form-control"
+                           id="nameDetachemnt" th:placeholder="#{text.detachment}" required>
+                        <input type="text" th:value="${detachment?.name}" th:name="name" class="form-control"
+                               id="2Detachemnt" th:placeholder="#{text.detachment}" required>
+                        <input type="text" th:value="${detachment?.name}" th:name="name" class="form-control"
+                               id="3Detachemnt" th:placeholder="#{text.detachment}" required>
+                        <input type="text" th:value="${detachment?.name}" th:name="name" class="form-control"
+                               id="4Detachemnt" th:placeholder="#{text.detachment}" required>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="id" data-th-value="${city?.id}" data-th-name="id">
+
+                        <div class="form-group">
+                            <label for="name" class="col-form-label" th:text="#{text.city}"></label>
+                            <input type="text" th:value="${city?.name}" th:name="name" class="form-control"
+                                   id="name" th:placeholder="#{text.city}" autofocus required
+                                   pattern="([A-Z])([a-zA-Z-\s]{3,39})" maxlength="40"/>
+                            <span class="form__error" th:text="#{text.error.city}"></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a th:href="@{/country}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+                        <input type="submit" class="btn btn-primary" id="save" th:value="#{bt.save}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

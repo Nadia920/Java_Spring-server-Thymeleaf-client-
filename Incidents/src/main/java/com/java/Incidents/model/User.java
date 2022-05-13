@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Set;
 
 
@@ -48,7 +49,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    BigInteger IDReceivingCompanyC;
+    BigInteger сompany_ID;
 
     public User() {
     }
@@ -66,7 +67,7 @@ public class User extends BaseEntity {
     }
 
 
-    public User(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<Order> orders, Role role) {
+    public User(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<Incidents> incidents, Role role) {
         this.login = login;
         this.email = email;
         this.password = password;
@@ -76,8 +77,6 @@ public class User extends BaseEntity {
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
-
-
 
 
 }

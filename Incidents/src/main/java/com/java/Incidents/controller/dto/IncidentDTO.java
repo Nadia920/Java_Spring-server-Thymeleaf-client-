@@ -1,196 +1,75 @@
 package com.java.Incidents.controller.dto;
 
 
-import com.java.Travel.model.TripStatus;
 
+import com.java.Incidents.model.Category;
+import com.java.Incidents.model.Detachment;
+import com.java.Incidents.model.IncidentStatus;
+import com.java.Incidents.model.User;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-
+@Getter
+@Setter
 public class IncidentDTO {
 
-    private  Long id;
+    private Long id;
+    private String IncidentName;
+    private String IncidentSolution;
+    private String Reaction;
+    private String Comments;
+    private String PreventionMeasures;
+    private String type;
+    private Category category;
+    private User user;
+    private Detachment detachment;
+    private IncidentStatus status;
+    private UserDTO userDTO;
+    private IncidentDTO incidentDTO;
 
-    @NotNull
-    private Integer freeSeats;
 
-    @NotNull
-    private Integer allSeats;
+    public IncidentDTO() {
+    }
 
-    @NotNull
-    private Double price;
-
-    @NotNull
-    private Timestamp departureDate;
-
-    private String timeDeparture;
-
-    private String dateDeparture;
-
-    private String timeArrival;
-
-    private String dateArrival;
-
-    @NotNull
-    private Timestamp arrivalDate;
-
-    private String travelTime;
-
-    private Integer soldTickets;
-
-    private TripStatus status;
-
-    private BusDTO bus;
-
-    private BusStationDTO busStationDeparture;
-
-    private BusStationDTO busStationArrival;
-
-    public TripDTO(Long id, Integer freeSeats, Integer allSeats, Double price, Timestamp departureDate, Timestamp arrivalDate, Integer soldTickets, TripStatus status , BusDTO busDTO, BusStationDTO busStationDeparture, BusStationDTO busStationArrival) {
+    public IncidentDTO(Long id, Double finalCost, IncidentStatus status, Timestamp orderDate, UserDTO userDTO, IncidentDTO incidentDTO) {
         this.id = id;
-        this.freeSeats  = freeSeats;
-        this.allSeats = allSeats;
-        this.price = price;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
         this.status = status;
-        this.bus = busDTO;
-        this.busStationDeparture = busStationDeparture;
-        this.busStationArrival = busStationArrival;
-        this.soldTickets =soldTickets;
-    }
-
-    public TripDTO() {
+        this.userDTO = userDTO;
+        this.incidentDTO = incidentDTO;
 
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public IncidentDTO(Long id) {
         this.id = id;
     }
 
-    public Integer getFreeSeats() {
-        return freeSeats;
-    }
 
-    public void setFreeSeats(Integer freeSeats) {
-        this.freeSeats = freeSeats;
-    }
-
-    public Integer getAllSeats() {
-        return allSeats;
-    }
-
-    public void setAllSeats(Integer allSeats) {
-        this.allSeats = allSeats;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Timestamp getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(Timestamp departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Timestamp getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(Timestamp arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public BusDTO getBus() {
-        return bus;
-    }
-
-    public void setBus(BusDTO bus) {
-        this.bus = bus;
-    }
-
-    public BusStationDTO getBusStationDeparture() {
-        return busStationDeparture;
-    }
-
-    public void setBusStationDeparture(BusStationDTO busStationDeparture) {
-        this.busStationDeparture = busStationDeparture;
-    }
-
-    public BusStationDTO getBusStationArrival() {
-        return busStationArrival;
-    }
-
-    public void setBusStationArrival(BusStationDTO busStationArrival) {
-        this.busStationArrival = busStationArrival;
-    }
-
-    public String getTravelTime() {
-        return travelTime;
-    }
-
-    public void setTravelTime(String travelTime) {
-        this.travelTime = travelTime;
-    }
-
-    public String getTimeDeparture() {
-        return timeDeparture;
-    }
-
-    public void setTimeDeparture(String timeDeparture) {
-        this.timeDeparture = timeDeparture;
-    }
-
-    public String getDateDeparture() {
-        return dateDeparture;
-    }
-
-    public void setDateDeparture(String dateDeparture) {
-        this.dateDeparture = dateDeparture;
-    }
-
-    public String getTimeArrival() {
-        return timeArrival;
-    }
-
-    public void setTimeArrival(String timeArrival) {
-        this.timeArrival = timeArrival;
-    }
-
-    public String getDateArrival() {
-        return dateArrival;
-    }
-
-    public void setDateArrival(String dateArrival) {
-        this.dateArrival = dateArrival;
-    }
-
-    public Integer getSoldTickets() {
-        return soldTickets;
-    }
-
-    public void setSoldTickets(Integer soldTickets) {
-        this.soldTickets = soldTickets;
-    }
-
-    public TripStatus getStatus() {
+    public IncidentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TripStatus status) {
+    public void setStatus(IncidentStatus status) {
         this.status = status;
     }
-}
 
+    @Override
+    public String toString() {
+        return "IncidentDTO{" +
+                "id=" + id +
+                ", IncidentName=" + IncidentName +
+                ", IncidentSolution=" + IncidentSolution +
+                ", Reaction=" + Reaction +
+                ", Comments" + Comments +
+                ", PreventionMeasures=" + PreventionMeasures +
+                ", type=" + type +
+                ", category=" + category +
+                ", user=" + user +
+                ", detachment=" + detachment +
+                ", status=" + status +
+                ", userDTO=" + userDTO +
+                ", incidentDTO=" + incidentDTO +
+                '}';
+    }
+}

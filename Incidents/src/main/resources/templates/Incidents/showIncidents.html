@@ -1,26 +1,120 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Country|Cities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <div th:replace="home/adminHeader :: acss"></div>
+</head>
+
+<body>
+
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <div th:replace="home/adminHeader :: admin-header"/>
+</div>
+<div sec:authorize="hasRole('ROLE_WORKER')">
+    <div th:replace="home/workerHeader :: worker-header"/>
+</div>
+
+
+<div class="container my-md-2" style="width: 30%">
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${incidents}" class="container my-md-4">
+                <p class="my-9">
+                    <!--<a th:href="@{/cities/edit(country=${country.name})}" class="btn btn-primary">-->
+                        <i class="fas fa-plus ml-2" th:text="#{text.city}"></i></a>
+                </p>
+                <!--<b th:text="#{text.country}+':'"> </b>
+                <span  th:text="${country.name}"></span>-->
+                <p></p>
+                <div class="col-md-4">
+                    <h2 th:case="null" th:text="#{text.record.found}"></h2>
+                    <div th:case="*">
+                        <table class="table table-hover" style="width: 400% ; margin-left: -30px">
+                            <thead>
+                            <tr>
+                                <th th:text="#{text.incident}"></th>
+                                <th th:text="#{text.incident-date}"></th>
+                                <th th:text="#{text.count-statements}"></th>
+                                <th th:text="#{text.login}"></th>
+                                <th th:text="#{text.phoneNumber}"></th>
+                                <th th:text="#{text.email}"></th>
+                                <th th:text="#{text.edit}"></th>
+                                <th th:text="#{text.delete}"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="incident : ${incidents}">
+                                <td th:text="${incident.incidentname}"></td>
+                                <td th:text="${incident.incidentsolution}"></td>
+                                <td th:text="${incident.reaction}"></td>
+                                <td th:text="${incident.comments}"></td>
+                                <td th:text="${incident.preventionMeasures}"></td>
+                                <td th:text="${incident.type}"></td>
+                                <td th:text="${incident.category}"></td>
+                                <td th:text="${incident.user}"></td>
+                                <td th:text="${incident.detachment}"></td>
+                                <td>
+                                    <a th:href="@{edit/{id} (id=${incident.id}) }">
+                                        <i class="far fa-edit  ml-3 "></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{delete/{id}(id=${incident.id}) }"
+                                       onclick="return confirm('Are you sure?')">
+                                        <span style="color: Tomato;">
+                                            <i class="fas fa-trash-alt ml-2"> </i>
+                                         </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a th:href="@{/country}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<!--<!DOCTYPE html>
 <html
         xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Incident | Add</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">-->
     <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="jquery.datetimepicker.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="tail.select-bootstrap4.css">
+    <link rel="stylesheet" href="tail.select-bootstrap4.css">-->
     <!--link type="text/css" rel="stylesheet" th:href="@{/static/select/bootstrap4/tail.select-default.min.css}" /-->
-    <link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
+    <!--<link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.min.css}" >
-    <script th:src="@{/static/select/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script th:src="@{/static/select/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>-->
     <!--<div th:replace="home/adminHeader :: acss"></div>-->
     <!--div th:replace="header :: header-css"/-->
-</head>
+<!--</head>
 <body>
     <table>
+        <thead>
         <tr>
             <td>{text.incident_category}Категория инцидента</td>
             <td>{text.incident_name}Название инцидента</td>
@@ -30,12 +124,79 @@
             <td>{text.preventive_measures}Профилактические меры</td>
             <td>{text.client_name}Имя клиента</td>
             <td>{text.team_name}Название команды</td>
-
         </tr>
+        </thead>
+        <tbody>
+        <tr th:each="city : ${cities}">
+            <td th:text="${city.name}"></td>
+            <td>
+                <a th:href="@{ /cities/edit/{id} (id=${city.id}) }">
+                    <i class="far fa-edit  ml-3 "></i>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/cities/delete/{id}(id=${city.id}) }"
+                   onclick="return confirm('Are you sure?')">
+                                        <span style="color: Tomato;">
+                                            <i class="fas fa-trash-alt ml-2"> </i>
+                                         </span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        <tr></tr>
     </table>
     <a th:href="@{/IncidentAdd}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
     <a th:href="@{/IncidentEdit}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
     <a th:href="@{/IncidentDelete}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <div th:replace="home/adminHeader :: admin-header"/>
+    </div>
+    <div sec:authorize="hasRole('ROLE_WORKER')">
+        <div th:replace="home/workerHeader :: worker-header"/>
+    </div>
+
+
+    <div class="container my-md-2" style="width: 70%">
+        <div class="card">
+            <div class="card-body">
+                <div th:switch="${incidents}" class="container my-md-4">
+                    <div class="col-md-4">
+                        <h2 th:case="null" th:text="#{text.record.found}"></h2>
+                        <div th:case="*">
+                            <table class="table table-hover" style="width: 340% ; margin-left: -30px">
+                                <thead>
+                                <tr>
+                                    <th th:text="#{text.incident}+'#'"></th>
+                                    <th th:text="#{text.incident-date}"></th>
+                                    <th th:text="#{text.count-statements}"></th>
+                                    <th th:text="#{text.login}"></th>
+                                    <th th:text="#{text.phoneNumber}"></th>
+                                    <th th:text="#{text.email}"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="incident : ${incidents}">
+                                    <td th:text="${incident.id}"></td>
+                                    <td th:text="${incident.incidentDate}"></td>
+                                    <td th:text="${incident.statementsDTOList.size()}"></td>
+                                    <td th:text="${incident.userDTO.login}"></td>
+                                    <td th:text="${incident.userDTO.phoneNumber}"></td>
+                                    <td th:text="${incident.userDTO.email}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a th:href="@{/trip}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
-</html>
+</html>-->

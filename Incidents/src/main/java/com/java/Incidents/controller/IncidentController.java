@@ -2,15 +2,17 @@ package com.java.Incidents.controller;
 
 import com.java.Incidents.controller.dto.CompanyDTO;
 import com.java.Incidents.controller.dto.CountryDTO;
+import com.java.Incidents.model.AppRating;
+import com.java.Incidents.model.IncidentStatus;
 import com.java.Incidents.model.Incidents;
 import com.java.Incidents.security.CustomUserDetail;
-import com.java.Incidents.service.IncidentServiceInterfImpl;
+import com.java.Incidents.service.IncidentServiceImpl;
 import com.java.Incidents.service.servicesInterface.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 
 import com.java.Incidents.controller.dto.*;
-import com.java.Incidents.model.AppRating;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,37 +40,39 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/")
-public class IncidentController extends AbstractController<Incidents, IncidentServiceInterfImpl> {
+@RequestMapping(value = "/incidents")
+public class IncidentController {
     private final static Logger LOGGER = LogManager.getLogger();
 
-    private OrderService OrderService;
+    private IncidentService IncidentService;
     private CountryService countryService;
     private CityService cityService;
     private CompanyService companyService;
     private EmailSender emailSender;
-    private OrderService orderService;
-    private IncidentServiceInterf incidentService;
+    private IncidentService incidentService;
 
     private List<CountryDTO> countryDTOList;
     private List<CompanyDTO> companyDTOList;
 
-    public IncidentController(OrderService OrderService,
+    public IncidentController(IncidentService IncidentService,
                           CountryService countryService,
                           CityService cityService,
                           CompanyService companyService,
-                          EmailSender emailSender,
-                          OrderService orderService) {
-        super();
-        this.OrderService = OrderService;
+                          EmailSender emailSender, IncidentService incidentService) {
+        this.IncidentService = IncidentService;
         this.countryService = countryService;
         this.cityService = cityService;
         this.companyService = companyService;
         this.emailSender = emailSender;
-        this.orderService = orderService;
+        this.incidentService = incidentService;
     }
 
-    @ModelAttribute("countries")
+    @GetMapping("/showIncidents")
+    public String showIncident() {
+        return "showIncidents";
+    }
+
+    /*@ModelAttribute("countries")
     public List<CountryDTO> getCountries() {
         countryDTOList = countryService.findAll(Sort.by("name").ascending());
         return countryDTOList;
@@ -92,34 +96,18 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
         return companyDTOList;
     }
 
-    @GetMapping("/create")
-    public String getAddTripView(Model model) {
-        model.addAttribute("trip", new TripDTO());
-        return "trip/addTrip";
-    }
 
     @GetMapping("/edit/{id}")
     public String getEditTripView(@PathVariable Long id, Model model) {
-       OrderDTO tripDTO = OrderService.getById(id);
+       IncidentDTO incidentDTO = IncidentService.getById(id);
 
-        String dDeparture = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(tripDTO.getDepartureDate().getTime()));
-        String dArrival = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(tripDTO.getArrivalDate().getTime()));
-
-        model.addAttribute("id", tripDTO.getId());
-        model.addAttribute("countries_fr", tripDTO.getBusStationDeparture().getCityDTO().getCountryDTO());
-        model.addAttribute("countries_to", tripDTO.getBusStationArrival().getCityDTO().getCountryDTO());
-        model.addAttribute("cities_fr", tripDTO.getBusStationDeparture().getCityDTO());
-        model.addAttribute("cities_to", tripDTO.getBusStationArrival().getCityDTO());
-        model.addAttribute("busStations_fr", tripDTO.getBusStationDeparture());
-        model.addAttribute("busStations_to", tripDTO.getBusStationArrival());
-        model.addAttribute("picker1", dDeparture);
-        model.addAttribute("picker2", dArrival);
-        model.addAttribute("companies", tripDTO.getBus().getCompanyDTO());
-        model.addAttribute("buss", tripDTO.getBus());
-        model.addAttribute("allSeats", tripDTO.getAllSeats());
-        model.addAttribute("freeSeats", tripDTO.getFreeSeats());
-        model.addAttribute("price",tripDTO.getPrice());
-        model.addAttribute("soldTickets", OrderService.getNumberSoldTicketById(tripDTO.getId()));
+        /*model.addAttribute("id", incidentDTO.getId());
+        model.addAttribute("countries_fr", incidentDTO.getIncidentName().getCityDTO().getCountryDTO());
+        model.addAttribute("countries_to", incidentDTO.getIncidentSolution().getCityDTO().getCountryDTO());
+        model.addAttribute("countries_to", incidentDTO.getIncidentSolution().getCityDTO().getCountryDTO());
+        model.addAttribute("countries_to", incidentDTO.getIncidentSolution().getCityDTO().getCountryDTO());
+        model.addAttribute("countries_to", incidentDTO.getIncidentSolution().getCityDTO().getCountryDTO());
+        model.addAttribute("countries_to", incidentDTO.getIncidentSolution().getCityDTO().getCountryDTO());
         return "trip/editTrip";
     }
 
@@ -129,101 +117,93 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
         return cityService.getCityListByCountry(id);
     }
 
-    @GetMapping(value = "/cities/{id}")
-    @ResponseBody
-    public List<BusStationDTO> getBusStations(@PathVariable Long id) {
-        return cityService.findOne(id).getBusStationDTOList();
-    }
-
-    @GetMapping(value = "/companies/{id}")
-    @ResponseBody
-    public List<BusDTO> getBuses(@PathVariable Long id) {
-        return companyService.findOne(id).getBusDTOList();
-    }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public OrderCreateUpdateDTO addTrip(@RequestBody OrderCreateUpdateDTO tripDTO) {
-        LOGGER.info("Create Trip where tripCreateUpdateDTO: " + tripDTO);
-        OrderService.addTrip(tripDTO);
-        return tripDTO;
+    public IncidentCreateUpdateDTO addIncident(@RequestBody IncidentCreateUpdateDTO incidentDTO) {
+        LOGGER.info("Create Trip where tripCreateUpdateDTO: " + incidentDTO);
+        incidentService.addIncident(incidentDTO);
+        return incidentDTO;
     }
 
     @PostMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public OrderCreateUpdateDTO editTrip(@PathVariable Long id, @RequestBody OrderCreateUpdateDTO tripDTO) {
-        LOGGER.info("Edit trip where new tripCreateUpdateDTO: " + tripDTO);
-        OrderService.edit(tripDTO);
-        return tripDTO;
+    public IncidentCreateUpdateDTO editIncident(@PathVariable Long id, @RequestBody IncidentCreateUpdateDTO incidentDTO) {
+        LOGGER.info("Edit trip where new tripCreateUpdateDTO: " + incidentDTO);
+        incidentService.edit(incidentDTO);
+        return incidentDTO;
     }
 
 
     @PreAuthorize("hasAnyRole('WORKER','ADMIN')")
     @GetMapping()
-    public String getTripView(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") TripStatus status, Model model) {
-        List<OrderDTO> tripDTOList = OrderService.findAllByStatus(status);
+    public String getTripView(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status, Model model) {
+        List<IncidentDTO> tripDTOList = IncidentService.findAllByStatus(status);
         model.addAttribute("trips", tripDTOList.size() != 0 ? tripDTOList : null);
-        return "withrole/showTrips";
+        return "withrole/showIncidents";
     }
 
     @PreAuthorize("hasAnyRole('CLIENT')")
     @GetMapping("/show/{id}")
     public String getShowTripViewByClient(@PathVariable Long id, Model model) {
-        model.addAttribute("trip", OrderService.getById(id));
+        model.addAttribute("trip", IncidentService.getById(id));
         return "trip/checkoutOrder";
     }
 
     @GetMapping("/canceled/{id}")
     public String canceledTrip(@PathVariable(name = "id") Long idTrip) {
         LOGGER.info("Cancel Trip where trip id: " + idTrip);
-        OrderService.canceledTrip(idTrip);
+        IncidentService.canceledIncident(idTrip);
         sendСancellationСonfirmToEmail(idTrip);
         return "redirect:/trip";
     }
 
     @GetMapping("/{id}/orders")
     public String getTripTicketsSold(@PathVariable Long id, Model model) {
-        model.addAttribute("orders", orderService.findAllByTripId(id));
+        model.addAttribute("orders", incidentService.findAllByTripId(id));
         return "order/showOrdersOnTrip";
     }
 
     private void sendСancellationСonfirmToEmail(Long idTrip) {
         LOGGER.info("Send a cancellation email to all users");
-        List<OrderDTO> orderDTOList = orderService.findAllByTripId(idTrip);
-        orderDTOList.stream().forEach(a -> emailSender.sendСancellationСonfirmToEmail(a));
+        List<IncidentDTO> incidentDTOList = incidentService.findAllByTripId(idTrip);
+        incidentDTOList.stream().forEach(a -> emailSender.sendСancellationСonfirmToEmail(a));
     }
 
-    @GetMapping("/findTrips")
+    @GetMapping("/findIncidents")
     public ModelAndView getTripByCriteria() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("trip/showTrips");
         modelAndView.addObject("trips", null);
-        modelAndView.addObject("rating", Rating.values());
-        modelAndView.addObject("tripCriteriaDTO", new TripCriteriaDTO());
+        modelAndView.addObject("rating", AppRating.values());
+        modelAndView.addObject("tripCriteriaDTO", new IncidentCriteriaDTO());
         return modelAndView;
     }
 
-    @PostMapping("/findTrips")
-    public ModelAndView getTripByCriteria(@ModelAttribute("tripCriteriaDTO") TripCriteriaDTO tripCriteriaDTO,
+    @PostMapping("/findIncidents")
+    public ModelAndView getTripByCriteria(@ModelAttribute("tripCriteriaDTO") IncidentCriteriaDTO tripCriteriaDTO,
                                           @RequestParam(value = "companyChoice", required = false) Long companyChoice) {
         LOGGER.info("Get trips by criteria: " + tripCriteriaDTO);
         ModelAndView modelAndView = new ModelAndView("trip/showTrips");
         modelAndView.addObject("picker1", tripCriteriaDTO.getDepartureDate());
         modelAndView.addObject("city_from", cityService.findOne(tripCriteriaDTO.getIdCityDeparture()));
-        modelAndView.addObject("city_to", cityService.findOne(tripCriteriaDTO.getIdCityArrival()));
+        modelAndView.addObject("city_to", cityService.findOne(tripCriteriaDTO.getIdCity()));
         modelAndView.addObject("companyChoice", tripCriteriaDTO.getIdCompany() == null ? null : companyService.findOne(tripCriteriaDTO.getIdCompany()).getName());
         modelAndView.addObject("tripCriteriaDTO", tripCriteriaDTO);
 
-        List<OrderDTO> tripDTOList = null;
+        List<IncidentDTO> incidentDTOList = null;
         try {
-            tripDTOList = OrderService.findTripsByCriteria(tripCriteriaDTO);
-        } catch (ParseException e) {
+            IncidentCriteriaDTO incidentCriteriaDTO = null;
+            incidentDTOList = IncidentService.findIncidentsByCriteria(incidentCriteriaDTO);
+        }
+        catch (Exception e) {}*/
+        /*catch (ParseException e) {
             LOGGER.error("Parse dates error");
             e.printStackTrace();
         }
-        modelAndView.addObject("trips", tripDTOList.size() == 0 ? null : tripDTOList);
+        modelAndView.addObject("trips", incidentDTOList.size() == 0 ? null : incidentDTOList);
         return modelAndView;
     }
 
@@ -249,7 +229,7 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
     }
 
     @PostMapping(path = "/PageIncidentsEdit")
-    public String registrationClient(@Valid @ModelAttribute("Incident") IncidentDTO incident,
+    public String incidentsEdit(@Valid @ModelAttribute("Incident") IncidentDTO incident,
                                      BindingResult result,
                                      Model model) {
         if (result.hasErrors()) {
@@ -259,7 +239,7 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
                 message += str.getDefaultMessage();
                 apiError.setMessage(message);
             }
-            model.addAttribute("user", incident);
+            model.addAttribute("incidents", incident);
             model.addAttribute("apiError", apiError);
             return "showIncidents";
         }
@@ -283,9 +263,14 @@ public class IncidentController extends AbstractController<Incidents, IncidentSe
     @PreAuthorize("hasAnyRole('CLIENT')")
     @PostMapping("/IncidentDelete")
     @ResponseBody
-    public OrderCreateUpdateDTO deleteTicketsOnTripByUser(@RequestBody OrderCreateUpdateDTO order, @AuthenticationPrincipal CustomUserDetail currUser) {
-        order.setIdClient(currUser.getId());
-        orderService.deleteTicketsOnTripByUSer(order);
-        return order;
+    public IncidentCreateUpdateDTO deleteTicketsOnTripByUser(@RequestBody IncidentCreateUpdateDTO incident, @AuthenticationPrincipal CustomUserDetail currUser) {
+        incident.setIdClient(currUser.getId());
+        incidentService.deleteTicketsOnTripByUSer(incident);
+        return incident;
     }
+
+    @Override
+    public ResponseEntity<Incidents> save(Incidents entity) {
+        return null;
+    }*/
 }

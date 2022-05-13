@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Country|Cities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <div th:replace="home/adminHeader :: acss"></div>
+</head>
+
+<body>
+
+
+<div class="container my-md-2" style="width: 30%">
+    <div class="card">
+        <div class="card-body">
+                <div class="col-md-4">
+                    <div th:case="*">
+                        <label>Введите, пожалуйста, название команды</label>
+                        <input type="text">
+                    </div>
+                </div>
+            <div th:switch="${employees}" class="container my-md-4">
+                <form action="/detachment/readyDetachment" method="post">
+            <table>
+                <thead>
+                <tr>
+                    <td>{text.lastNameEmployee}</td>
+                    <td>{text.firstNameEmployee}</td>
+                    <td>{text.patronymicEmployee}</td>
+                    <td>{text.qualification}</td>
+                    <td>{text.experience}</td>
+                    <td>{text.companyEntity}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td>
+                        <input type="checkbox" name="employee" value="employee.id">
+                    </td>
+                    <td th:text="${employee.lastNameEmployee}"> </td>
+
+
+                    <td th:text="${employee.firstNameEmployee}"></td>
+                    <td th:text="${employee.patronymicEmployee}"></td>
+                    <td th:text="${employee.qualification}"></td>
+                    <td th:text="${employee.experience}"></td>
+                    <td th:text="${employee.companyEntity}"></td>
+
+                </tr>
+                </tbody>
+                <tr></tr>
+            </table>
+                </form>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

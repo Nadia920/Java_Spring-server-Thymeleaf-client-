@@ -5,11 +5,7 @@ import com.java.Incidents.controller.dto.CountryDTO;
 import com.java.Incidents.exception.EditCountryParametersExistException;
 import com.java.Incidents.model.Country;
 import com.java.Incidents.service.servicesInterface.CountryService;
-import com.java.Travel.controller.dto.ApiError;
-import com.java.Travel.controller.dto.CountryDTO;
-import com.java.Travel.exception.EditCountryParametersExistException;
-import com.java.Travel.model.CountryEntity;
-import com.java.Travel.service.CountryService;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
