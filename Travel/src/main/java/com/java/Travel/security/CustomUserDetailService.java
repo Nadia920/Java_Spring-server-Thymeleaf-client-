@@ -3,7 +3,9 @@ package com.java.Travel.security;
 
 import com.java.Travel.model.UserEntity;
 
+import com.java.Travel.service.ServiceImpl.UserServiceImpl;
 import com.java.Travel.service.UserService;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +15,16 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
+@NoArgsConstructor
 public class CustomUserDetailService extends UserEntity implements UserDetailsService{
 
-    @Autowired
-    private UserService userService;
+    /*@Autowired
+    private UserService userService;*/
 
-    public CustomUserDetailService(UserService userService) {
+    /*@Autowired*/
+    private UserServiceImpl userService;
+
+    public CustomUserDetailService(UserServiceImpl userService) {
         this.userService = userService;
     }
 

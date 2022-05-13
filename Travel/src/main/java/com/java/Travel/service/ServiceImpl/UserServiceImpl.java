@@ -3,6 +3,7 @@ package com.java.Travel.service.ServiceImpl;
 import com.java.Travel.controller.dto.UserDTO;
 import com.java.Travel.exception.EditUsersParametersExistException;
 import com.java.Travel.exception.UserNotFoundException;
+import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.model.UserEntity;
 
 import java.util.List;
@@ -161,4 +162,14 @@ public Optional<UserEntity> findByLogin(String login) {
         return Optional.ofNullable(userRepository.findByLogin(login));
         }
 
+        @Override
+        public boolean save(UserEntity obj){
+                UserEntity a = userRepository.save(obj);
+                if (a == null) {
+                        return false;
+                }
+                else return true;
         }
+
+
+}

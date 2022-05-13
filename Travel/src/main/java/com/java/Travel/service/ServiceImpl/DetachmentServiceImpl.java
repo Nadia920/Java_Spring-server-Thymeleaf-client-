@@ -2,6 +2,7 @@ package com.java.Travel.service.ServiceImpl;
 
 import com.java.Travel.controller.dto.CompanyDTO;
 import com.java.Travel.controller.dto.DetachmentDTO;
+import com.java.Travel.model.AppRating;
 import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.DetachmentEntity;
 import com.java.Travel.repository.DetachmentRepository;
@@ -57,6 +58,14 @@ public class DetachmentServiceImpl implements DetachmentService {
         return detachmentEntities.stream()
                 .map(c -> new DetachmentDTO(c.getId(), c.getDetachmentName()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean save(DetachmentEntity obj){
+        DetachmentEntity a = detachmentRepository.save(obj);
+        if (a == null){
+            return false;}
+        else return true;
     }
 
 }

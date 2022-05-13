@@ -6,6 +6,7 @@ import com.java.Travel.controller.dto.IncidentDTO;
 import java.util.List;
 
 
+import com.java.Travel.model.DetachmentEntity;
 import com.java.Travel.model.IncidentStatus;
 import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.repository.IncidentEntityRepository;
@@ -118,6 +119,15 @@ public class IncidentServiceImpl implements IncidentService {
     public void save(IncidentDTO incidentDTO) {
         IncidentsEntity incidentEntity = new IncidentsEntity(incidentDTO.getIncidentName(), incidentDTO.getIncidentSolution(), incidentDTO.getReaction(), incidentDTO.getComments(), incidentDTO.getPreventionMeasures(), incidentDTO.getType(), incidentDTO.getCategory(), incidentDTO.getUser(), incidentDTO.getDetachment(), incidentDTO.getStatus(), incidentDTO.getUserDTO(), incidentDTO.getIncidentDTO());
         incidentRepository.save(incidentEntity);
+    }
+
+    @Override
+    public boolean save(IncidentsEntity obj){
+        IncidentsEntity a = incidentRepository.save(obj);
+        if (a == null) {
+            return false;
+        }
+        else return true;
     }
 
 

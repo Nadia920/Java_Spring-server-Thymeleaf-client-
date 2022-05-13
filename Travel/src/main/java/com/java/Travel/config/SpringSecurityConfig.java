@@ -18,7 +18,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
-    @Autowired
+   /* @Autowired*/
     private CustomUserDetailService customUserDetailService;
 
     @Override

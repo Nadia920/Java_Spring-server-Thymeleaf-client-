@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
 import java.util.List;
-@Repository
+
 public interface CityEntityRepository extends JpaRepository<CityEntity, Long> {
 
     void deleteById(Long id);
@@ -16,7 +16,7 @@ public interface CityEntityRepository extends JpaRepository<CityEntity, Long> {
 
     List<CityEntity> findAllByCountryEntity_Id(Long id);
 
-    @Query(value = "select ct.countryEntity.id from CityEntity ct where ct.id=?1")
+    @Query("select ct.countryEntity.id from CityEntity ct where ct.id=?1")
     Long getIdCountryByCityId(Long id);
 
 }

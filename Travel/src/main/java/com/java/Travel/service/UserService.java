@@ -19,4 +19,6 @@ public interface UserService {
     void update(UserDTO user);
 
     Optional<UserEntity> findByLogin(String login);
+
+    boolean save (UserEntity obj);
 }

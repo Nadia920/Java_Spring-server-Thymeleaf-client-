@@ -1,6 +1,7 @@
 package com.java.Travel.service;
 
 import com.java.Travel.controller.dto.AppRatingDTO;
+import com.java.Travel.model.AppRating;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface AppRatingService {
@@ -13,5 +14,7 @@ public interface AppRatingService {
     void update(AppRatingDTO appRating);
 
     @Transactional
-    boolean save(AppRatingDTO appRatingDTO);
+    boolean save(AppRating obj);
+
+
 }

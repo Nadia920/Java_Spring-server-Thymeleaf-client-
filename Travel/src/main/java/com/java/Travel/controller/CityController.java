@@ -32,11 +32,14 @@ public class CityController {
     @Autowired
     private CountryService countryService;
 
-    public CityController(CityService cityService,
+    public CityController() {
+    }
+
+    /*public CityController(CityService cityService,
                           CountryService countryService) {
         this.cityService = cityService;
         this.countryService = countryService;
-    }
+    }*/
 
     @GetMapping(path = {"/edit", "/edit/{id}"})
     public String getAddOrEditCityView(

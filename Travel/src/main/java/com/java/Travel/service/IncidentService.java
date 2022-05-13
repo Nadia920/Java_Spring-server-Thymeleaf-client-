@@ -3,6 +3,7 @@ package com.java.Travel.service;
 import com.java.Travel.controller.dto.IncidentCreateUpdateDTO;
 import com.java.Travel.controller.dto.IncidentDTO;
 import com.java.Travel.model.IncidentStatus;
+import com.java.Travel.model.IncidentsEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -38,4 +39,6 @@ public interface IncidentService {
 
     @Transactional
     void save(IncidentDTO incidentDTO);
+
+    boolean save(IncidentsEntity incidentEntity);
 }

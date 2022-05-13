@@ -41,4 +41,13 @@ public class FixedDetachmentsServiceImpl implements FixedDetachmentsService {
                 .map(c -> new FixedDetachmentsDTO(c.getId(), c.getDetachmentEntity(), c.getCompanyEntity()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean save(FixedDetachmentsEntity obj){
+        FixedDetachmentsEntity a = fixedDetachmentsRepository.save(obj);
+        if (a == null){
+            return false;}
+        else return true;
+    }
+
 }

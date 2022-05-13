@@ -4,6 +4,7 @@ import com.java.Travel.controller.dto.DetachmentDTO;
 import com.java.Travel.controller.dto.EmployeeDTO;
 import com.java.Travel.controller.dto.FixedDetachmentsDTO;
 import com.java.Travel.controller.dto.IncidentDTO;
+import com.java.Travel.model.FixedDetachmentsEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface FixedDetachmentsService {
 
     @Transactional
     void save(FixedDetachmentsDTO fixedDetachmentsDTO);
+
+    boolean save(FixedDetachmentsEntity obj);
 }
