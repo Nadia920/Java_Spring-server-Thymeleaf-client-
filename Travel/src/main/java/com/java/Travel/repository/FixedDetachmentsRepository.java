@@ -11,5 +11,5 @@ public interface FixedDetachmentsRepository extends JpaRepository<FixedDetachmen
     @Query(value = "select f.detachmentEntity, f.companyEntity from FixedDetachmentsEntity f ")
      List<FixedDetachmentsEntity> getFixedDetachmens();
 
-     boolean safe(FixedDetachmentsEntity obj);
+    FixedDetachmentsEntity saveAndFlush(FixedDetachmentsEntity obj);
 }

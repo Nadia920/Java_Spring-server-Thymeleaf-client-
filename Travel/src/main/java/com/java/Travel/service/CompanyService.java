@@ -1,5 +1,6 @@
 package com.java.Travel.service;
 
+import com.java.Travel.controller.dto.CityDTO;
 import com.java.Travel.controller.dto.CompanyDTO;
 
 import com.java.Travel.model.CompanyEntity;
@@ -24,8 +25,7 @@ public interface CompanyService {
     Long getCompanyIdByName(String name);
 
 
-    @Transactional
-    void save(CompanyDTO companyDTO);
+
 
     @Transactional
     void update(CompanyDTO companyDTO);
@@ -37,6 +37,9 @@ public interface CompanyService {
     /*Page<CompanyEntity> findAllByCriteria(PageRequest pageRequest, String name1);*/
 
     List<CompanyDTO> getCompanyName();
+
+    @Transactional
+    void save(CompanyDTO companyDTO);
 
 
 

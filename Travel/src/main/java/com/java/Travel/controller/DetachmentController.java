@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,16 +61,23 @@ public class DetachmentController {
         return "Detachment/showDetachment";
     }
 
-    @GetMapping("/addFixDetachment")
+    @GetMapping("/AddFixDetachment")
     public String addFixDetachment(Model model){
-        List<DetachmentDTO> detachmentsDTOList = detachmentsService.getDetachmentName();
+        System.out.println("45");
+        List<DetachmentDTO> detachmentsDTOList = detachmentsService.findAll();
         model.addAttribute("detachments", detachmentsDTOList.size() != 0 ? detachmentsDTOList : null);
         List<CompanyDTO> companyDTOList = compamyService.findAll();
         model.addAttribute("company", companyDTOList.size() != 0 ? companyDTOList : null);
-
-        return "FixedDetachment/AddFixedDetachment";
+        FixedDetachmentsDTO fix = new FixedDetachmentsDTO();
+        model.addAttribute("obj", fix);
+        return "/FixedDetachment/AddFixedDetachment";
     }
 
+
+    @PostMapping("/AddFix")
+    public void addFix(FixedDetachmentsDTO obj){
+        fixedDetachmentsService.save(obj);
+    }
 
 
 }

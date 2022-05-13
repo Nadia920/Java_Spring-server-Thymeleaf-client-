@@ -1,14 +1,11 @@
 package com.java.Travel.controller;
 
 
-import com.java.Travel.controller.dto.CompanyDTO;
-import com.java.Travel.controller.dto.IncidentCreateUpdateDTO;
-import com.java.Travel.controller.dto.IncidentDTO;
+import com.java.Travel.controller.dto.*;
 import com.java.Travel.model.IncidentStatus;
+import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.security.CustomUserDetail;
-import com.java.Travel.service.CompanyService;
-import com.java.Travel.service.EmailSender;
-import com.java.Travel.service.IncidentService;
+import com.java.Travel.service.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +35,10 @@ public class IncidentController {
     private EmailSender emailSender;
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private DetachmentService detachmentService;
 
     @GetMapping("/showMyIncidents")
     public String showIncident(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status, Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
@@ -86,9 +87,16 @@ public class IncidentController {
 
     @GetMapping("/addIncident")
     public String add(Model model) {
-        List<CompanyDTO> companyDTOList = companyService.getCompanyName();
-        model.addAttribute("company", companyDTOList.size() != 0 ? companyDTOList : null);
+        List<CategoryDTO> categoryDTOList = categoryService.findAll();
+        model.addAttribute("categories", categoryDTOList.size() != 0 ? categoryDTOList : null);
+        List<DetachmentDTO> detachmentDTOList = detachmentService.findAll();
+        model.addAttribute("detachments", detachmentDTOList.size() != 0 ? detachmentDTOList : null);
+        model.addAttribute("obj", new IncidentDTO());
         return "Incidents/PageIncidentAdd";
+    }
+    @PostMapping("/PageIncidentsAdd")
+    public void addIncident(Model model, IncidentDTO obj) {
+        incidentService.save(obj);
     }
     }
 

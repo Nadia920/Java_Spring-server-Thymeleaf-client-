@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class CategoryDTO {
 
+    private Long id;
+
     private Set<IncidentsEntity> incidents;
 
     @NotNull
@@ -20,6 +22,12 @@ public class CategoryDTO {
     CategoryDTO(){}
 
     CategoryDTO(String сategoryName, String descriptionCategory){
+        this.сategoryName = сategoryName;
+        this.descriptionCategory = descriptionCategory;
+    }
+
+    public CategoryDTO(Long id, String сategoryName, String descriptionCategory) {
+        this.id = id;
         this.сategoryName = сategoryName;
         this.descriptionCategory = descriptionCategory;
     }

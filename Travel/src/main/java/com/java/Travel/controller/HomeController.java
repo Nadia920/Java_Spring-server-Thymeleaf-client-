@@ -111,6 +111,8 @@ public class HomeController {
 
     @GetMapping("/showAppRating")
     public String showAppRating() {
+
+        System.out.println("ааааааааааааааа");
         return "rating/showAppRating";
     }
 

@@ -2,11 +2,13 @@ package com.java.Travel.service;
 
 
 import com.java.Travel.controller.dto.CityDTO;
+import com.java.Travel.controller.dto.CompanyDTO;
 import com.java.Travel.controller.dto.CountryDTO;
 import com.java.Travel.model.CountryEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -30,4 +32,6 @@ public interface CountryService {
     List<CountryDTO> findAll(Sort name);
 
     Set<CityDTO> checkCityDTOSet(Set<CityDTO> cityDTOSet);
+    @Transactional
+    void save(CountryDTO countryDTO);
 }

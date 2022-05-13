@@ -1,11 +1,18 @@
 package com.java.Travel.service;
 
+import com.java.Travel.controller.dto.ProblemDTO;
 import com.java.Travel.controller.dto.QuestionDTO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface QuestionService {
-    boolean save(QuestionDTO questionDTO);
+
+    @Transactional
+    void save(QuestionDTO questionDTO);
+
+
+    /*QuestionService(QuestionDTO questionDTO);*/
 
     void deleteUserById(Long id);
 

@@ -1,13 +1,17 @@
 package com.java.Travel.service.impl;
 
 
+import com.java.Travel.controller.dto.AppRatingDTO;
 import com.java.Travel.controller.dto.CompanyDTO;
 import com.java.Travel.controller.dto.IncidentDTO;
+import com.java.Travel.controller.dto.TestDTO;
 import com.java.Travel.model.*;
 import com.java.Travel.repository.*;
+import com.java.Travel.service.ServiceImpl.AppRatingServiceImpl;
 import com.java.Travel.service.ServiceImpl.CompanyServiceImpl;
 
 import com.java.Travel.service.ServiceImpl.IncidentServiceImpl;
+import com.java.Travel.service.ServiceImpl.TestsServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -48,6 +52,9 @@ public class CompanyServiceImplTest {
 
     private IncidentServiceImpl incidentService;
 
+    private TestsServiceImpl testService;
+
+    private AppRatingServiceImpl appRatingService;
     @Test
     public void save() {
         companyService.save(new CompanyDTO("Fake"));
@@ -70,21 +77,18 @@ public class CompanyServiceImplTest {
         verify(companyRepository, times(1)).findAllByCompanyName("djf");
     }
 
-    @Test
+    /*@Test
     public void findAllPageable() {
         pageable = PageRequest.of(0, 4, Sort.by("name").ascending());
         Page<CompanyEntity> companyEntities = new PageImpl<>(Arrays.asList(
-                new CompanyEntity(1L, "Fake1"),
-                new CompanyEntity(2L, "Fake2"),
-                new CompanyEntity(3L, "Fake3"),
-                new CompanyEntity(5L, "Fake7")));
+                new CompanyEntity(1L)));
 
         when(companyRepository.findAll(pageable)).thenReturn(companyEntities);
         Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll(pageable);
 
         assertEquals(expectedCompanyEntitiesList.get().count(), 4);
         verify(companyRepository, times(1)).findAll(pageable);
-    }
+    }*/
 
     @Test
     public void findAllIsEmpty() {
@@ -252,8 +256,8 @@ public class CompanyServiceImplTest {
     }
     @Test
     public void TestDiffIncident2() {
-        TestsEntity tests = new TestsEntity();
-        if (testsRepository.add(tests)) {
+        TestDTO tests = new  TestDTO();
+        if (testService.save(tests)) {
 
         }
         else
@@ -270,8 +274,9 @@ public class CompanyServiceImplTest {
         }
     }
     @Test
-    public void TestMoment2(TestsEntity tests) {
-        if (testsRepository.add(tests)) {
+    public void TestMoment2() {
+        TestDTO testsDTO = new TestDTO();
+        if (testService.save(testsDTO)) {
 
         }
         else
@@ -291,8 +296,10 @@ public class CompanyServiceImplTest {
     }
     @Test
     public void addProblem2() {
-        DetachmentEntity obj = new DetachmentEntity();
-        when(detachmentRepository.findDetachmentEntityByDetachmentName()).thenReturn(obj);
+        String name = null;
+       /* DetachmentEntity obj = new DetachmentEntity();
+        when(detachmentRepository.findDetachmentEntityByDetachmentName(name)).thenReturn(obj);*/
+        DetachmentEntity obj = detachmentRepository.findDetachmentEntityByDetachmentName(name);
         if(obj.equals(NULL)){
             System.out.println("Информации о такой команде помощи нет в бд, проверьте правильность введённого названия");
         } else {
@@ -329,25 +336,27 @@ public class CompanyServiceImplTest {
             System.out.println("Данных есть, выполнение действия возможно");
         }
     }
-    @Test
+    /*@Test
     public void tryFixDetachment2(FixedDetachmentsEntity obj) {
-        if (fixedDetachmentsRepository.safe(obj)) {
+
+        if (fixedDetachmentsRepository.saveAndFlush(obj).) {
             System.out.println("Запись в бд произошла успешно");
         }
         else
         {
             System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
         }
-    }
+    }*/
     @Test
-    public void addIncident(IncidentsEntity obj) {
-        if (incidentEntityRepository.add(obj)) {
+    public void addIncident() {
+        /*IncidentDTO obj = null;
+        if (incidentService.save(obj)) {
             System.out.println("Запись в бд произошла успешно");
         }
         else
         {
             System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }
+        }*/
     }
     @Test
     public void addIncident2() {
@@ -374,8 +383,8 @@ public class CompanyServiceImplTest {
     }
     @Test
     public void addRating2() {
-        AppRating obj = new  AppRating();
-        if (appRatingRepository.add(obj)) {
+        AppRatingDTO obj = new  AppRatingDTO();
+        if (appRatingService.save(obj)) {
             System.out.println("Запись в бд произошла успешно");
         }
         else

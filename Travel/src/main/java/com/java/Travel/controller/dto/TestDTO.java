@@ -6,6 +6,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 public class TestDTO {
 
         @NotNull
@@ -16,7 +18,7 @@ public class TestDTO {
         private String answers;
         @NotNull
         private String correctAnswers;
-        TestDTO() {}
+        public TestDTO() {}
         TestDTO(String topic, String questions, String answers, String correctAnswers ) {
             this.topic = topic;
             this.questions = questions;

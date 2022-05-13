@@ -1,37 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <div class="form-group">
-    <form th:href="@{/PageIncidentsAdd}" method="post">
-        <label for="name" class="col-form-label" th:text="#{text.city}"></label>
-        <input type="text" th:value="${city?.name}" th:name="name" class="form-control"
-               id="name" th:placeholder="#{text.city}" autofocus required
-               pattern="([A-Z])([a-zA-Z-\s]{3,39})" maxlength="40"/>
-        <span class="form__error" th:text="#{text.error.city}"></span>
-        <p>{text.incident_category}</p>
+    <form th:href="@{/PageIncidentsAdd}" method="post" th:object=${obj}>
+        <p th:text = {text.incident_category}></p>
         <select name="incident_category" value="" ></select>
-        <select class="form-control col-sm-auto" name="incident_category" id="select_city_to"  required>
-            <option value="">&#45;&#45;&#45;&#45;</option>
-            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+        <select th:each="category : ${categories}" class="form-control col-lg-auto "   id="select2"  name="category" required  >
+            <option  th:value="${category.id}"  th:text="${category.CategoryName}"> </option>
         </select>
-        <p>{text.incident_name}</p>
-        <select name="incident_name"></select>
-        <p>{text.incident_resolution}</p>
-        <input name="{text.incident_resolution}">
-        <p>{text.incident_response}</p>
-        <input name="{text.incident_response}">
-        <p>{text.comment}</p>
-        <input name="{text.comment}">
-        <p>{text.preventive_measures}</p>
-        <input name="{text.preventive_measures}">
-        <p>{text.client_name}</p>
-        <select name="client_name"></select>
-        <p>{text.team_name}</p>
-        <select name="team_name"></select>
+        <p th:text=#{text.incident_name} ></p>
+        <select name="incident_name" name="incidentName"></select>
+        <p th:text=#{text.incident_solution}></p>
+        <input name="{text.incident_solution}" name="incidentSolution">
+        <p th:text=#{text.incident_reaction}></p>
+        <input name="{text.incident_reaction}" name="reaction">
+    <p th:text=#{text.incident_comments}></p>
+    <input name="{text.incident_comments}" name="comments">
+    <p th:text=#{text.prevention_measures}></p>
+    <input name="{text.prevention_measures}" name="preventionMeasures">
+    <select th:each="detachment : ${detachments}" class="form-control col-lg-auto "   id="select3"  name="detachmentEntity" required  >
+        <option  th:value="${detachment.id}"  th:text="${category.detachmentName}"> </option>
+    </select>
+    <input type="submit" text="Отправить">
     </form>
 </div>
 </body>

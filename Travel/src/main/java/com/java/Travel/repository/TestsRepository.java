@@ -18,5 +18,4 @@ public interface TestsRepository extends JpaRepository<TestsEntity, Long> {
 
     void deleteById(Long id);
 
-    boolean add(TestsEntity test);
 }

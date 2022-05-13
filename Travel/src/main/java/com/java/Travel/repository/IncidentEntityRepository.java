@@ -29,5 +29,5 @@ public interface IncidentEntityRepository extends JpaRepository<IncidentsEntity,
 
     IncidentsEntity findIncidentEntityByIncidentName(String name);
 
-    boolean add(IncidentsEntity obj);
+    /*boolean add(IncidentsEntity obj);*/
 }

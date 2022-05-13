@@ -14,7 +14,7 @@ public class AppRatingDTO {
     @NotNull
     private BigInteger iDClientA;
 
-    AppRatingDTO() {}
+    public AppRatingDTO() {}
 
     AppRatingDTO(Number value, Number finalValue, BigInteger iDClientA) {
         this.value = value;

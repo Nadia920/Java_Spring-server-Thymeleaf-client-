@@ -15,14 +15,7 @@
 
 <body>
 
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <div th:replace="home/adminHeader :: admin-header"/>
-</div>
-<div sec:authorize="hasRole('ROLE_WORKER')">
-    <div th:replace="home/workerHeader :: worker-header"/>
-</div>
-
-
+<form action="/detachment/AddFix" method="post" th:object="${obj}"></form>
 <div class="container my-md-2" style="width: 30%">
     <div class="card">
         <div class="card-body">
@@ -48,13 +41,7 @@
                 </div>
             </div>
             <div th:switch="${detachments}" class="container my-md-4">
-                <p class="my-9">
-                    <!--<a th:href="@{/cities/edit(country=${country.name})}" class="btn btn-primary">-->
-                    <i class="fas fa-plus ml-2" th:text="#{text.city}"></i></a>
-                </p>
-                <!--<b th:text="#{text.country}+':'"> </b>
-                <span  th:text="${country.name}"></span>-->
-                <p></p>
+
                 <div class="col-md-4">
                     <h2 th:case="null" th:text="#{text.record.found}"></h2>
                     <div th:case="*">
@@ -68,12 +55,14 @@
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <a th:href="@{/country}"> <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{bt.back}"></button></a>
-            </div>
+            <label>Введите имя компании</label>
+            <input type="text" name="companyEntity">
+            <label>Введите имя команды</label>
+            <input type="text" name="detachmentEntity">
+
         </div>
     </div>
 </div>
-
+</form>
 </body>
 </html>

@@ -21,5 +21,5 @@ public interface AppRatingRepository extends JpaRepository<AppRating, Long> {
 
     void deleteById(Long id);
 
-    boolean add(AppRating obj);
+
 }

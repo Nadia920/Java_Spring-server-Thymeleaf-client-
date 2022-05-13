@@ -55,6 +55,7 @@ public class IncidentDTO {
         this.status = status;
     }
 
+
     @Override
     public String toString() {
         return "IncidentDTO{" +

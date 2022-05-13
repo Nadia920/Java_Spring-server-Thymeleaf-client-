@@ -21,13 +21,6 @@
 </head>
 <body>
 
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <div th:replace="home/adminHeader :: admin-header"/>
-</div>
-<div sec:authorize="hasRole('ROLE_WORKER')">
-    <div th:replace="home/workerHeader :: worker-header"/>
-</div>
-
 <div class="container my-2 col-lg-10" style="width: 40%">
     <div class="card">
         <div class="card-body" >
@@ -39,22 +32,21 @@
                 </p>
 
                 <div class="col-md-4">
-                    <h2 th:case="null" th:text="#{text.record.found}"></h2>
+
                     <div th:case="*">
                         <table class="table table-hover" >
                             <thead>
                             <tr>
-                                <th th:text="#{text.who_appreciated}"></th>
                                 <th th:text="#{text.grade}"></th>
                                 <th th:text="#{text.final_grade}"></th>
+                                <th th:text="#{text.who_appreciated}"></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="AppRating : ${AppRatings}">
-                                <td th:text="${AppRating.name}"></td>
-                                <td th:text="${AppRating.code}"></td>
-                                <td th:text="${AppRating.cityDTO.name}"></td>
-                                <td th:text="${AppRating.cityDTO.countryDTO.name}"></td>
+                                <td th:text="${AppRating.Value}"></td>
+                                <td th:text="${AppRating.FinalValue}"></td>
+                                <td th:text="${AppRating.userEntity}"></td>
                                 <td>
                                     <a th:href="@{ /AppRating/edit/{id} (id=${AppRating.id}) }">
                                         <i class="fas fa-edit ml-2"></i>

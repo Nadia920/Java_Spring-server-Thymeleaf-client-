@@ -20,12 +20,12 @@ public class TestController {
     private TestsRepository testRepository;
     @GetMapping("/TestMoments")
     public String TestMoments() {
-        return "Tests/TestMoments";
+        return "/Tests/TestMoments";
     }
 
     @GetMapping("/TestDiffIncident")
     public String TestDiffIncident() {
-        return "Tests/TestDiffIncident";
+        return "/Tests/TestDiffIncident";
     }
 
 
@@ -40,11 +40,11 @@ public class TestController {
 
     @PostMapping("/SendTestDiff")
     public String SendTestDiffIncident(String send) {
-        TestsEntity test = new TestsEntity();
+        TestDTO test = new TestDTO();
         test.setTopic("TestMoments");
         ResultsEntity resultsEntity = null;
         resultsEntity.setTestResult(send);
-        testRepository.add(test);
+        testsService.save(test);
         return "Result";
     }
 

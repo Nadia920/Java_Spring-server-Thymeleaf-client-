@@ -19,5 +19,5 @@ public interface DetachmentRepository extends JpaRepository<DetachmentEntity, Lo
 
      public DetachmentEntity findByDetachmentName(String name);
 
-    public DetachmentEntity findDetachmentEntityByDetachmentName();
+    public DetachmentEntity findDetachmentEntityByDetachmentName(String name);
 }

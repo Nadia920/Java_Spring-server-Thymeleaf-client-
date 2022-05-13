@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
 import java.util.stream.Collectors;
@@ -110,6 +111,13 @@ public class IncidentServiceImpl implements IncidentService {
     @Override
     public List<IncidentDTO> findALL() {
         return null;
+    }
+
+    @Transactional
+    @Override
+    public void save(IncidentDTO incidentDTO) {
+        IncidentsEntity incidentEntity = new IncidentsEntity(incidentDTO.getIncidentName(), incidentDTO.getIncidentSolution(), incidentDTO.getReaction(), incidentDTO.getComments(), incidentDTO.getPreventionMeasures(), incidentDTO.getType(), incidentDTO.getCategory(), incidentDTO.getUser(), incidentDTO.getDetachment(), incidentDTO.getStatus(), incidentDTO.getUserDTO(), incidentDTO.getIncidentDTO());
+        incidentRepository.save(incidentEntity);
     }
 
 

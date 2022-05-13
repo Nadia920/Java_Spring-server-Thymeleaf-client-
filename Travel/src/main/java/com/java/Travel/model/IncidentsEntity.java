@@ -1,5 +1,7 @@
 package com.java.Travel.model;
 
+import com.java.Travel.controller.dto.IncidentDTO;
+import com.java.Travel.controller.dto.UserDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,5 +44,11 @@ public class IncidentsEntity extends BaseEntity {
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "incidents_detachment_id")
     private DetachmentEntity detachmentEntity;
+
+    public IncidentsEntity(String incidentName, String incidentSolution, String reaction, String comments, String preventionMeasures, String type, CategoryEntity category, UserEntity user, DetachmentEntity detachment, IncidentStatus status, UserDTO userDTO, IncidentDTO incidentDTO) {
+    }
+
+
+
 }
 

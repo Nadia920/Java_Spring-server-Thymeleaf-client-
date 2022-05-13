@@ -105,4 +105,9 @@ public class CityServiceImpl implements CityService {
         return cityRepository.getIdCountryByCityId(id);
     }
 
+    @Override
+    public void save(CityDTO cityDTO) {
+
+    }
+
 }

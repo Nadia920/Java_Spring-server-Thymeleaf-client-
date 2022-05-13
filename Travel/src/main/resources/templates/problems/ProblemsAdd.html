@@ -21,15 +21,15 @@
 </head>
 <body>
 <form th:action="@{/Problems}" method="post">
-  <h3>{text.nameProblem}</h3>
+  <h3 th:text = #{text.nameProblem}></h3>
   <input name="nameProblem">
-  <h3>{text.descriptionProblem}</h3>
+  <h3 th:text = #{text.descriptionProblem}></h3>
   <input name="descriptionProblem">
-  <h3>{text.nameClient}</h3>
+  <h3 th:text = #{text.nameClient}></h3>
   <input name="nameClient">
-  <h3>{text.nameTeam}</h3>
+  <h3 th:text = #{text.nameTeam}></h3>
   <div>
-    <h1 for="city_from" class="col-form-label text-center" style="color: black"  th:text="#{text.from}"></h1>
+    <h1 for="city_from" class="col-form-label text-center" style="color: black"  th:text="#{text.detachmentName}"></h1>
     <select class="form-control col-lg-auto " name="idCityDeparture"  id="select1"  required  >
       <option th:each="detachment : ${detachments}"  th:label="${detachment.name}">
       </option>

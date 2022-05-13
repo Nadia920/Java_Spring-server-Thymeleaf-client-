@@ -26,8 +26,7 @@ public class ProblemsController {
 
     @GetMapping(value = "/ProblemsAdd")
     public String getHelp(Model model) {
-        model.addAttribute("detachment", new DetachmentDTO());
-        List<DetachmentDTO> detachmentDTOList = detachmentService.getDetachmentName();
+        List<DetachmentDTO> detachmentDTOList = detachmentService.findAll();
         model.addAttribute("detachment", detachmentDTOList.size() != 0 ? detachmentDTOList : null);
         return "problems/ProblemsAdd";
     }

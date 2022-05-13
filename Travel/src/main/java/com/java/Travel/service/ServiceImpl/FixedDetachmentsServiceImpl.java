@@ -2,7 +2,6 @@ package com.java.Travel.service.ServiceImpl;
 
 import com.java.Travel.controller.dto.DetachmentDTO;
 import com.java.Travel.controller.dto.FixedDetachmentsDTO;
-import com.java.Travel.controller.dto.IncidentDTO;
 import com.java.Travel.model.FixedDetachmentsEntity;
 import com.java.Travel.repository.FixedDetachmentsRepository;
 import com.java.Travel.service.FixedDetachmentsService;
@@ -17,8 +16,8 @@ public class FixedDetachmentsServiceImpl implements FixedDetachmentsService {
     @Autowired
     private FixedDetachmentsRepository fixedDetachmentsRepository;
     @Override
-    public boolean save(FixedDetachmentsDTO fixedDetachmentsDTO) {
-        return false;
+    public void save(FixedDetachmentsDTO fixedDetachmentsDTO) {
+
     }
 
     @Override

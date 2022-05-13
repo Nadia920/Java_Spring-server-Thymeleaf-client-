@@ -3,13 +3,14 @@ package com.java.Travel.service;
 import com.java.Travel.controller.dto.IncidentCreateUpdateDTO;
 import com.java.Travel.controller.dto.IncidentDTO;
 import com.java.Travel.model.IncidentStatus;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 
 public interface IncidentService {
 
-    IncidentDTO add(IncidentCreateUpdateDTO orderDTO);
+    IncidentDTO add(IncidentCreateUpdateDTO incidentDTO);
 
     List<IncidentDTO> getOrdersByUserId(Long id);
 
@@ -34,4 +35,7 @@ public interface IncidentService {
     String getIncidentsReactionByID(Long id);
 
     List<IncidentDTO> findALL();
+
+    @Transactional
+    void save(IncidentDTO incidentDTO);
 }
