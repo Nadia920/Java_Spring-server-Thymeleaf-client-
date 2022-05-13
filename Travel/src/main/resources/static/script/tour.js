@@ -1,4 +1,4 @@
-protocol = $(location).attr('protocol') + '//';
+/*protocol = $(location).attr('protocol') + '//';
 hostUrl = $(location).attr('host');
 localServerUrl = protocol+hostUrl+'/';
 
@@ -50,5 +50,6 @@ draw = (init)=>{
     var tour = new google.visualization.BarTour(document.getElementById('tour_div'));
 
     tour.draw(data, options);
-    
-};
+
+};*/
+yandex.map.

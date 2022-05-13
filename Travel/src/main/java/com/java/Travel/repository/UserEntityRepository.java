@@ -29,5 +29,7 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
 
     UserEntity findByLogin(String login);
 
+    Boolean save(UserEntity userEntity);
+
 
 }

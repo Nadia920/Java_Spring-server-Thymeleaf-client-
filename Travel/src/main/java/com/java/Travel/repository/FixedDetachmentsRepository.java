@@ -12,4 +12,5 @@ public interface FixedDetachmentsRepository extends JpaRepository<FixedDetachmen
      List<FixedDetachmentsEntity> getFixedDetachmens();
 
     FixedDetachmentsEntity saveAndFlush(FixedDetachmentsEntity obj);
+    Boolean save(FixedDetachmentsEntity obj);
 }

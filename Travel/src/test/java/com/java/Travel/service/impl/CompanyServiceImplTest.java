@@ -12,6 +12,7 @@ import com.java.Travel.service.ServiceImpl.CompanyServiceImpl;
 
 import com.java.Travel.service.ServiceImpl.IncidentServiceImpl;
 import com.java.Travel.service.ServiceImpl.TestsServiceImpl;
+import org.apache.catalina.Store;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -27,10 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class CompanyServiceImplTest {
 
-
+    private UserEntityRepository userEntityRepository;
     private CompanyEntityRepository companyRepository;
 
     private IncidentEntityRepository incidentEntityRepository;
@@ -69,33 +70,33 @@ public class CompanyServiceImplTest {
         list.add(companyEntity1);
         list.add(companyEntity2);
 
-        when(companyRepository.findAllByCompanyName("jhf")).thenReturn(list);
+        list = companyRepository.findAllByCompanyName("IT");
 
         List<CompanyDTO> empList = companyService.findAll();
 
         assertEquals(2, empList.size());
-        verify(companyRepository, times(1)).findAllByCompanyName("djf");
+        verify(companyRepository, times(1)).findAllByCompanyName("IT");
     }
 
-    /*@Test
+    @Test
     public void findAllPageable() {
-        pageable = PageRequest.of(0, 4, Sort.by("name").ascending());
+        pageable = PageRequest.of(0, 4, Sort.by("companyName").ascending());
         Page<CompanyEntity> companyEntities = new PageImpl<>(Arrays.asList(
-                new CompanyEntity(1L)));
+                new CompanyEntity("IT")));
 
-        when(companyRepository.findAll(pageable)).thenReturn(companyEntities);
+        companyEntities = companyRepository.findAll(pageable);
         Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll(pageable);
 
         assertEquals(expectedCompanyEntitiesList.get().count(), 4);
         verify(companyRepository, times(1)).findAll(pageable);
-    }*/
+    }
 
     @Test
     public void findAllIsEmpty() {
-        pageable = PageRequest.of(0, 4, Sort.by("name").ascending());
+        pageable = PageRequest.of(0, 4, Sort.by("companyName").ascending());
         Page<CompanyEntity> companyEntities = new PageImpl<>(new ArrayList<>());
 
-        when(companyRepository.findAll(pageable)).thenReturn(companyEntities);
+        companyEntities = companyRepository.findAll(pageable);
         Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll(pageable);
 
         assertThat(expectedCompanyEntitiesList).isEmpty();
@@ -104,9 +105,9 @@ public class CompanyServiceImplTest {
 
     @Test
     public void findAllIsNull() {
-        pageable = PageRequest.of(0, 4, Sort.by("name").ascending());
+        pageable = PageRequest.of(0, 4, Sort.by("companyName").ascending());
 
-        when(companyRepository.findAll(pageable)).thenReturn(null);
+        companyRepository.findAll(pageable);
         Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll(pageable);
 
         assertThat(expectedCompanyEntitiesList).isNull();
@@ -117,7 +118,7 @@ public class CompanyServiceImplTest {
     public void findOneById() {
         Long id = 1L;
         Optional<CompanyEntity> companyEntity = Optional.of(new CompanyEntity(id, "Fake"));
-        when(companyRepository.findById(id)).thenReturn(companyEntity);
+        companyEntity = companyRepository.findById(id);
         CompanyDTO actualCompany = companyService.findOne(id);
         assertEquals(id, actualCompany.getId());
     }
@@ -125,7 +126,8 @@ public class CompanyServiceImplTest {
     @Test
     public void findOneByIdNotFound() {
         Long id = 2L;
-        when(companyRepository.findById(id)).thenReturn(Optional.empty());
+        companyRepository.findById(id);
+        Optional.empty();
         CompanyDTO actualCompany = companyService.findOne(id);
         assertNull(actualCompany);
     }
@@ -134,16 +136,17 @@ public class CompanyServiceImplTest {
     public void getCompanyIdByName() {
         Long id = 1L;
         CompanyEntity companyEntity = new CompanyEntity(id, "Fake");
-        when(companyRepository.getCompanyIdByName(companyEntity.getCompanyName())).thenReturn(id);
+        id = companyRepository.getCompanyIdByName(companyEntity.getCompanyName());
         Long actualId = companyService.getCompanyIdByName(companyEntity.getCompanyName());
         assertEquals(id, actualId);
     }
 
     @Test
     public void getCompanyIdByNameNotFound() {
-        when(companyRepository.getCompanyIdByName("F")).thenReturn(null);
-        Long actualId = companyService.getCompanyIdByName("F");
+
+        Long actualId = companyService.getCompanyIdByName("IT");
         assertNull(actualId);
+
     }
     @Test
     public void getIncidentFalse() {
@@ -151,7 +154,7 @@ public class CompanyServiceImplTest {
         List<IncidentsEntity> list = new ArrayList<>();
         IncidentsEntity incidentEntity1 = new IncidentsEntity();
         IncidentsEntity incidentEntity2 = new IncidentsEntity();
-        when(incidentEntityRepository.getIncidentsFalse(name)).thenReturn(list);
+        list = incidentEntityRepository.getIncidentsFalse(name);
         List<IncidentDTO> actualIncident = incidentService.getIncidentsFalse("False");
         verify(incidentEntityRepository, times(1)).getIncidentsFalse(name);
     }
@@ -166,7 +169,7 @@ public class CompanyServiceImplTest {
         String name = "True";
         List<IncidentsEntity> list = new ArrayList<>();
         IncidentsEntity incidentEntity1 = new IncidentsEntity();
-        when(incidentEntityRepository.getIncidentsTrue(name)).thenReturn(list);
+        list = incidentEntityRepository.getIncidentsTrue(name);
         List<IncidentDTO> actualIncident = incidentService.getIncidentsTrue("True");
         assertEquals(1, actualIncident.size());
         verify(incidentEntityRepository, times(1)).getIncidentsTrue(name);
@@ -180,7 +183,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addFixDetachment() {
         List<CompanyEntity> list = new ArrayList<>();
-        when(companyRepository.findAll()).thenReturn(list);
+        list = companyRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о компаниях пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -190,7 +193,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addFixDetachment2() {
         List<DetachmentEntity> list = new ArrayList<>();
-        when(detachmentRepository.findAll()).thenReturn(list);
+        list = detachmentRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о командах пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -200,7 +203,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addDetachment() {
         List<EmployeeEntity> list = new ArrayList<>();
-        when(employeeRepository.findAll()).thenReturn(list);
+        list = employeeRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -210,7 +213,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addDetachment2() {
         List<DetachmentEntity> list = new ArrayList<>();
-        when(detachmentRepository.findAll()).thenReturn(list);
+        list = detachmentRepository.findAll();
         List<DetachmentEntity> duplicates = list.stream()
 
                 .collect(Collectors.groupingBy(Function.identity()))
@@ -229,7 +232,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addReport() {
         List<IncidentsEntity> list = new ArrayList<>();
-        when(incidentEntityRepository.findAll()).thenReturn(list);
+        list = incidentEntityRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -238,16 +241,17 @@ public class CompanyServiceImplTest {
     }
     @Test
     public void addReport2(Long id) {
-        IncidentsEntity obj = new IncidentsEntity();
-        when(incidentEntityRepository.getIncidentsReactionByID(id)).thenReturn(String.valueOf(obj));
-        if (obj.getReaction().isEmpty()){
+
+        String a = incidentEntityRepository.getIncidentsReactionByID(id);
+        if (a == null){
             System.out.println("Данные о реакции на данный инцидент ещё не поступили ");
         } else {
             System.out.println("Всё отлично. Получите отчёт");
         }
     }
     @Test
-    public void TestDiffIncident(Integer number) {
+    public void TestDiffIncident() {
+        Integer number = 3;
         if(number == 3){
             System.out.println("Вы идеальный знаток");
         } else {
@@ -266,7 +270,8 @@ public class CompanyServiceImplTest {
         }
     }
     @Test
-    public void TestMoment(Integer number) {
+    public void TestMoment() {
+        Integer number = 3;
         if(number == 3){
             System.out.println("Вы идеальный знаток");
         } else {
@@ -287,7 +292,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addProblem() {
         List<EmployeeEntity> list = new ArrayList<>();
-        when(employeeRepository.findAll()).thenReturn(list);
+        list = employeeRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -309,7 +314,7 @@ public class CompanyServiceImplTest {
     @Test
     public void findIncidents() {
         List<IncidentsEntity> list = new ArrayList<>();
-        when(incidentEntityRepository.findAll()).thenReturn(list);
+        list = incidentEntityRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о инцидентах пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
@@ -319,7 +324,7 @@ public class CompanyServiceImplTest {
     @Test
     public void findIncidentsByIncidentName(String name) {
         IncidentsEntity obj = new IncidentsEntity();
-        when(incidentEntityRepository.findIncidentEntityByIncidentName(name)).thenReturn(obj);
+        obj =incidentEntityRepository.findIncidentEntityByIncidentName(name);
         if(obj.equals(NULL)){
             System.out.println("Информации о такой команде помощи нет в бд, проверьте правильность введённого названия");
         } else {
@@ -329,34 +334,27 @@ public class CompanyServiceImplTest {
     @Test
     public void tryFixDetachment() {
         List<DetachmentEntity> list = new ArrayList<>();
-        when(detachmentRepository.findAll()).thenReturn(list);
+        list = detachmentRepository.findAll();
         if(list.isEmpty()){
             System.out.println("База данный о командах пуста. Данных для выбора нет, введите, пожалуйста, данные");
         } else {
             System.out.println("Данных есть, выполнение действия возможно");
         }
     }
-    /*@Test
-    public void tryFixDetachment2(FixedDetachmentsEntity obj) {
+    @Test
+    public void tryFixDetachment2() {
+        FixedDetachmentsEntity obj = new FixedDetachmentsEntity();
+        Boolean a = fixedDetachmentsRepository.save(obj);
+        assertEquals(true, a);
 
-        if (fixedDetachmentsRepository.saveAndFlush(obj).) {
-            System.out.println("Запись в бд произошла успешно");
-        }
-        else
-        {
-            System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }
-    }*/
+    }
     @Test
     public void addIncident() {
-        /*IncidentDTO obj = null;
-        if (incidentService.save(obj)) {
-            System.out.println("Запись в бд произошла успешно");
-        }
-        else
-        {
-            System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }*/
+
+        IncidentsEntity obj = new IncidentsEntity();
+        Boolean a = incidentEntityRepository.save(obj);
+        assertEquals(true, a);
+
     }
     @Test
     public void addIncident2() {
@@ -374,7 +372,7 @@ public class CompanyServiceImplTest {
     @Test
     public void addRating(IncidentsEntity obj) {
         List<AppRating> list = new ArrayList<>();
-        when(appRatingRepository.findAll()).thenReturn(list);
+        list = appRatingRepository.findAll();
         if(list.isEmpty()){
             System.out.println("Данное приложение ещё никто не оценивал, Вы будете первым");
         } else {
@@ -394,35 +392,35 @@ public class CompanyServiceImplTest {
     }
     @Test
     public void login() {
+
+        UserEntity obj = new UserEntity();
+        Boolean a = userEntityRepository.save(obj);
+        assertEquals(true, a);
     }
     @Test
     public void login2() {
+        String name = "Nadja";
+        UserEntity a = userEntityRepository.findByLogin(name);
+        if (a != null) {
+            System.out.println("Пользователь с таким логином уже существует");
+        }
 
     }
     @Test
     public void registration() {
+        UserEntity obj = new UserEntity();
+        Boolean a = userEntityRepository.save(obj);
+        assertEquals(true, a);
     }
     @Test
     public void registration2() {
+        String name = "Nadja";
+        UserEntity a = userEntityRepository.findByLogin(name);
+        if (a != null) {
+            System.out.println("Пользователь с таким логином уже существует");
+        }
     }
-    @Test
-    public void enterContactData() {
-    }
-    @Test
-    public void enterContactData2() {
-    }
-    @Test
-    public void enterLogin() {
-    }
-    @Test
-    public void enterLogin2() {
-    }
-    @Test
-    public void enterPassword() {
-    }
-    @Test
-    public void enterPassword2() {
-    }
+
 
 
 
