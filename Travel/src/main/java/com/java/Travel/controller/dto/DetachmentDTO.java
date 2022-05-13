@@ -2,15 +2,15 @@ package com.java.Travel.controller.dto;
 
 
 import com.java.Travel.model.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
-
+@Getter
+@Setter
 public class DetachmentDTO {
 
+    private Long id;
     private Set<FixedDetachmentsEntity> fixedDetachments;
 
     private Set<IncidentsEntity> incidents;
@@ -22,18 +22,26 @@ public class DetachmentDTO {
     private Set<QuestionsEntity> questions;
 
 
-    String nameDetachment;
+    String detachmentName;
 
     String specialization;
 
     public DetachmentDTO(){}
 
-    public DetachmentDTO(String nameDetachment, String specialization){
-        this.nameDetachment = nameDetachment;
+    public DetachmentDTO(String detachmentName, String specialization){
+        this.detachmentName = detachmentName;
         this.specialization = specialization;
     }
 
     public DetachmentDTO(Long id, String detachmentName) {
+    }
+
+    @Override
+    public String toString() {
+        return "DetachmentDTO{" +
+                "id=" + id +
+                ", name='" + detachmentName + '\'' +
+                '}';
     }
 }
 

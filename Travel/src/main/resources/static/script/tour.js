@@ -50,4 +50,5 @@ draw = (init)=>{
     var tour = new google.visualization.BarTour(document.getElementById('tour_div'));
 
     tour.draw(data, options);
+    
 };

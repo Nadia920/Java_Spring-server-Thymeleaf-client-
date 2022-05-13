@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
+
 @Getter
 @Setter
 public class CompanyDTO {
@@ -16,22 +16,32 @@ public class CompanyDTO {
 
     @NotNull
     @Size(min = 3, max = 30)
-    private String name;
+    private String companyName;
+    private String companyAddress;
+    private String companyActivity;
+    private CityDTO cityEntity;
 
+    public CompanyDTO(Long id, String companyName, String companyAddress, String companyActivity, CityDTO cityEntity) {
+        this.id = id;
+        this.companyName = companyName;
+        this.companyAddress = companyAddress;
+        this.companyActivity = companyActivity;
+        this.cityEntity = cityEntity;
+    }
 
     public CompanyDTO(){}
 
-    public CompanyDTO(Long id, String name) {
+    public CompanyDTO(Long id, String companyName) {
         this.id = id;
-        this.name = name;
+        this.companyName = companyName;
     }
 
 
-    public CompanyDTO(String name) {
-        this.name = name;
+    public CompanyDTO(String companyName) {
+        this.companyName = companyName;
     }
 
-    public CompanyDTO(Object id, Object name) {
+    public CompanyDTO(Object id, Object companyName) {
 
     }
 
@@ -41,7 +51,7 @@ public class CompanyDTO {
     public String toString() {
         return "CompanyDTO{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + companyName + '\'' +
                 '}';
     }
 

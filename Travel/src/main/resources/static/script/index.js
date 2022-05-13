@@ -1,4 +1,4 @@
-protocol = $(location).attr('protocol') + '//';
+/*protocol = $(location).attr('protocol') + '//';
 hostUrl = $(location).attr('host');
 localServerUrl = protocol+hostUrl+'/';
 
@@ -193,4 +193,4 @@ function sendСonfirmPurchaseToEmail(order) {
         },
         dataType: "json"
     });
-}
+}*/

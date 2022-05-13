@@ -21,7 +21,6 @@ public interface CompanyEntityRepository extends JpaRepository<CompanyEntity, Lo
 
     /*CompanyEntity findByName(String name);*/
 
-
     void delete(CompanyEntity companyEntity);
 
     void deleteById(Long id);

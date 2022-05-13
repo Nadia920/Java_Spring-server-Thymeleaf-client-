@@ -75,7 +75,7 @@ method: "GET"
 })
 
 
- /*$.ajax({
+ $.ajax({
             url: localServerUrl + "SendTestMoments",
             contentType: "application/json",
             method: "POST",
@@ -93,7 +93,7 @@ method: "GET"
 
             },
             dataType: "json"
-        });*/
+        });
          $.ajax({
                     url: localServerUrl + "SendTestDiff",
                     contentType: "application/json",

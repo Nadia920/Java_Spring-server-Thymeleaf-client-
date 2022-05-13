@@ -101,15 +101,15 @@ public class CompanyController {
 
         if (company.getId() != null) {
 
-            if (companyService.getCompanyIdByName(company.getName()) != null
-                    && companyService.getCompanyIdByName(company.getName()) != company.getId()) {
-                LOGGER.error("Company with this name already exist, name: " + company.getName());
+            if (companyService.getCompanyIdByName(company.getCompanyName()) != null
+                    && companyService.getCompanyIdByName(company.getCompanyName()) != company.getId()) {
+                LOGGER.error("Company with this name already exist, name: " + company.getCompanyName());
                 throw new EditCompanyParametersExistException("Company_with_this_name_already_exist", company);
             }
             companyService.update(company);
         } else {
-            if (companyService.getCompanyIdByName(company.getName()) != null) {
-                LOGGER.error("Company with this name already exist, name: " + company.getName());
+            if (companyService.getCompanyIdByName(company.getCompanyName()) != null) {
+                LOGGER.error("Company with this name already exist, name: " + company.getCompanyName());
                 throw new EditCompanyParametersExistException("Company_with_this_name_already_exist", company);
             }
             companyService.save(company);

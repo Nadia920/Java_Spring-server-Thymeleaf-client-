@@ -65,9 +65,13 @@ public class DetachmentController {
     public String addFixDetachment(Model model){
         System.out.println("45");
         List<DetachmentDTO> detachmentsDTOList = detachmentsService.findAll();
+        for (DetachmentDTO e : detachmentsDTOList){
+            System.out.println(e);
+        }
+
         model.addAttribute("detachments", detachmentsDTOList.size() != 0 ? detachmentsDTOList : null);
         List<CompanyDTO> companyDTOList = compamyService.findAll();
-        model.addAttribute("company", companyDTOList.size() != 0 ? companyDTOList : null);
+        model.addAttribute("companies", companyDTOList.size() != 0 ? companyDTOList : null);
         FixedDetachmentsDTO fix = new FixedDetachmentsDTO();
         model.addAttribute("obj", fix);
         return "/FixedDetachment/AddFixedDetachment";

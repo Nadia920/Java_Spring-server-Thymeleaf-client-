@@ -2,6 +2,7 @@ package com.java.Travel.repository;
 
 import com.java.Travel.controller.dto.DetachmentDTO;
 import com.java.Travel.controller.dto.EmployeeDTO;
+import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.DetachmentEntity;
 import com.java.Travel.model.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface DetachmentRepository extends JpaRepository<DetachmentEntity, Lo
      public DetachmentEntity findByDetachmentName(String name);
 
     public DetachmentEntity findDetachmentEntityByDetachmentName(String name);
+
+    List<DetachmentEntity> findAll();
 }

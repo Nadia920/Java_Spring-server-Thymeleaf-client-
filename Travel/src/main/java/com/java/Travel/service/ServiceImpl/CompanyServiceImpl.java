@@ -7,7 +7,6 @@ import com.java.Travel.repository.CompanyEntityRepository;
 import com.java.Travel.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (companyEntity.isPresent()) {
             CompanyDTO companyDTO = new CompanyDTO();
             companyDTO.setId(companyEntity.get().getId());
-            companyDTO.setName(companyEntity.get().getCompanyName());
+            companyDTO.setCompanyName(companyEntity.get().getCompanyName());
             companyDTO.setCompanyAddress(companyEntity.get().getCompanyAddress());
             companyDTO.setCompanyActivity(companyEntity.get().getCompanyActivity());
 
@@ -71,7 +70,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional
     @Override
     public void save(CompanyDTO companyDTO) {
-        CompanyEntity companyEntity = new CompanyEntity(companyDTO.getName());
+        CompanyEntity companyEntity = new CompanyEntity(companyDTO.getCompanyName());
         companyRepository.save(companyEntity);
     }
 
@@ -80,7 +79,7 @@ public class CompanyServiceImpl implements CompanyService {
     public void update(CompanyDTO companyDTO) {
         Optional<CompanyEntity> editCompanyEntity = companyRepository.findById(companyDTO.getId());
         if (editCompanyEntity.isPresent()) {
-            editCompanyEntity.get().setCompanyName(companyDTO.getName());
+            editCompanyEntity.get().setCompanyName(companyDTO.getCompanyName());
             companyRepository.save(editCompanyEntity.get());
         } else {
             throw new UserNotFoundException("Company with id=" + companyDTO.getId() + " not found");
@@ -94,7 +93,7 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyDTO companyDTO = new CompanyDTO();
         if (companyEntity != null) {
             companyDTO.setId(companyEntity.getId());
-            companyDTO.setName(companyEntity.getCompanyName());
+            companyDTO.setCompanyName(companyEntity.getCompanyName());
         } else {
             throw new EntityNotFoundException("Company with name=" + company + " not found!");
         }
