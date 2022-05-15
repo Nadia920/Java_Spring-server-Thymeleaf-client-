@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="form-group">
+    <form action="/Incidents/PageIncidentsAdd" method="post" th:object=${obj}>
+        <p th:text =#{text.category}></p>
+        <select class="form-control col-lg-auto "   id="select1"  name="category.id" required>
+              <optgroup th:each="category : ${categories}" >
+              <option  th:value="${category.id}"  th:text="${category.CategoryName}"> </option>
+              </optgroup>
+        </select>
+        <p th:text=#{text.incidentName} ></p>
+        <input  name="incidentName">
+        <p th:text=#{text.preventionMeasures}></p>
+        <input name="preventionMeasures">
+        <p th:text =#{text.detachmentEntity}></p>
+        <select class="form-control col-lg-auto "   id="select1"  name="detachmentEntity.id" required>
+              <optgroup th:each="detachment : ${detachments}" >
+            <option  th:value="${detachment.id}"  th:text="${detachment.detachmentName}"> </option>
+              </optgroup>
+        </select>
+    <input type="submit" text="Отправить">
+    </form>
+</div>
+</body>
+</html>

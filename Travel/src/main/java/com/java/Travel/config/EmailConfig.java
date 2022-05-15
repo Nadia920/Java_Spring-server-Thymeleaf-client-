@@ -1,11 +1,12 @@
 package com.java.Travel.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @PropertySource("classpath:application.yml")
-@Component
+@Configuration
 public class EmailConfig {
 
     @Value("${spring.mail.host}")

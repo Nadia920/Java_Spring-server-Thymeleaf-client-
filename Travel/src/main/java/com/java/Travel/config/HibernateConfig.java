@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-@Component
 @Configuration
 @ComponentScan(basePackages = "com.java.Travel")
 @EnableTransactionManagement

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Incident | Add</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="jquery.datetimepicker.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="tail.select-bootstrap4.css">
+    <!--link type="text/css" rel="stylesheet" th:href="@{/static/select/bootstrap4/tail.select-default.min.css}" /-->
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" >
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.css}" >
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.min.css}" >
+    <script th:src="@{/static/select/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!--<div th:replace="home/adminHeader :: acss"></div>-->
+    <!--div th:replace="header :: header-css"/-->
+</head>
+<body>
+<!--<form action="TestDiffIncident" method="post">-->
+    <h3>Первое действие, если загорелась техника</h3>
+    <input type="radio" id="contactChoice1"
+           name="test1" value="No">
+    <label for="contactChoice1">Накрыть полотенцем</label>
+
+    <input type="radio" id="contactChoice2"
+           name="test1" value="Yes">
+    <label for="contactChoice2">Отключить от электричества</label>
+
+    <input type="radio" id="contactChoice3"
+           name="test1" value="No">
+    <label for="contactChoice3">Покинуть помещение</label>
+    <h3>Первое действие если потерялся</h3>
+    <input type="radio" id="contactChoice2_1"
+           name="test2" value="No">
+    <label for="contactChoice1">Оставаться на том же месте</label>
+
+    <input type="radio" id="contactChoice2_2"
+           name="test2" value="No">
+    <label for="contactChoice2">Попытаться спросить прохожих</label>
+
+    <input type="radio" id="contactChoice2_3"
+           name="test2" value="Yes">
+    <label for="contactChoice3">Попытать найти представителей правоохранительных органов</label>
+    <h3>Первое действие если чувствуешь предобморочное состояние</h3>
+    <input type="radio" id="contactChoice3_1"
+           name="test3" value="Yes">
+    <label for="contactChoice1">Принять лежачее положение</label>
+
+    <input type="radio" id="contactChoice3_2"
+           name="test3" value="No">
+    <label for="contactChoice2">Медленно идти и восстанавливать дыхание</label>
+
+    <h3>Первое действие если застрял в лифте</h3>
+    <input type="radio" id="contactChoice4_1"
+           name="test4" value="Yes">
+    <label for="contactChoice4_1">Вызвать на помощь спасателей </label>
+
+    <input type="radio" id="contactChoice4_2"
+           name="test4" value="No">
+    <label for="contactChoice4_2">Попытаться открыть двери лифта самостоятельно</label>
+
+    <h3>Первое действие, если чувствуешь неприятный запах</h3>
+    <input type="radio" id="contactChoice5_1"
+           name="test5" value="No">
+    <label for="contactChoice5_1">Открыть окна</label>
+
+    <input type="radio" id="contactChoice5_2"
+           name="test5" value="Yes">
+    <label for="contactChoice5_2">Покинуть помещение</label>
+    <input type="submit" value="Ответить">
+<!--</form>-->
+<script src="../../static/js.js"></script>
+<h5>Ваш результат равен 100 процентов</h5>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/Incidents/addI" method="post" obj="${obj}">
+    <p>Выберите название инцидента</p>
+    <div>
+        <select class="form-control col-lg-auto " name="idReportIncident"  id="select1"  required  >
+            <optgroup th:each="incident : ${incidents}" >
+                <option th:value="${incident.id}"  th:text="${incident.incidentName}"> </option>
+            </optgroup>
+        </select>
+    </div>
+    <button type="submit">Отправить</button>
+</form>
+</body>
+</html>

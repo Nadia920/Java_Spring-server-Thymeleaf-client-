@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="form-group">
+    <form th:href="@{/PageIncidentsAdd}" method="post" th:object=${obj}>
+        <p th:text = {text.incident_category}></p>
+        <select name="incident_category" value="" ></select>
+        <select th:each="category : ${categories}" class="form-control col-lg-auto "   id="select2"  name="category" required  >
+            <option  th:value="${category.id}"  th:text="${category.CategoryName}"> </option>
+        </select>
+        <p th:text=#{text.incident_name} ></p>
+        <select name="incident_name" name="incidentName"></select>
+        <p th:text=#{text.incident_solution}></p>
+        <input name="{text.incident_solution}" name="incidentSolution">
+        <p th:text=#{text.incident_reaction}></p>
+        <input name="{text.incident_reaction}" name="reaction">
+    <p th:text=#{text.incident_comments}></p>
+    <input name="{text.incident_comments}" name="comments">
+    <p th:text=#{text.prevention_measures}></p>
+    <input name="{text.prevention_measures}" name="preventionMeasures">
+    <select th:each="detachment : ${detachments}" class="form-control col-lg-auto "   id="select3"  name="detachmentEntity" required  >
+        <option  th:value="${detachment.id}"  th:text="${category.detachmentName}"> </option>
+    </select>
+    <input type="submit" text="Отправить">
+    </form>
+</div>
+</body>
+</html>
