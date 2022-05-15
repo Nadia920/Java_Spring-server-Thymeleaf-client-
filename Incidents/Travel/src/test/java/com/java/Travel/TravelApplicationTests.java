@@ -1,8 +1,13 @@
 package com.java.Travel;
 
 import com.java.Travel.controller.dto.CompanyDTO;
+import com.java.Travel.controller.dto.IncidentDTO;
+import com.java.Travel.controller.dto.TestDTO;
+import com.java.Travel.model.AppRating;
 import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.DetachmentEntity;
+import com.java.Travel.model.EmployeeEntity;
+import com.java.Travel.model.FixedDetachmentsEntity;
 import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.model.UserEntity;
 import com.java.Travel.repository.AppRatingRepository;
@@ -31,13 +36,26 @@ import com.java.Travel.service.ServiceImpl.UserServiceImpl;
 import com.java.Travel.service.TestsService;
 import com.java.Travel.service.UserService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import static org.mockito.Mockito.times;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -283,34 +301,33 @@ public class TravelApplicationTests {
 
     @Test
     public void findAllPageable() {
-        pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
+        Pageable pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
         Page<CompanyEntity> companyEntities = new PageImpl<>(Arrays.asList(
                 new CompanyEntity("IT")));
 
         companyEntities = companyRepo.findAll((org.springframework.data.domain.Pageable) pageable);
-        Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll((org.springframework.data.domain.Pageable) pageable);
+        Page<CompanyEntity> expectedCompanyEntitiesList = companyServ.findAll((org.springframework.data.domain.Pageable) pageable);
 
         assertEquals(expectedCompanyEntitiesList.get().count(), 4);
-        verify(companyRepo, times(1)).findAll(pageable);
     }
 
     @Test
     public void findAllIsEmpty() {
-        pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
+        Pageable pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
         Page<CompanyEntity> companyEntities = new PageImpl<>(new ArrayList<>());
 
         companyEntities = companyRepo.findAll((org.springframework.data.domain.Pageable) pageable);
-        Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll((org.springframework.data.domain.Pageable) pageable);
+        Page<CompanyEntity> expectedCompanyEntitiesList = companyServ.findAll((org.springframework.data.domain.Pageable) pageable);
 
         assertThat(expectedCompanyEntitiesList).isEmpty();
     }
 
     @Test
     public void findAllIsNull() {
-        pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
+        Pageable pageable = (Pageable) PageRequest.of(0, 4, Sort.by("companyName").ascending());
 
-        companyRepo.findAll1((org.springframework.data.domain.Pageable) pageable);
-        Page<CompanyEntity> expectedCompanyEntitiesList = companyService.findAll((org.springframework.data.domain.Pageable) pageable);
+        companyRepo.findAll((org.springframework.data.domain.Pageable) pageable);
+        Page<CompanyEntity> expectedCompanyEntitiesList = companyServ.findAll((org.springframework.data.domain.Pageable) pageable);
 
         assertThat(expectedCompanyEntitiesList).isNull();
     }
@@ -356,7 +373,7 @@ public class TravelApplicationTests {
         IncidentsEntity incidentEntity1 = new IncidentsEntity();
         IncidentsEntity incidentEntity2 = new IncidentsEntity();
         list = incidentRepo.getIncidentsFalse(name);
-        List<IncidentDTO> actualIncident = incidentServ.getIncidentsFalse("False");
+        List<IncidentsEntity> actualIncident = incidentServ.getIncidentsFalse("False");
     }
     @Test
     public void getIncidentFalse2() {
@@ -370,7 +387,7 @@ public class TravelApplicationTests {
         List<IncidentsEntity> list = new ArrayList<>();
         IncidentsEntity incidentEntity1 = new IncidentsEntity();
         list = incidentRepo.getIncidentsTrue(name);
-        List<IncidentDTO> actualIncident = incidentServ.getIncidentsTrue("True");
+        List<IncidentsEntity> actualIncident = incidentServ.getIncidentsTrue("True");
         assertEquals(1, actualIncident.size());
     }
     @Test
