@@ -1,5 +1,6 @@
 package com.java.Travel;
 
+import com.java.Travel.controller.dto.CompanyDTO;
 import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.DetachmentEntity;
 import com.java.Travel.model.IncidentsEntity;
@@ -29,6 +30,9 @@ import com.java.Travel.service.ServiceImpl.TestsServiceImpl;
 import com.java.Travel.service.ServiceImpl.UserServiceImpl;
 import com.java.Travel.service.TestsService;
 import com.java.Travel.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -110,8 +114,9 @@ public class TravelApplicationTests {
         incidentRepo.save(new IncidentsEntity("2", "2"));
         incidentRepo.save(new IncidentsEntity("3", "3"));
     }
+    
 
-   /*@Test
+   @Test
     public void findAllUsers() {
         List<UserEntity> expacted = new ArrayList<>();
         expacted.add(new UserEntity());
@@ -253,14 +258,7 @@ public class TravelApplicationTests {
 
         assertEquals(false, actual);
     }
-    
-    private IncidentService incidentServ;
-
-    private DetachmentService detachmentServ;
-
-    private CompanyService companyServ;
-
-    private UserService userServ;
+ 
 
     
     @Test
@@ -627,5 +625,5 @@ public class TravelApplicationTests {
           ProblemService problemservice1 = new ProblemServiceImpl(problemsRepository);
     }
 
-    */
+    
 }

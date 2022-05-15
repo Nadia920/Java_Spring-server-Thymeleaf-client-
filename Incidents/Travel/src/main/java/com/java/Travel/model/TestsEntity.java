@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class TestsEntity extends BaseEntity {
 
+    static Integer number;
     @NotNull
     @Column(name = "topic", length = 15)
     private String topic;
