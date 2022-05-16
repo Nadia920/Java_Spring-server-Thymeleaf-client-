@@ -54,8 +54,6 @@ public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
     private Set<AppRating> appRating;
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
-    private Set<ResultsEntity> resultsEntity;
-    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
     private Set<IncidentsEntity> incidentsEntity;
 
     public UserEntity(UserEntity user) {
@@ -84,6 +82,20 @@ public class UserEntity extends BaseEntity {
         this.companyEntity = companyEntity;
     }
 
+    /**
+     *
+     * @param login
+     * @param email
+     * @param password
+     * @param firstName
+     * @param lastName
+     * @param patronymic
+     * @param phoneNumber
+     * @param incidents
+     * @param appRating
+     * @param roleEntity
+     * @param companyEntity
+     */
     public UserEntity(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<IncidentsEntity> incidents, Set<AppRating> appRating, RoleEntity roleEntity, CompanyEntity companyEntity) {
         this.login = login;
         this.email = email;
@@ -98,20 +110,6 @@ public class UserEntity extends BaseEntity {
         this.companyEntity = companyEntity;
     }
 
-    public UserEntity(@NotNull String login, String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, @NotNull String patronymic, @NotNull String phoneNumber, Set<IncidentsEntity> incidents, Set<AppRating> appRating, Set<ResultsEntity> results, RoleEntity roleEntity, CompanyEntity companyEntity) {
-        this.login = login;
-        this.email = email;
-        this.password = password;
-        this.firstNameUser = firstName;
-        this.lastNameUser = lastName;
-        this.patronymicUser = patronymic;
-        this.phoneNumber = phoneNumber;
-        this.incidentsEntity = incidents;
-        this.appRating = appRating;
-        this.resultsEntity = results;
-        this.roleEntity = roleEntity;
-        this.companyEntity = companyEntity;
-    }
 
     public UserEntity(String string, String string0, String string1, String string2) {
         this.login = string;

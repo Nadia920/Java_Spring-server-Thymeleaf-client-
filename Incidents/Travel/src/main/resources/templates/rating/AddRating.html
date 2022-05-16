@@ -19,7 +19,7 @@
     <!--<div th:replace="home/adminHeader :: acss"></div>-->
     <!--div th:replace="header :: header-css"/-->
 </head>
-    <body>
+    <body class = "content">
         <form action="/add/rating" method="post" th:object="${obj}">
         <p th:text=#{text.value}></p>
         <input name="Value">

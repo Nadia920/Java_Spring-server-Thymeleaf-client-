@@ -17,23 +17,18 @@ import com.java.Travel.repository.EmployeeRepository;
 import com.java.Travel.repository.FixedDetachmentsRepository;
 import com.java.Travel.repository.IncidentEntityRepository;
 import com.java.Travel.repository.ProblemsRepository;
-import com.java.Travel.repository.TestsRepository;
 import com.java.Travel.repository.UserEntityRepository;
 import com.java.Travel.service.AppRatingService;
 import com.java.Travel.service.CompanyService;
 import com.java.Travel.service.DetachmentService;
 import com.java.Travel.service.FixedDetachmentsService;
 import com.java.Travel.service.IncidentService;
-import com.java.Travel.service.ProblemService;
 import com.java.Travel.service.ServiceImpl.AppRatingServiceImpl;
 import com.java.Travel.service.ServiceImpl.CompanyServiceImpl;
 import com.java.Travel.service.ServiceImpl.DetachmentServiceImpl;
 import com.java.Travel.service.ServiceImpl.FixedDetachmentsServiceImpl;
 import com.java.Travel.service.ServiceImpl.IncidentServiceImpl;
-import com.java.Travel.service.ServiceImpl.ProblemServiceImpl;
-import com.java.Travel.service.ServiceImpl.TestsServiceImpl;
 import com.java.Travel.service.ServiceImpl.UserServiceImpl;
-import com.java.Travel.service.TestsService;
 import com.java.Travel.service.UserService;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,8 +63,6 @@ public class TravelApplicationTests {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
-    private TestsRepository testsRepository;
-    @Autowired
     private AppRatingRepository appRatingRepository;
     @Autowired
     private ProblemsRepository problemsRepository;
@@ -89,8 +82,6 @@ public class TravelApplicationTests {
 
     private CompanyService companyServ;
 
-    private TestsService testServiceImpl;
-
     private AppRatingService appRatingServiceImpl;
 
     private DetachmentService detachmentServ;
@@ -101,20 +92,15 @@ public class TravelApplicationTests {
 
     private UserService userServ;
     
-    private ProblemService problemServiceImpl;
-    
-  
-
+ 
     @BeforeEach
     public void init() {
         userServ = new UserServiceImpl(userRepo);
         companyServ = new CompanyServiceImpl(companyRepo);
         detachmentServ = new DetachmentServiceImpl(detachmentRepo);
         incidentServ = new IncidentServiceImpl(incidentRepo);
-        testServiceImpl = new TestsServiceImpl(testsRepository);
         appRatingServiceImpl = new AppRatingServiceImpl(appRatingRepository);
         fixedDetachmentServiceImpl = new FixedDetachmentsServiceImpl(fixedDetachmentsRepository);
-        problemServiceImpl = new ProblemServiceImpl(problemsRepository);
 
         userRepo.save(new UserEntity("1", "1", "1", "1"));
         userRepo.save(new UserEntity("2", "2", "2", "2"));
@@ -400,31 +386,19 @@ public class TravelApplicationTests {
     public void addFixDetachment() {
         List<CompanyEntity> list = new ArrayList<>();
         list = companyRepo.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о компаниях пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addFixDetachment2() {
         List<DetachmentEntity> list = new ArrayList<>();
         list = detachmentRepo.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о командах пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addDetachment() {
         List<EmployeeEntity> list = new ArrayList<>();
         list = employeeRepository.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addDetachment2() {
@@ -439,123 +413,55 @@ public class TravelApplicationTests {
                 .map(Map.Entry::getKey)
                 //собираем в список
                 .collect(Collectors.toList());
-        if(duplicates.isEmpty()){
-            System.out.println("В базе данных есть дубликаты имён компаний, пожалуйста, исправьте");
-        } else {
-            System.out.println("В базе данных нет дубликатов");
-        }
+
+        assertEquals(duplicates, null);
+
     }
     @Test
     public void addReport() {
         List<IncidentsEntity> list = new ArrayList<>();
         list = incidentRepo.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addReport2() {
         Long id = 1L;
         String a = incidentRepo.getIncidentsReactionByID(id);
-        if (a == null){
-            System.out.println("Данные о реакции на данный инцидент ещё не поступили ");
-        } else {
-            System.out.println("Всё отлично. Получите отчёт");
-        }
+        assertEquals(a, null);
     }
-    @Test
-    public void TestDiffIncident() {
-        Integer number = 3;
-        if(number == 3){
-            System.out.println("Вы идеальный знаток");
-        } else {
-            System.out.println("Вы набрали меньше, чем нужно, попробуйте снова");
-        }
-    }
-    @Test
-    public void TestDiffIncident2() {
-        TestDTO tests = new  TestDTO();
-        if (testServiceImpl.save(tests)) {
-            System.out.println("Сохранение в бд произошло успешно");
-        }
-        else
-        {
-            System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }
-    }
-    @Test
-    public void TestMoment() {
-        Integer number = 3;
-        if(number == 3){
-            System.out.println("Вы идеальный знаток");
-        } else {
-            System.out.println("Вы набрали меньше, чем нужно, попробуйте снова");
-        }
-    }
-    @Test
-    public void TestMoment2() {
-        TestDTO testsDTO = new TestDTO();
-        if (testServiceImpl.save(testsDTO)) {
-            System.out.println("Сохранение в бд произошло успешно");
-        }
-        else
-        {
-            System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }
-    }
+
+
     @Test
     public void addProblem() {
         List<EmployeeEntity> list = new ArrayList<>();
         list = employeeRepository.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о сотрудниках пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addProblem2() {
         String name = null;
 
         DetachmentEntity obj = detachmentRepo.findDetachmentEntityByDetachmentName(name);
-        if(!(obj == null)){
-            System.out.println("Данных есть, выполнение действия возможно");
-        } else {
-            System.out.println("Информации о такой команде помощи нет в бд, проверьте правильность введённого названия");
-        }
+        assertEquals(obj, null);
     }
     @Test
     public void findIncidents() {
         List<IncidentsEntity> list = new ArrayList<>();
         list = incidentRepo.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о инцидентах пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void findIncidentsByIncidentName() {
         String name = "IT";
         IncidentsEntity obj = new IncidentsEntity();
         obj =incidentRepo.findIncidentEntityByIncidentName(name);
-        if(obj == null){
-            System.out.println("Информации о такой команде помощи нет в бд, проверьте правильность введённого названия");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(obj, null);
     }
     @Test
     public void tryFixDetachment() {
         List<DetachmentEntity> list = new ArrayList<>();
         list = detachmentRepo.findAll();
-        if(list.isEmpty()){
-            System.out.println("База данный о командах пуста. Данных для выбора нет, введите, пожалуйста, данные");
-        } else {
-            System.out.println("Данных есть, выполнение действия возможно");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void tryFixDetachment2() {
@@ -576,35 +482,19 @@ public class TravelApplicationTests {
     public void addIncident2() {
         String name = new String();
        IncidentsEntity obj = incidentRepo.findIncidentEntityByIncidentName(name);
-        IncidentsEntity Null = null;
-        if (obj != Null) {
-            System.out.println("Инцидент с таким именем уже есть, посмотрите, пожалуйста, первую помощь при возникновении данного инцидента");
-        }
-        else
-        {
-            System.out.println("Ваш инцидент уникален. Заявка принята. Пожалуйста, ожидайте помощи");
-        }
+
+        assertEquals(obj, null);
     }
     @Test
     public void addRating() {
         List<AppRating> list = new ArrayList<>();
         list = appRatingRepository.findAll();
-        if(list.isEmpty()){
-            System.out.println("Данное приложение ещё никто не оценивал, Вы будете первым");
-        } else {
-            System.out.println("Вы можете посмотреть, как оценили данное приложение другие пользователи");
-        }
+        assertEquals(list, null);
     }
     @Test
     public void addRating2() {
         AppRating obj = new  AppRating();
-        if (appRatingServiceImpl.save(obj)) {
-            System.out.println("Запись в бд произошла успешно");
-        }
-        else
-        {
-            System.out.println("Произошла ошибка при сохранении данных в бд, попробуйте снова");
-        }
+        assertEquals(obj, null);
     }
     @Test
     public void login() {
@@ -632,15 +522,7 @@ public class TravelApplicationTests {
     public void registration2() {
         String name = "Nadja";
         UserEntity a = userRepo.findByLogin(name);
-        if (a != null) {
-            System.out.println("Пользователь с таким логином уже существует");
-        }
+        assertEquals(a, new UserEntity());
     }
-    
-    @Test
-    public void test1() {
-          ProblemService problemservice1 = new ProblemServiceImpl(problemsRepository);
-    }
-
     
 }

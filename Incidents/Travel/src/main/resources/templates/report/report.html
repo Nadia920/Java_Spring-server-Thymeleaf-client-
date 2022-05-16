@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Отчёт</title>
+    <link  rel="stylesheet" type="text/css" th:href="@{../../static/css/style.css}" >
 </head>
-<body>
+<body class="content">
 <form action="/Incidents/addI" method="post" obj="${obj}">
     <p>Выберите название инцидента</p>
     <div>
-        <select class="form-control col-lg-auto " name="idReportIncident"  id="select1"  required  >
+        <select class="form-control col-lg-auto " name="idReportIncident"  id="select1"  class="select" name="incident" required  >
             <optgroup th:each="incident : ${incidents}" >
                 <option th:value="${incident.id}"  th:text="${incident.incidentName}"> </option>
             </optgroup>
@@ -16,5 +17,6 @@
     </div>
     <button type="submit">Отправить</button>
 </form>
+<script src="../../static/script/script.js" type="text/javascript"></script>
 </body>
 </html>

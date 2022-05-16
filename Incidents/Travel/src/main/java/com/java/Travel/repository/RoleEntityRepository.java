@@ -1,7 +1,7 @@
 package com.java.Travel.repository;
 
 
-import com.java.Travel.model.ResultsEntity;
+
 import com.java.Travel.model.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
