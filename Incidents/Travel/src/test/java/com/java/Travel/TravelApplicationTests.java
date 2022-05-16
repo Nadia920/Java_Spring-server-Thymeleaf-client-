@@ -1,8 +1,6 @@
 package com.java.Travel;
 
 import com.java.Travel.controller.dto.CompanyDTO;
-import com.java.Travel.controller.dto.IncidentDTO;
-import com.java.Travel.controller.dto.TestDTO;
 import com.java.Travel.model.AppRating;
 import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.DetachmentEntity;
@@ -507,9 +505,7 @@ public class TravelApplicationTests {
     public void login2() {
         String name = "Nadja";
         UserEntity a = userRepo.findByLogin(name);
-        if (a != null) {
-            System.out.println("Пользователь с таким логином уже существует");
-        }
+        assertEquals(null, a);
 
     }
     @Test
