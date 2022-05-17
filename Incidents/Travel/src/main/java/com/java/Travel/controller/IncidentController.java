@@ -12,15 +12,15 @@ import com.java.Travel.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -102,7 +102,7 @@ public class IncidentController {
    
     @GetMapping("/search")
     public String search(Model model, @RequestParam(name = "search") String a) {
-        System.out.println("12121212");
+
         List<IncidentsEntity> list = incidentService.findIncidentName(a);
         model.addAttribute("incidents", list);
         return "Incidents/showIncidents";
@@ -114,7 +114,7 @@ public class IncidentController {
         model.addAttribute("incidentLogs", incidentList.size() != 0 ? incidentList : null);
         return "Incidents/showIncidentLog";
     }
-    
+
     @GetMapping("/addIncidentLog")
     public String addLog(Model model) {
         List<CategoryEntity> categoryDTOList = categoryService.findAll();
@@ -123,12 +123,22 @@ public class IncidentController {
         model.addAttribute("obj", new IncidentLog());
         return "Incidents/PageIncidentLogAdd";
     }
-    
- 
-    @GetMapping("/saveNewInLog")
-    public String  addLog(Model model, IncidentLog incidentLog) {
-        incidentLogService.save(incidentLog);
+
+
+    @PostMapping(value = "/saveNewInLog", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String addLog(@RequestBody MultiValueMap<String, String> values) {
+//      
+        System.out.println(values);
+//        incidentLogService.save(incidentLog);
         return "redirect:/";
+    }
+
+    @GetMapping("/searchLog")
+    public String searchLog(Model model, @RequestParam(name = "search") String a) {
+
+        List<IncidentLog> list = incidentLogService.findIncidentName(a);
+        model.addAttribute("incidents", list);
+        return "Incidents/showIncidents";
     }
     
 }

@@ -17,15 +17,12 @@ public class AppRating extends BaseEntity {
 
     @NotNull
     @Column(name = "value", length = 15)
-    private Number Value;
-    @NotNull
-    @Column(name = "final_value", length = 15)
-    private Number FinalValue;
+    private String Value;
+
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "rating_users_id")
     private UserEntity userEntity;
-
 
     public static AppRating values(){
         AppRating app = new AppRating();

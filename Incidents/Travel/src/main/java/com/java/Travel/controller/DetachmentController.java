@@ -35,7 +35,7 @@ public class DetachmentController {
     @Autowired
     private DetachmentService detachmentsService;
     @Autowired
-    private CompanyService compamyService;
+    private CompanyService companyService;
 
     @GetMapping("/addDetachment")
     public String addDetachment(Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
@@ -76,28 +76,30 @@ public class DetachmentController {
     public String addFixDetachment(Model model) {
         List<DetachmentEntity> l = detachmentsService.all();
         model.addAttribute("detachments", l.size() != 0 ? l : null);
-        List<CompanyDTO> companyDTOList = compamyService.findAll();
+        List<CompanyDTO> companyDTOList = companyService.findAll();
         model.addAttribute("companies", companyDTOList.size() != 0 ? companyDTOList : null);
         model.addAttribute("obj", new FixedDetachmentsEntity());
         return "/FixedDetachment/AddFixedDetachment";
     }
     @PostMapping("/chooseDetachment")
-    public void chooseDetachment(DetachmentEntity obj) {
+    public String chooseDetachment(DetachmentEntity obj) {
         System.out.println(obj);
         detachmentsService.save(obj);
+        return "redirect:/";
+
     }
     @PostMapping("/AddFix")
     public String addFix(FixedDetachmentsEntity obj) {
         System.out.println(obj.getCompanyEntity().getId() + " " + obj.getDetachmentEntity().getId());
         DetachmentEntity d = detachmentsService.findById(obj.getDetachmentEntity().getId());
-        CompanyEntity c = compamyService.findById(obj.getCompanyEntity().getId());
+        CompanyEntity c = companyService.findById(obj.getCompanyEntity().getId());
         Set<FixedDetachmentsEntity> a = d.addFixedDetachments(obj);
         Set<FixedDetachmentsEntity> b = c.addFixedDetachments(obj);
         d.setFixedDetachments(a);
         c.setFixedDetachments(b);
         System.out.println(a.isEmpty());
         detachmentsService.save(d);
-        compamyService.save(c);
+        companyService.save(c);
         obj.setId(1L);
         obj.setDetachmentEntity(d);
         obj.setCompanyEntity(c);
@@ -107,3 +109,4 @@ public class DetachmentController {
     }
 
 }
+//значи добавление реализовано неверно. Там он id вставлять сам не хочет ., постоянно null

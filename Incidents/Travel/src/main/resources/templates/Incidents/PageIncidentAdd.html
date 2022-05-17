@@ -8,11 +8,14 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
 
     <title>Incidents</title>
+    <div th:replace="headerWhenSign_in :: acss"></div>
 </head>
 <body>
+
 <div class="form-group">
     <div class="wrapper">
-    <form action="/Incident/saveNewInLog" method="post" th:object=${obj}>
+    <form action="/Incidents/PageIncidentsAdd" method="post" th:object=${obj}>
+
         <p th:text =#{text.category}></p>
         <select class="form-control col-lg-auto "   id="select1"  name="category.id" required>
               <optgroup th:each="category : ${categories}" >
@@ -24,7 +27,7 @@
         <p th:text=#{text.preventionMeasures}></p>
         <input name="preventionMeasures">
         <p th:text =#{text.detachmentEntity}></p>
-        <select class="form-control col-lg-auto "   id="select1"  name="detachmentEntity.id" required>
+        <select class="form-control col-lg-auto "   id="select2"  name="detachmentEntity.id" required>
               <optgroup th:each="detachment : ${detachments}" >
             <option  th:value="${detachment.id}"  th:text="${detachment.detachmentName}"> </option>
               </optgroup>

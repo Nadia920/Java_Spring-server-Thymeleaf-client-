@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class HomeController {
@@ -50,22 +51,21 @@ public class HomeController {
 
     @GetMapping(value = "/home")
     public String getHomeView(Model model, @AuthenticationPrincipal CustomUserDetail currentUser) {
-//        model.addAttribute("id", currentUser.getId());
+       model.addAttribute("id", currentUser.getId());
         return "home/home";
     }
 
     @GetMapping(value = "/")
     public String index(Model model) {
-        /*model.addAttribute("countries", countryService.findAll(Sort.by("name").ascending()));*/
         return "index";
-        /*return "waq";*/
+
     }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-
+//ссылки верные возвращает? на обработку события на кнопку. вроде да, давай глянем
     /*@GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -108,8 +108,18 @@ public class HomeController {
         return "/home/MenuUser";
     }
 
+    @PostMapping("/MenuUser")
+    public String MenuUser1() {
+        return "/home/MenuUser";
+    }
+
     @GetMapping("/MenuAdmin")
     public String MenuAdmin() {
+        return "/home/MenuAdmin";
+    }
+
+    @PostMapping("/MenuAdmin")
+    public String MenuAdmin1() {
         return "/home/MenuAdmin";
     }
 
@@ -131,12 +141,14 @@ public class HomeController {
     }
     
     @PostMapping("/add/rating")
-    public String addAppRating(AppRating obj) {
+    public String addAppRating(@RequestBody AppRating obj, @AuthenticationPrincipal CustomUserDetail currUser) {
         UserDetails userInfo = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity user = userService.findByLogin1(userInfo.getUsername());
         obj.setUserEntity(user);
+        System.out.println(obj);
         addRatingService.save(obj);
-        return "rating/addRating";
+        /*return "rating/addRating";*/
+        return "redirect:/";
     }
    
 }

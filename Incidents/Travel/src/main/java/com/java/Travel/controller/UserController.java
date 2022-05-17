@@ -51,7 +51,7 @@ public class UserController {
         model.addAttribute("users", users.size() == 0 ? null : users);
         return "user/showUsers";
     }
-
+//регистарции нету?
     @PreAuthorize("hasAnyRole('ADMIN', 'WORKER')")
     @GetMapping(path = "/delete")
     public String deleteEmployeeById(Model model,

@@ -36,7 +36,13 @@ public class IncidentLog extends BaseEntity{
     @NotNull
     @Column(name = "unique_number", length = 15)
     private String uniqueNumber;
-    
+    @NotNull
+    @Column(name = "log_incidents_dangerlevel", length = 15)
+    private Long dangerLevel;
+    @NotNull
+    @Column(name = "log_incidents__priority", length = 15)
+    private Long priority;
+
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "log_incidents_category_id")
     private CategoryEntity category;

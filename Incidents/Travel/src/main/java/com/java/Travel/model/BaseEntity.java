@@ -11,8 +11,9 @@ import javax.persistence.*;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
+    /*@Column(columnDefinition = "id)*/
     private Long id;
 
     public BaseEntity(Long id) {
@@ -22,7 +23,7 @@ public abstract class BaseEntity {
     public BaseEntity() {
     }
 
-
+//хрен знает у меня так же
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("BaseEntity{");

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.w3.org/1999/xhtml">
-
+      <div th:replace="headerWhenSign_in :: acss"></div>
     <head>
         <meta charset="utf-8">
             <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -20,8 +20,14 @@
                                             <div th:switch="${incidentLogs}" class = "content">
 
                                                 <p></p>
-                                                <div >
-
+                                                <div
+>
+                                                    <div class="search">
+                                                        <form action="/Incidents/searchLog" method="get">
+                                                            <input type="text" placeholder="Имя инцидента" name="search">
+                                                            <button href="/Incidents/search" type="submit">Поиск</button>
+                                                        </form>
+                                                    </div>
                                                         <div th:case="*">
                                                             <table class="table table-hover" style="margin-left: -5px">
                                                                 <thead>
@@ -30,6 +36,8 @@
                                                                         <th>Описание инцидента</th>
                                                                         <th>Уникальный номер инцидента</th>
                                                                         <th>Категория</th>
+                                                                        <th>Уровень опасности</th>
+                                                                        <th>Приоритет</th>
                                                                         <th>Пользователь</th>
                                                                     </tr>
                                                                 </thead>
@@ -39,6 +47,8 @@
                                                                         <td th:text="${incident.descriptionIncident}"></td>
                                                                         <td th:text="${incident.uniqueNumber}"></td>
                                                                         <td th:text="${incident.category.CategoryName}"></td>
+                                                                        <td th:text="${incident.dangerLevel}"></td>
+                                                                        <td th:text="${incident.priority}"></td>
                                                                         <td th:text="${incident.userEntity.firstNameUser}"></td>
                                                                     </tr>
                                                                 </tbody>

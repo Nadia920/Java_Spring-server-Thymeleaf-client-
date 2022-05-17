@@ -6,7 +6,10 @@ package com.java.Travel.service;
 
 import com.java.Travel.model.IncidentLog;
 import java.util.List;
+
+import com.java.Travel.model.IncidentsEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -16,6 +19,10 @@ import org.springframework.stereotype.Service;
 public interface  IncidentLogService {
     
       List<IncidentLog> findALL();
-      void save(IncidentLog incidentLog);
+
+
+      boolean save(IncidentLog incidentLog);
+
+      List<IncidentLog> findIncidentName(String name1);
    
 }
