@@ -86,8 +86,16 @@ public class IncidentServiceImpl implements IncidentService {
 
     @Override
     public List<IncidentsEntity> findIncidentName(String name) {
-        List<IncidentsEntity> incidentEntities = incidentRepository.getIncidentsByIncidentName(name);
-        return incidentEntities;
+        List<IncidentsEntity> all = incidentRepository.findAll();
+        List<IncidentsEntity> need = new ArrayList<>();
+
+        for (IncidentsEntity i : all) {
+            if (i.getIncidentName().contains(name)) {
+                need.add(i);
+            }
+        }
+
+        return need;
     }
 
     @Override

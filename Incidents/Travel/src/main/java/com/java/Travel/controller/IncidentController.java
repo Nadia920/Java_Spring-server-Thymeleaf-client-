@@ -42,14 +42,7 @@ public class IncidentController {
      @Autowired
     private IncidentLogService incidentLogService;
     
- 
 
-    /*@GetMapping("/showMyIncidents")
-    public String showIncident(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status, Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
-        List<IncidentDTO> incidentDTOList = incidentService.getOrdersByUserIdAndStatus(currUser.getId(), status);
-        model.addAttribute("incidents", incidentDTOList.size() != 0 ? incidentDTOList : null);
-        return "withrole/client/myIncidents";
-    }*/
 
     @GetMapping("/showIncidentsFalse")
     public String showIncidentFalse(/*@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status,*/Model model /*, @AuthenticationPrincipal CustomUserDetail currUser*/) {
@@ -108,7 +101,8 @@ public class IncidentController {
     }
    
     @GetMapping("/search")
-    public String search(Model model, String a) {
+    public String search(Model model, @RequestParam(name = "search") String a) {
+        System.out.println("12121212");
         List<IncidentsEntity> list = incidentService.findIncidentName(a);
         model.addAttribute("incidents", list);
         return "Incidents/showIncidents";
