@@ -1,0 +1,10 @@
+.form-group {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    border: 2px solid grey;
+    border-radius: 20px;
+    padding: 20px
+}
+
+

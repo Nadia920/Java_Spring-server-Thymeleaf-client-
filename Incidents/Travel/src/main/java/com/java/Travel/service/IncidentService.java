@@ -21,7 +21,7 @@ public interface IncidentService {
 
     List<IncidentDTO> getIncidents();
 
-    List<IncidentDTO> getIncidentsByIncidentName(String name1);
+    List<IncidentsEntity> findIncidentName(String name1);
 
     String getIncidentsReactionByID(Long id);
 

@@ -85,12 +85,9 @@ public class IncidentServiceImpl implements IncidentService {
     }
 
     @Override
-    public List<IncidentDTO> getIncidentsByIncidentName(String name1) {
-        String name = name1;
+    public List<IncidentsEntity> findIncidentName(String name) {
         List<IncidentsEntity> incidentEntities = incidentRepository.getIncidentsByIncidentName(name);
-        return incidentEntities.stream()
-                .map(c -> new IncidentDTO(c.getId(), c.getIncidentName(), c.getIncidentSolution(), c.getReaction(), c.getComments(), c.getPreventionMeasures(), c.getStatus(), c.getCategory(), c.getUserEntity(), c.getDetachmentEntity()))
-                .collect(Collectors.toList());
+        return incidentEntities;
     }
 
     @Override

@@ -16,6 +16,8 @@ import java.util.Set;
 public class CategoryEntity extends BaseEntity {
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private Set<IncidentsEntity> incidents;
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    private Set<IncidentLog> incidentsLog;
 
     @NotNull
     @Column(name = "category_name", length = 15)

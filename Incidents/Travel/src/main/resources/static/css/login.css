@@ -1,4 +1,10 @@
-/*sign-in*/
+.main {
+position: absolute;
+    top: 25%;
+    left: 38%;
+    }
+/*sign-in*//*
+
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 body{
@@ -43,4 +49,4 @@ body{
 {
     margin-left: 0;
     margin-right: 0;
-}
+}*/

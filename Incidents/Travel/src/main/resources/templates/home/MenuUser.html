@@ -13,6 +13,7 @@
     <!--link type="text/css" rel="stylesheet" th:href="@{/static/select/bootstrap4/tail.select-default.min.css}" /-->
     <link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" >
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.min.css}" >
     <script th:src="@{/static/select/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -21,21 +22,19 @@
 </head>
 <body>
 
-<p>Возможности</p>
+<div class="grid text-center">
+<h1>Возможности</h1>
 
 <a href="/problems/ProblemsAdd"><button class="button2" tabindex="0" style="margin: 4px"> 1 - Связь с членом команды помощи для решения возникших вопросов </button></a>
 
-<a href="/tests/TestDiffIncident"><button  class="button2" tabindex="0" style="margin: 4px"> 2 - Пройти тест "Знаешь ли ты, что делать при различных инцидентах" </button></a>
+<a href="/Incidents/showAllIncidents"><button  class="button2" tabindex="0" style="margin: 4px"> 2 - Поиск нужных действий при различных инцидентах </button></a>
 
-<a href="/Incidents/showAllIncidents"><button  class="button2" tabindex="0" style="margin: 4px"> 3 - Поиск нужных действий при различных инцидентах </button></a>
+<a href="/detachment/AddFixDetachment"><button  class="button2" tabindex="0" style="margin: 4px"> 3 - Отправить заявку на закрепление определённого отряда помощи за этим предприятием </button></a>
 
-<a href="/detachment/AddFixDetachment"><button  class="button2" tabindex="0" style="margin: 4px"> 4 - Отправить заявку на закрепление определённого отряда помощи за этим предприятием </button></a>
+<a href="/Incidents/addIncident"><button  class="button2" tabindex="0" style="margin: 4px"> 4 - Подать заявление о инциденте </button></a>
 
-<a href="/Incidents/addIncident"><button  class="button2" tabindex="0" style="margin: 4px"> 5 - Подать заявление о инциденте </button></a>
+<a href="/showAppRating"><button  class="button2" tabindex="0" style="margin: 4px"> 5 - Оценить приложение </button></a>
 
-<a href="/showAppRating"><button  class="button2" tabindex="0" style="margin: 4px"> 6 - Оценить приложение </button></a>
-
-<a href="/tests/TestMoments"><button  class="button2" tabindex="0" style="margin: 4px"> 7 - Пройти тест, чтобы выявить моменты, из-за которых могут случиться инциденты </button></a>
-
+</div>
 </body>
 </html>

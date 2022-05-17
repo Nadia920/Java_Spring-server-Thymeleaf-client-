@@ -13,6 +13,7 @@
         <!--link type="text/css" rel="stylesheet" th:href="@{/static/select/bootstrap4/tail.select-default.min.css}" /-->
         <link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
         <link  rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" >
+        <link  rel="stylesheet" type="text/css" th:href="@{/static/css/problemsAdd.css}" >
         <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.css}" >
         <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.min.css}" >
         <script th:src="@{/static/select/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -20,16 +21,16 @@
         <!--div th:replace="header :: header-css"/-->
     </head>
     <body>
+    <div class="wrapper">
         <form th:action="@{/problems/SendProblem}" method="post" th:object="${obj}">
-            <h3 th:text = #{text.nameProblem}></h3>
-            <input name="problemName">
-            <h3 th:text = #{text.descriptionProblem}></h3>
-            <input name="descriptionProblem">
-            <h3 th:text = #{text.nameClient}></h3>
-            <input name="userEntity.firstNameUser">
-            <h3 th:text = #{text.nameTeam}></h3>
+            <h5 th:text = #{text.nameProblem}></h5>
+            <input class="form-control" name="problemName">
+            <h5 th:text = #{text.descriptionProblem}></h5>
+            <input class="form-control" name="descriptionProblem">
+            <h5 th:text = #{text.nameClient}></h5>
+            <input class="form-control" name="userEntity.firstNameUser">
+            <h5 th:text ="#{text.detachmentName}"></h5>
             <div>
-                <h1 for="city_from" class="col-form-label text-center" style="color: black"  th:text="#{text.detachmentName}"></h1>
                 <select class="form-control col-lg-auto " name="detachmentEntity.id"  id="select1"  required  >
                     <th:block th:each="detachment : ${detachments}"  >
                         <option th:value="${detachment.id}" th:text="${detachment.detachmentName}">S</option>
@@ -39,7 +40,8 @@
             <div style="padding-top: 37px">
                 <input type="submit" class="btn btn-success" th:value="#{text.addProblem}">
             </div>
-        </form>
 
+        </form>
+    </div>
     </body>
 </html>

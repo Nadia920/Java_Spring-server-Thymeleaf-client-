@@ -21,7 +21,7 @@ public interface IncidentEntityRepository extends JpaRepository<IncidentsEntity,
     List<IncidentsEntity> getIncidentsTrue(String name);
 
     @Query(value = "select i.incidentName, i.incidentSolution, i.reaction, " +
-            "i.comments,i.preventionMeasures,i.status, i.category, i.userEntity, i.detachmentEntity from IncidentsEntity i")
+            "i.comments,i.preventionMeasures, i.status, i.category, i.userEntity, i.detachmentEntity from IncidentsEntity i where i.incidentName = ?1")
     List<IncidentsEntity> getIncidentsByIncidentName(String name);
 
     @Query(value = "select i.reaction from IncidentsEntity i where id=:id")

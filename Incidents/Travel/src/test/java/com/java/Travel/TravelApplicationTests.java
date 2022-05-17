@@ -41,7 +41,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.times;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
@@ -55,7 +54,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 public class TravelApplicationTests {
 
-
+    /*
     @Autowired
     private FixedDetachmentsRepository fixedDetachmentsRepository;
     @Autowired
@@ -520,5 +519,7 @@ public class TravelApplicationTests {
         UserEntity a = userRepo.findByLogin(name);
         assertEquals(a, new UserEntity());
     }
+
+     */
     
 }

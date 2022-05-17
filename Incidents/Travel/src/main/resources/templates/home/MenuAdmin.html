@@ -12,19 +12,20 @@
     <link type="text/css" rel="stylesheet" th:href="@{/static/select/bootstrap4/tail.select-default.min.css}" />
     <link  rel="stylesheet" type="text/css" th:href="@{/static/css/error.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" >
+    <link  rel="stylesheet" type="text/css" th:href="@{/static/css/admin.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.css}" >
     <link  rel="stylesheet" type="text/css" th:href="@{/static/datetimepicker/jquery.datetimepicker.min.css}" >
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <div th:replace="home/adminHeader :: acss"></div>
-    <div th:replace="header :: header-css"/>
+   
 </head>
 <body>
-<!--<form th:action="@{/menuAdmin}" method="post">-->
-<p>Выберите пункт меню</p>
-<a href="/Incidents/showIncidentsFalse"><button  class="button2" tabindex="0"> 1 - Работа с ложными заявлениями о инцидентах </button></a>
+<div class="grid text-center">
+<h1>Выберите пункт меню:</h1>
+    <a href="/Incidents/showIncidentsFalse"><button  class="button2" tabindex="0"> 1 - Работа с ложными заявлениями о инцидентах </button></a>
 <a href="/detachment/AddFixDetachment"><button class="button2" tabindex="0"> 2 - Закрепление определённого отряда помощи за определённым предприятием </button></a>
 <a href="/detachment/addDetachment"><button  class="button2" tabindex="0"> 3 - Формирование отрядов реагирования </button></a>
 <a href="/Incidents/showIncidentsTrue"><button class="button2" tabindex="0"> 4 - Работа с реальными заявлениями о инцидентах </button></a>
-<!--</form>-->
+<a href="/Incidents/showIncidentLog"><button class="button2" tabindex="0"> 5 - Посмотреть журнал инцидентов </button></a>
+</div>
 </body>
 </html>

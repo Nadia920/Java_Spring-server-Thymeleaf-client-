@@ -3,6 +3,7 @@ package com.java.Travel.controller;
 import com.java.Travel.controller.dto.*;
 import com.java.Travel.model.CategoryEntity;
 import com.java.Travel.model.DetachmentEntity;
+import com.java.Travel.model.IncidentLog;
 import com.java.Travel.model.IncidentStatus;
 import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.security.CustomUserDetail;
@@ -36,6 +37,12 @@ public class IncidentController {
     private CategoryService categoryService;
     @Autowired
     private DetachmentService detachmentService;
+    @Autowired
+    private UserService userService;
+     @Autowired
+    private IncidentLogService incidentLogService;
+    
+ 
 
     /*@GetMapping("/showMyIncidents")
     public String showIncident(@RequestParam(value = "status", required = false, defaultValue = "ACTIVE") IncidentStatus status, Model model, @AuthenticationPrincipal CustomUserDetail currUser) {
@@ -99,4 +106,35 @@ public class IncidentController {
         incidentService.save(obj);
         return "redirect:/";
     }
+   
+    @GetMapping("/search")
+    public String search(Model model, String a) {
+        List<IncidentsEntity> list = incidentService.findIncidentName(a);
+        model.addAttribute("incidents", list);
+        return "Incidents/showIncidents";
+    }
+    
+    @GetMapping("/showIncidentLog")
+    public String showAllIncidentLogs(Model model) {
+        List<IncidentLog> incidentList = incidentLogService.findALL();
+        model.addAttribute("incidentLogs", incidentList.size() != 0 ? incidentList : null);
+        return "Incidents/showIncidentLog";
+    }
+    
+    @GetMapping("/addIncidentLog")
+    public String addLog(Model model) {
+        List<CategoryEntity> categoryDTOList = categoryService.findAll();
+        model.addAttribute("categories", categoryDTOList.size() != 0 ? categoryDTOList : null);
+        model.addAttribute("userEntities", userService.findAll());
+        model.addAttribute("obj", new IncidentLog());
+        return "Incidents/PageIncidentLogAdd";
+    }
+    
+ 
+    @GetMapping("/saveNewInLog")
+    public String  addLog(Model model, IncidentLog incidentLog) {
+        incidentLogService.save(incidentLog);
+        return "redirect:/";
+    }
+    
 }

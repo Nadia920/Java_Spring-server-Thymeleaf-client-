@@ -55,6 +55,8 @@ public class UserEntity extends BaseEntity {
     private Set<AppRating> appRating;
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
     private Set<IncidentsEntity> incidentsEntity;
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    private Set<IncidentLog> incidentLog;
 
     public UserEntity(UserEntity user) {
         this.setId(user.getId());

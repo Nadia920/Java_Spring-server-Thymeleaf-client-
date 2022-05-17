@@ -19,8 +19,6 @@ public class DetachmentDTO {
 
     private Set<EmployeeEntity> employees;
 
-    private Set<QuestionsEntity> questions;
-
 
     String detachmentName;
 
