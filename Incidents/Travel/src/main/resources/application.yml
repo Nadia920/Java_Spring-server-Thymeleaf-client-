@@ -22,7 +22,7 @@ spring:
     #   For Docker
     #    url: jdbc:postgresql://localhost:5432/Travel-Agency-db
     #    For Local host
-    url: jdbc:postgresql://localhost:5432/help--it-incidents-db
+    url: jdbc:postgresql://localhost:5432/help_incident
     username: postgres
     password: 1111
     driverClassName: org.postgresql.Driver

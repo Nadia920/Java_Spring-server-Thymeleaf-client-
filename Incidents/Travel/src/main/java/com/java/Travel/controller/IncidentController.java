@@ -18,10 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/Incidents")
@@ -41,6 +40,8 @@ public class IncidentController {
     private UserService userService;
      @Autowired
     private IncidentLogService incidentLogService;
+    @Autowired
+    private RestTemplate restTemplate;
     
 
 
@@ -127,9 +128,9 @@ public class IncidentController {
 
     @PostMapping(value = "/saveNewInLog", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String addLog(@RequestBody MultiValueMap<String, String> values) {
-//      
+//
         System.out.println(values);
-//        incidentLogService.save(incidentLog);
+        incidentLogService.save(values);
         return "redirect:/";
     }
 
@@ -137,8 +138,14 @@ public class IncidentController {
     public String searchLog(Model model, @RequestParam(name = "search") String a) {
 
         List<IncidentLog> list = incidentLogService.findIncidentName(a);
-        model.addAttribute("incidents", list);
-        return "Incidents/showIncidents";
+        model.addAttribute("incidentLogs", list);
+        return "Incidents/showIncidentLog";
     }
-    
+    @GetMapping("/sort")
+    public String sort(Model model) {
+        List<IncidentLog> list = incidentLogService.findALL();
+        Collections.sort(list);
+        model.addAttribute("incidentLogs", list);
+        return "Incidents/showIncidentLog";
+    }
 }

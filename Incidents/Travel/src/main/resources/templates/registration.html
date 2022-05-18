@@ -60,7 +60,7 @@
 
                         <div class="form-group col-md-8">
                             <label for="firstName" class="col-form-label" th:text="#{text.firstName}"></label>
-                            <input type="text" th:value="${user?.firstNameUser}" th:name="firstName" class="form-control"
+                            <input type="text" th:value="${user?.firstNameUser}" th:name="firstNameUser" class="form-control"
                                    id="firstName" th:placeholder="#{text.firstName}" autofocus required
                                    pattern="[A-ZА-ЯЁ]([A-Za-zА-Яа-яЁё]{2,13})" minlength="3" maxlength="14"/>
                             <span class="form__error" th:text="#{text.error.firstName}"></span>
@@ -68,7 +68,7 @@
 
                         <div class="form-group col-md-8">
                             <label for="lastName" class="col-form-label" th:text="#{text.lastName}"></label>
-                            <input type="text" th:value="${user?.lastNameUser}" th:name="lastName" class="form-control"
+                            <input type="text" th:value="${user?.lastNameUser}" th:name="lastNameUser" class="form-control"
                                    id="lastName" th:placeholder="#{text.lastName}" autofocus required
                                    pattern="[A-ZА-ЯЁ]([A-Za-zА-Яа-яЁё]{2,13})" minlength="3" maxlength="14"/>
                             <span class="form__error" th:text="#{text.error.lastName}"></span>
@@ -76,7 +76,7 @@
 
                         <div class="form-group col-md-8">
                             <label for="patronymic" class="col-form-label" th:text="#{text.patronymic}"></label>
-                            <input type="text" th:value="${user?.patronymicUser}" th:name="patronymic" class="form-control"
+                            <input type="text" th:value="${user?.patronymicUser}" th:name="patronymicUser" class="form-control"
                                    id="patronymic" th:placeholder="#{text.patronymic}" autofocus required
                                    pattern="[A-ZА-ЯЁ]([A-Za-zА-Яа-яЁё]{2,13})" minlength="3" maxlength="14"/>
                             <span class="form__error" th:text="#{text.error.patronymic}"></span>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label for="company" class="col-form-label" th:text="#{text.companyName}"></label>
-                            <select name="user.companies">
+                            <select name="companyEntity.id" id="company">
                                 <th:block th:each="company:${companies}">
                                     <option th:value="${company.id}" th:text="${company.CompanyName}"></option>
                                 </th:block>
@@ -102,11 +102,11 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-primary" th:value="#{bt.sign-up}">
+                            <input type="submit" class="btn btn-primary" value="Зарегистрироваться">
                         </div>
 
                         <div>
-                            <a th:href="@{ /login}" class="btn btn-success">
+                            <a th:href="@{/login}" class="btn btn-success">
                                 <i class="fas fa-arrow-alt-circle-left ml-2"></i>
                             </a>
                         </div>

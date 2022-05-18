@@ -27,4 +27,6 @@ public interface UserService {
     List<UserEntity> findAll();
     
     UserEntity findUserById1(Long id);
+
+    UserEntity findById(long userEntity);
 }

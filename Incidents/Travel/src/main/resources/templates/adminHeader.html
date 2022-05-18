@@ -21,7 +21,7 @@
 <body>
 <div th:fragment="admin-header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" th:href="@{/}">FindTrip</a>
+        <a class="navbar-brand" th:href="@{/}">Incident</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,10 +32,10 @@
                     <a class="nav-link" th:href="@{/home}" ><i class="fa fa-home"></i><span th:text="#{text.home}"></span></a>
                 </li>
             </ul>
-
-            <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <a href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{bt.log-out}"></button></a>
+            <!--form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" th:text="#{bt.log-out}"></button>
-            </form>
+            </form-->
         </div>
     </nav>
 </div>

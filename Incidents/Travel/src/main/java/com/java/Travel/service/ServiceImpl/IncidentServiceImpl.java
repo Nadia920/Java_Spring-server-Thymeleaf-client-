@@ -8,12 +8,17 @@ import java.util.List;
 import com.java.Travel.model.DetachmentEntity;
 import com.java.Travel.model.IncidentStatus;
 import com.java.Travel.model.IncidentsEntity;
+import com.java.Travel.model.UserEntity;
 import com.java.Travel.repository.IncidentEntityRepository;
 import com.java.Travel.repository.UserEntityRepository;
+import com.java.Travel.service.CategoryService;
+import com.java.Travel.service.DetachmentService;
 import com.java.Travel.service.IncidentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,8 +36,12 @@ public class IncidentServiceImpl implements IncidentService {
 
     @Autowired
     private UserEntityRepository userRepository;
+
     @Autowired
-    private IncidentEntityRepository incidentEntityRepository;
+    private DetachmentService detachmentService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     private DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
@@ -55,8 +64,10 @@ public class IncidentServiceImpl implements IncidentService {
         List<IncidentsEntity> need = new ArrayList<>();
 
         for (IncidentsEntity i : all) {
-            if (i.getComments().equals(name)) {
-                need.add(i);
+            if (i.getComments() != null) {
+                if (i.getComments().equals(name)) {
+                    need.add(i);
+                }
             }
         }
 
@@ -71,11 +82,12 @@ public class IncidentServiceImpl implements IncidentService {
         List<IncidentsEntity> need = new ArrayList<>();
 
         for (IncidentsEntity i : all) {
-            if (i.getComments().equals(name)) {
-                need.add(i);
+            if (i.getComments() != null) {
+                if (i.getComments().equals(name)) {
+                    need.add(i);
+                }
             }
         }
-
         return need;
     }
 
@@ -106,7 +118,7 @@ public class IncidentServiceImpl implements IncidentService {
 
     @Override
     public List<IncidentsEntity> findALL() {
-       return (incidentRepository.findAll());
+        return (incidentRepository.findAll());
     }
 
     @Transactional
@@ -118,6 +130,11 @@ public class IncidentServiceImpl implements IncidentService {
 
     @Override
     public boolean save(IncidentsEntity obj) {
+        UserDetails info = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity user = userRepository.findByLogin(info.getUsername());
+        obj.setDetachmentEntity(detachmentService.findById(obj.getDetachmentEntity().getId()));
+        obj.setCategory(categoryService.findById(obj.getCategory().getId()));
+        obj.setUserEntity(user);
         IncidentsEntity a = incidentRepository.save(obj);
         if (a == null) {
             return false;

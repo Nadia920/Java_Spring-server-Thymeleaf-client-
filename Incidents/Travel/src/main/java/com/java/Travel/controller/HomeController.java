@@ -2,6 +2,7 @@ package com.java.Travel.controller;
 
 import com.java.Travel.controller.dto.ApiError;
 import com.java.Travel.controller.dto.UserDTO;
+import com.java.Travel.exception.EditUsersParametersExistException;
 import com.java.Travel.model.AppRating;
 import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.UserEntity;
@@ -65,7 +66,7 @@ public class HomeController {
     public String login() {
         return "login";
     }
-//ссылки верные возвращает? на обработку события на кнопку. вроде да, давай глянем
+
     /*@GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -81,7 +82,28 @@ public class HomeController {
     public String registrationClient(@Valid @ModelAttribute("user") UserEntity client,
             BindingResult result,
             Model model) {
-        if (result.hasErrors()) {
+        System.out.println(client);
+        try {
+            userService.save(client, "ROLE_USER");
+            return "redirect:/";
+        } catch (EditUsersParametersExistException ex) {
+            System.out.println("i'm here!!!!!!!!!!!!!!!");
+            ApiError apiError = new ApiError();
+            String message = "";
+            for (FieldError str : result.getFieldErrors()) {
+                message += str.getDefaultMessage();
+                System.out.println(message);
+                apiError.setMessage(message);
+            }
+            System.out.println(message);
+            model.addAttribute("user", client);
+            model.addAttribute("apiError", apiError);
+            return "registration";
+        }
+
+
+        /*if (result.hasErrors()) {
+            System.out.println("i'm here!!!!!!!!!!!!!!!");
             ApiError apiError = new ApiError();
             String message = "";
             for (FieldError str : result.getFieldErrors()) {
@@ -91,11 +113,9 @@ public class HomeController {
             model.addAttribute("user", client);
             model.addAttribute("apiError", apiError);
             return "registration";
-        }
-        System.out.println("hello from controller");
-        userService.save(client, "ROLE_CLIENT");
+        }*/
 
-        return "redirect:/";
+
     }
 
     @GetMapping("/403")
@@ -129,26 +149,28 @@ public class HomeController {
     }
 
     @GetMapping("/showAppRating")
-    public String showAppRating() {
-
+    public String showAppRating(Model model) {
+        model.addAttribute("marks",addRatingService.findAll());
         return "rating/showAppRating";
     }
      
     @GetMapping("/AppRating/add")
     public String addAppRating(Model model) {
+        model.addAttribute("marks",addRatingService.findAll());
+        for (AppRating a:addRatingService.findAll()) {
+            System.out.println(a.getValue()+"usersijfviDFDFbjDFbDFNbnjdgbjnfg\n\n\n");
+        }
         model.addAttribute("obj", new AppRating());
         return "rating/addRating";
     }
     
     @PostMapping("/add/rating")
-    public String addAppRating(@RequestBody AppRating obj, @AuthenticationPrincipal CustomUserDetail currUser) {
+    public String addAppRating(AppRating obj, @AuthenticationPrincipal CustomUserDetail currUser) {
         UserDetails userInfo = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserEntity user = userService.findByLogin1(userInfo.getUsername());
         obj.setUserEntity(user);
-        System.out.println(obj);
         addRatingService.save(obj);
-        /*return "rating/addRating";*/
-        return "redirect:/";
+        return "redirect:/showAppRating";
     }
    
 }

@@ -3,6 +3,7 @@ package com.java.Travel.service.ServiceImpl;
 import com.java.Travel.controller.dto.UserDTO;
 import com.java.Travel.exception.EditUsersParametersExistException;
 import com.java.Travel.exception.UserNotFoundException;
+import com.java.Travel.model.CompanyEntity;
 import com.java.Travel.model.IncidentsEntity;
 import com.java.Travel.model.UserEntity;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 import com.java.Travel.repository.RoleEntityRepository;
 import com.java.Travel.repository.UserEntityRepository;
+import com.java.Travel.service.CompanyService;
 import com.java.Travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class UserServiceImpl implements UserService {
     private UserEntityRepository userRepository;
     @Autowired
     private RoleEntityRepository roleRepository;
+
+    @Autowired
+    private CompanyService companyService;
 
     public UserServiceImpl(UserEntityRepository userRepository) {
         this.userRepository = userRepository;
@@ -53,7 +58,8 @@ public class UserServiceImpl implements UserService {
         }
 
         userEntity.setRoleEntity(roleRepository.findByRole(role));
-
+        CompanyEntity c = companyService.findById(userEntity.getCompanyEntity().getId());
+        userEntity.setCompanyEntity(c);
         userRepository.save(userEntity);
 
         return true;
@@ -179,6 +185,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findUserById1(Long id) {
          return userRepository.findUserEntityById(id);
+    }
+
+    @Override
+    public UserEntity findById(long id) {
+        return userRepository.findById(id).get();
     }
 
 }

@@ -26,7 +26,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "incident_log")
 @NoArgsConstructor
-public class IncidentLog extends BaseEntity{
+public class IncidentLog extends BaseEntity implements Comparable<IncidentLog>{
     @NotNull
     @Column(name = "date_incident", length = 15)
     private Date dateIncident;
@@ -49,5 +49,15 @@ public class IncidentLog extends BaseEntity{
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = " log_incidents_user_id")
     private UserEntity userEntity;
-    
+
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull IncidentLog o) {
+                if(this.priority>o.getPriority()){
+                    return 1;
+                }
+                if(this.priority==o.getPriority()) {
+                    return 0;
+                }
+                else return -1;
+    }
 }

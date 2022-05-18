@@ -21,7 +21,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
-   @Autowired
+    @Autowired
     private UserDetailsService customUserDetailService;
 
     @Override
@@ -29,12 +29,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/MenuUser").hasAnyRole("USER")
+                .antMatchers("/MenuAdmin", "/addDetachment", "/showDetachment", "/PageIncidentLogAdd", "/showIncidentLog", "/MenuAdmin").hasAnyRole("ADMIN")
+                .antMatchers("/MenuUser", "/PageIncidentAdd", "/ProblemsAdd", "/showAppRating").hasAnyRole("USER")
+                .antMatchers("/MenuWorker", "/report", "/getReport").hasAnyRole("WORKER")
+                .antMatchers("/addFixedDetachment", "/showIncidents", "/showIncidentsTrue", "/showIncidentsFalse", "/showAllIncidents").hasAnyRole("ADMIN", "USER", "WORKER")
+                .antMatchers("/home").hasAnyRole("WORKER", "USER", "ADMIN")
+                .antMatchers("/**").permitAll()
+                .and()
+                .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
+                .and().logout().permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+
+        /*http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/",
                         "/js/**",
                         "/css/**",
                         "/images/**",
                         "/webjars/**").permitAll()
-                .antMatchers("/registration", "/static/**", "/trips/Travel","/info/**").permitAll()
+                .antMatchers("/registration", "/static/**", "/trips/Travel", "/info/**").permitAll()
                 .antMatchers("/wallet/**").hasAnyRole("CLIENT")
                 .antMatchers().hasAnyRole("ADMIN")
                 .antMatchers().hasAnyRole("WORKER")
@@ -49,7 +62,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
     }
 
     @Override

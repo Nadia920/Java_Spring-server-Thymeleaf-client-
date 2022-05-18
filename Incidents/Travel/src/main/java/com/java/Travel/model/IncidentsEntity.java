@@ -5,6 +5,7 @@ import com.java.Travel.controller.dto.UserDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import java.math.BigInteger;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "incidents")
 @NoArgsConstructor
 public class IncidentsEntity extends BaseEntity {

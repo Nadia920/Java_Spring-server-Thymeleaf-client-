@@ -10,6 +10,7 @@ import java.util.List;
 import com.java.Travel.model.IncidentsEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
 
 /**
  *
@@ -21,7 +22,7 @@ public interface  IncidentLogService {
       List<IncidentLog> findALL();
 
 
-      boolean save(IncidentLog incidentLog);
+      boolean save(MultiValueMap<String, String> values);
 
       List<IncidentLog> findIncidentName(String name1);
    

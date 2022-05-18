@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Отчёт</title>
-    <link  rel="stylesheet" type="text/css" th:href="@{../../static/css/style.css}" >
-    <div th:replace="headerWhenSign_in :: acss"></div>
+    <link rel="stylesheet" type="text/css" th:href="@{../../static/css/style.css}">
+    <div th:replace="workerHeader :: acss"></div>
+    <style>
+        h2, h3 {
+        text-align: center;
+        font: normal 18px 'Árial', sans-serif;
+        margin-bottom: 10px;
+        }
+
+        .report-name {
+        text-align: center;
+        font: bold 25px 'Árial', sands-serif;
+        }
+
+    </style>
 </head>
-<body class = "content">
+<body class="content">
 <h2>Отчёт</h2>
 <h3>Название инцидента</h3>
-<div  class="container my-md-4">
-    <p th:text="${incidentName}">
+<div class="container my-md-4">
+    <p class="report-name" th:text="${incidentName}">
 </div>
 <h3>Реакция на инцидент</h3>
-<div  class="container my-md-4">
-    <p th:text="${incidentReact}">
+<div class="container my-md-4">
+    <p class="report-name" th:text="${incidentReact}">
 </div>
 </body>
 </html>

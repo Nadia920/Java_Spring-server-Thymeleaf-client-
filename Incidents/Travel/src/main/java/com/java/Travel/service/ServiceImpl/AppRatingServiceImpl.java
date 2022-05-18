@@ -8,6 +8,8 @@ import com.java.Travel.service.AppRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AppRatingServiceImpl implements AppRatingService {
 
@@ -15,6 +17,11 @@ public class AppRatingServiceImpl implements AppRatingService {
     @Autowired
     private AppRatingRepository appRatingRepository;
 
+
+    @Override
+    public List<AppRating> findAll() {
+        return appRatingRepository.findAll();
+    }
 
     @Override
     public void deleteUserById(Long id) {

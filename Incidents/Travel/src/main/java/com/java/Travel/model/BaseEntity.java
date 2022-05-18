@@ -11,9 +11,8 @@ import javax.persistence.*;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    /*@Column(columnDefinition = "id)*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private Long id;
 
     public BaseEntity(Long id) {

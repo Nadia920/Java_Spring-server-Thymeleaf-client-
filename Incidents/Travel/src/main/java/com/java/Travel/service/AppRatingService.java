@@ -4,8 +4,11 @@ import com.java.Travel.controller.dto.AppRatingDTO;
 import com.java.Travel.model.AppRating;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface AppRatingService {
 
+    List<AppRating> findAll();
 
     void deleteUserById(Long id);
 
