@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="form-group">
-  <form th:action="@{/Incidents/saveNewInLog}" method="post" th:object="${obj}"> <!--А тут кавычки у obj не нужны ? нет -->
+  <form th:action="@{/Incidents/saveNewInLog}" method="post" th:object="${obj}"> 
 
         <h5 th:text =#{text.category}></h5>
         <select class=" dropdown form-control col-lg-auto "   id="select1"  name="category.id" required>
