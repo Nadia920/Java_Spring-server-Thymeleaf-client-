@@ -6,11 +6,7 @@ import com.java.Travel.repository.*;
 import com.java.Travel.service.*;
 import com.java.Travel.service.ServiceImpl.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -99,6 +95,10 @@ public class TravelApplicationTests {
         incidentRepo.save(new IncidentsEntity("1", "1"));
         incidentRepo.save(new IncidentsEntity("2", "2"));
         incidentRepo.save(new IncidentsEntity("3", "3"));
+
+        incidentLogRepo.save(new IncidentLog("1", 3L));
+        incidentLogRepo.save(new IncidentLog("2", 1L));
+        incidentLogRepo.save(new IncidentLog("3", 2L));
     }
     
 
@@ -480,6 +480,21 @@ public class TravelApplicationTests {
         boolean actual = incidentLogServ.save((MultiValueMap<String, String>) obj);
         assertEquals(false, actual);
 
+    }
+    @Test
+    public void IncidentSearch() {
+        List<IncidentLog> obj = incidentLogRepo.findByDescriptionIncident();
+        assertEquals(obj, null);
+    }
+    @Test
+    public void IncidentSort() {
+        List<IncidentLog> obj = new ArrayList<>();
+        obj.add(new IncidentLog("1", 3L));
+        obj.add(new IncidentLog("2", 1L));
+        obj.add(new IncidentLog("3", 2L));
+        List<IncidentLog> list = incidentLogServ.findALL();
+        Collections.sort(list);
+        assertEquals(obj, list);
     }
     @Test
     public void addRating() {

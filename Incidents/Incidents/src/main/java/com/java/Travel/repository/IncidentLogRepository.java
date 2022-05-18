@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface IncidentLogRepository extends JpaRepository<IncidentLog, Long>{
 
      List<IncidentLog> findAll();
-   
-    
+
+
+    List<IncidentLog> findByDescriptionIncident();
 }

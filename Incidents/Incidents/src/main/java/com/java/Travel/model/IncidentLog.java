@@ -60,4 +60,9 @@ public class IncidentLog extends BaseEntity implements Comparable<IncidentLog>{
                 }
                 else return 1;
     }
+
+    public IncidentLog(String descriptionIncident, Long priority) {
+        this.descriptionIncident = descriptionIncident;
+        this.priority = priority;
+    }
 }
