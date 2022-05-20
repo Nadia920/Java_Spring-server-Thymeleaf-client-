@@ -27,13 +27,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
         sessionLocaleResolver.setDefaultLocale(Locale.US);
         return sessionLocaleResolver;
-        /*if (this.mvcProperties.getLocaleResolver() == WebMvcProperties.LocaleResolver.FIXED) {
-            return new FixedLocaleResolver(this.mvcProperties.getLocale());
-        }
-        AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-        // Get the default Locale
-        localeResolver.setDefaultLocale(this.mvcProperties.getLocale());
-        return localeResolver;*/
+
     }
 
     @Bean

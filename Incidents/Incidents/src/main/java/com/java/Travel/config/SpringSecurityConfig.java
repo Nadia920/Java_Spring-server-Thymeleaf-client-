@@ -13,13 +13,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity//
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
+    private AccessDeniedHandler accessDeniedHandler;//Используется exceptionTranslationFilter для обработки платформы .AccessDeniedException
 
     @Autowired
     private UserDetailsService customUserDetailService;
@@ -40,29 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/home")
                 .and().logout().permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
-        /*http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/",
-                        "/js/**",
-                        "/css/**",
-                        "/images/**",
-                        "/webjars/**").permitAll()
-                .antMatchers("/registration", "/static/**", "/trips/Travel", "/info/**").permitAll()
-                .antMatchers("/wallet/**").hasAnyRole("CLIENT")
-                .antMatchers().hasAnyRole("ADMIN")
-                .antMatchers().hasAnyRole("WORKER")
-                .antMatchers("/home/**", "/users/**").hasAnyRole("WORKER", "CLIENT", "ADMIN")
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .defaultSuccessUrl("/home")
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
+
     }
 
     @Override

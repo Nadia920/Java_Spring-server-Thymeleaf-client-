@@ -62,54 +62,7 @@ public class UserController {
         return redirect;
     }
 
-    /*@GetMapping(path = {"/edit", "/edit/{id}"})
-    public String getAddOrEditUserView(
-            Model model,
-            @RequestParam(value = "role", required = false, defaultValue = "ROLE_CLIENT") RoleEntity role,
-            @PathVariable(value = "id") Optional<Long> id) {
 
-
-        if (id.isPresent()) {
-            UserDTO userDTO = userService.findUserById(id.get());
-            if (userDTO != null) {
-                model.addAttribute("user", userDTO);
-            } else {
-                throw new UserNotFoundException("User with id=" + id + " not found");
-            }
-            return "user/addEditUser";
-        } else {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setRoleEntity(role);
-            model.addAttribute("user", userDTO);
-            return "user/addEditUser";
-        }
-    }
-
-    @PostMapping(path = "/edit")
-    public String addOrEditUser(@Valid @ModelAttribute("user") UserEntity user,
-                                @RequestParam(value = "role", required = false, defaultValue = "ROLE_CLIENT") String role,
-                                BindingResult result, Model model) {
-
-        if (result.hasErrors()) {
-            ApiError apiError = new ApiError();
-            String message = "";
-            for (FieldError str : result.getFieldErrors()) {
-                message += str.getDefaultMessage();
-                apiError.setMessage(message);
-            }
-            model.addAttribute("user", user);
-            model.addAttribute("apiError", apiError);
-            return "user/addEditUser";
-        }
-
-        if (user.getId() != null) {
-            userService.update(user);
-        } else {
-            userService.save(user, role);
-        }
-
-        return "redirect:/home";
-    }*/
 
 
 }

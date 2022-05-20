@@ -130,18 +130,8 @@ public class HomeController {
         return "/home/MenuUser";
     }
 
-    @PostMapping("/MenuUser")
-    public String MenuUser1() {
-        return "/home/MenuUser";
-    }
-
     @GetMapping("/MenuAdmin")
     public String MenuAdmin() {
-        return "/home/MenuAdmin";
-    }
-
-    @PostMapping("/MenuAdmin")
-    public String MenuAdmin1() {
         return "/home/MenuAdmin";
     }
 

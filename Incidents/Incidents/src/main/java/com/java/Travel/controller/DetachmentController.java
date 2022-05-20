@@ -55,9 +55,7 @@ public class DetachmentController {
     @GetMapping("/readyDetachment")
     public void readyDetachment(@RequestParam(name = "employee") Long[] ids, Model model) {
         //DetachmentEntity detachmentEntity = new DetachmentEntity(detachmentDTO);
-        for (Long id : ids) {
-            System.out.println(id);
-        }
+
     }
 
     @GetMapping("/showFixedDetachments")
@@ -109,4 +107,4 @@ public class DetachmentController {
     }
 
 }
-//значи добавление реализовано неверно. Там он id вставлять сам не хочет ., постоянно null
+
