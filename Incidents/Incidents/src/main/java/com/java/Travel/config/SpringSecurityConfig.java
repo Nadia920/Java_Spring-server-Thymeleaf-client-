@@ -15,7 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 
 @Configuration
-@EnableWebSecurity//
+@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
